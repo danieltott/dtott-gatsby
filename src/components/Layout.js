@@ -60,11 +60,14 @@ const Layout = ({ children, section = 'home' }) => (
             </form>
             <div role="contentinfo" className="page-section-wrap">
               <a href="/thoughts/feed">RSS</a>
-              &bull;
-              <a href="http://twitter.com/danieltott">Twitter</a> &bull;
-              <a href="http://github.com/danieltott">Github</a> &bull;{' '}
+              {' • '}
+              <a href="http://twitter.com/danieltott">Twitter</a>
+              {' • '}
+              <a href="http://github.com/danieltott">Github</a>
+              {' • '}
               <span className="nowrap">
-                Built with <a href="http://buildwithcraft.com">Craft</a>
+                Built with <a href="https://craftcms.com">Craft</a> and
+                <a href="https://gatsbyjs.org">Gatsby</a>
               </span>{' '}
               <br />
               All code, content and images (except where noted) &copy; 2006 -{' '}
