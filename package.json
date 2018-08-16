@@ -8,6 +8,7 @@
     "disqus-react": "^1.0.5",
     "dotenv": "^6.0.0",
     "gatsby": "next",
+    "gatsby-plugin-feed": "^1.3.25",
     "gatsby-plugin-google-analytics": "^1.0.31",
     "gatsby-plugin-manifest": "next",
     "gatsby-plugin-offline": "next",

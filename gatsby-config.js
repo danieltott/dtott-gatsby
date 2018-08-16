@@ -2,9 +2,13 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
+var moment = require('moment')
+
 module.exports = {
   siteMetadata: {
     title: 'Front-End Design and Development ~  Daniel T. Ott',
+    description: `Daniel T Ott - Front End Design and Developmtn. Dan Ott's portfolio, information, and thoughts on HTML, CSS, Javascript, and the web development industry in general.`,
+    siteUrl: `https://www.dtott.com`,
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -49,6 +53,62 @@ module.exports = {
         respectDNT: true,
         // Avoids sending pageview hits from custom paths
         exclude: [],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, craft } }) => {
+              return craft.entries.map(entry => {
+                return {
+                  title: entry.title,
+                  description: entry.body,
+                  date: moment(entry.postDate * 1000).format(
+                    'ddd, DD MMM YYYY HH:mm:ss ZZ'
+                  ),
+                  url: site.siteMetadata.siteUrl + '/' + entry.uri,
+                  guid: site.siteMetadata.siteUrl + '/' + entry.uri,
+                }
+              })
+            },
+            query: `
+              {
+                craft {
+                  entries(section: [thoughts]) {
+                    ... on Craft_Thoughts {
+                      id
+                      postDate
+                      title
+                      summary
+                      body
+                      url
+                      uri
+                      tags {
+                        id
+                        title
+                      }
+                    }
+                  }
+                }
+              }
+            `,
+            output: '/thoughts/feed.rss',
+          },
+        ],
       },
     },
   ],
