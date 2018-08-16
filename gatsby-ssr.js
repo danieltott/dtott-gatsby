@@ -4,14 +4,17 @@ import { ApolloProvider } from 'react-apollo'
 import { renderToString } from 'react-dom/server'
 import fetch from 'isomorphic-fetch'
 
+// require('dotenv').config({
+//   path: `.env.${process.env.NODE_ENV}`,
+// })
+
 // gatsby-ssr is required for build regardless if you plan to support SSR
 export const replaceRenderer = ({ bodyComponent, replaceBodyHTMLString }) => {
   const client = new ApolloClient({
     fetch,
-    uri: 'http://dtott.test/api',
+    uri: process.env.DTOTT_API_URL,
     headers: {
-      Authorization:
-        'bearer GwyFgsxqfRsvsxX4tKJvbXbuwNE2Sus_qTPvwxipQEuO8j9CnboWmTVwOmfu5PSc',
+      authorization: `bearer ${process.env.DTOTT_API_TOKEN}`,
       'Content-type': 'application/json',
     },
   })

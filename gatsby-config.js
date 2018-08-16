@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: 'Front-End Design and Development ~  Daniel T. Ott',
@@ -23,11 +27,10 @@ module.exports = {
         typeName: 'Craft',
         fieldName: 'craft',
         // Url to query from
-        url: 'http://dtott.test/api',
+        url: process.env.DTOTT_API_URL,
         // HTTP headers
         headers: {
-          Authorization:
-            'bearer GwyFgsxqfRsvsxX4tKJvbXbuwNE2Sus_qTPvwxipQEuO8j9CnboWmTVwOmfu5PSc',
+          Authorization: `bearer ${process.env.DTOTT_API_TOKEN}`,
           'Content-type': 'application/json',
         },
         // Additional options to pass to node-fetch
