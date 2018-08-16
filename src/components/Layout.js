@@ -66,7 +66,7 @@ const Layout = ({ children, section = 'home' }) => (
               <a href="http://github.com/danieltott">Github</a>
               {' • '}
               <span className="nowrap">
-                Built with <a href="https://craftcms.com">Craft</a> and
+                Built with <a href="https://craftcms.com">Craft</a> and{' '}
                 <a href="https://gatsbyjs.org">Gatsby</a>
               </span>{' '}
               <br />
