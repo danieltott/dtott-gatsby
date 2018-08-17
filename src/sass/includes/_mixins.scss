@@ -1,0 +1,26 @@
+@function calculateRem($size) {
+  $remSize: $size /  100;
+  @return #{$remSize}rem;
+}
+
+@mixin fontSize($size) {
+  font-size: #{$size}px; //Fallback in px
+  font-size: calculateRem($size);
+}
+
+@mixin rem($property, $value) {
+  #{$property}: #{$value}px; //Fallback in px
+  #{$property}: calculateRem($value);
+}
+
+@function makelongshadow($color) {
+	$val: 0px 0px $color;
+	@for $i from 1 through 200 {
+  		$val: #{$val}, #{$i}px #{$i}px #{$color};
+	}
+	@return $val;
+}
+
+@mixin longshadow($color) {
+	text-shadow: makelongshadow($color);
+}
