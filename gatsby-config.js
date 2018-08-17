@@ -31,10 +31,10 @@ module.exports = {
         typeName: 'Craft',
         fieldName: 'craft',
         // Url to query from
-        url: process.env.DTOTT_API_URL,
+        url: process.env.GATSBY_DTOTT_API_URL,
         // HTTP headers
         headers: {
-          Authorization: `bearer ${process.env.DTOTT_API_TOKEN}`,
+          Authorization: `bearer ${process.env.GATSBY_DTOTT_API_TOKEN}`,
           'Content-type': 'application/json',
         },
         // Additional options to pass to node-fetch
