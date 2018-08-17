@@ -86,18 +86,6 @@ class IndexPage extends React.Component {
                 Older Posts
               </SimpleButton>
             )}
-            {/* {% paginate craft.entries.section('thoughts').limit(5)as entries %}
-                {% for entry in entries %}
-                    {% include "thoughts/_listpost" %}
-                {% endfor %}
-                {# {{ paginate.prevUrl|replace({'/p' : '/thoughts/ajax-list/p'}) }} #}
-                {% if paginate.prevUrl %}
-                    <a href="{{ paginate.prevUrl }}#thoughts">Newer Posts</a>
-                {% endif %}
-
-                {% if paginate.nextUrl %}
-                    <a href="{{ paginate.nextUrl }}#thoughts">Older Posts</a>
-                {% endif %} */}
           </div>
         </section>
       </Layout>
