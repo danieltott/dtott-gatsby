@@ -7,8 +7,6 @@ import ApolloClient from 'apollo-boost'
 //   path: `.env.${process.env.GATSBY_NODE_ENV}`,
 // })
 
-console.log(process.env.GATSBY_DTOTT_API_URL)
-
 const client = new ApolloClient({
   fetch,
   uri: process.env.GATSBY_DTOTT_API_URL,
