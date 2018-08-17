@@ -33,6 +33,11 @@ const Layout = ({ children, section = 'home' }) => (
             ]}
           >
             <html lang="en" />
+            <link
+              rel="stylesheet"
+              type="text/css"
+              href="https://cloud.typography.com/7220032/609782/css/fonts.css"
+            />
           </Helmet>
           <Header siteTitle={data.site.siteMetadata.title} />
           <div role="main" className={section}>
