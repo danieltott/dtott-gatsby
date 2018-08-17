@@ -37,6 +37,8 @@ const Layout = ({ children, section = 'home' }) => (
               rel="stylesheet"
               type="text/css"
               href="https://cloud.typography.com/7220032/609782/css/fonts.css"
+              media="nope!"
+              onLoad="this.media='all'"
             />
           </Helmet>
           <Header siteTitle={data.site.siteMetadata.title} />
