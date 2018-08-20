@@ -76,7 +76,7 @@ module.exports = {
               return craft.entries.map(entry => {
                 return {
                   title: entry.title,
-                  description: entry.body,
+                  description: entry.summary,
                   date: moment(entry.postDate * 1000).format(
                     'ddd, DD MMM YYYY HH:mm:ss ZZ'
                   ),
