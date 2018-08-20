@@ -99,10 +99,6 @@ nav,
 section {
   display: block;
 }
-ol,
-ul {
-  list-style: none;
-}
 blockquote,
 q {
   quotes: none;
@@ -424,4 +420,21 @@ header[role='banner'] .banner-tagline {
   .page-section-wrap {
     width: 1036px;
   }
+}
+
+pre {
+  font-size: 0.8em;
+  margin-bottom: 24px;
+  margin-bottom: 0.24rem;
+}
+
+.page-section ul,
+.page-section ol {
+  padding-left: 24px;
+  padding-left: 0.24rem;
+}
+
+.page-section li {
+  margin-bottom: 12px;
+  margin-bottom: 0.12rem;
 }
