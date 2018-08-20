@@ -16,7 +16,12 @@ const ThoughtsEntry = ({
 }) => {
   return (
     <Layout section="thoughts">
-      <Helmet title={entry.title} />
+      <Helmet>
+        <title>{entry.title}</title>
+        {entry.seoDescription && (
+          <meta name="description" content={entry.seoDescription} />
+        )}
+      </Helmet>
 
       <h2 className="section-title">
         <span className="page-section-wrap">Thoughts</span>
@@ -99,6 +104,7 @@ export const query = graphql`
           id
           postDate
           title
+          seoDescription
           summary
           body
           url
