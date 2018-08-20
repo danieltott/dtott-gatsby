@@ -6,6 +6,8 @@ import Helmet from 'react-helmet'
 import Layout from './Layout'
 import Timestamp from './Timestamp'
 import Highlight from 'react-highlight'
+import RawHtml from './RawHtml'
+import Codepen from 'react-codepen-embed'
 
 const ThoughtsEntry = ({
   data: {
@@ -25,7 +27,32 @@ const ThoughtsEntry = ({
           <Timestamp time={entry.postDate} />
         </header>
         <div className="page-section-wrap">
-          <Highlight innerHTML={true}>{entry.body}</Highlight>
+          {entry.bodyBlocks ? (
+            entry.bodyBlocks.map(block => {
+              switch (block.__typename) {
+                case 'Craft_BodyBlocksText':
+                  return <RawHtml key={block.id} html={block.text.content} />
+                case 'Craft_BodyBlocksCodeSnippet':
+                  return (
+                    <Highlight key={block.id} className={block.language}>
+                      {block.code}
+                    </Highlight>
+                  )
+                case 'Craft_':
+                  return (
+                    <Codepen
+                      key={block.id}
+                      hash={block.hash}
+                      user={block.user}
+                    />
+                  )
+                default:
+                  return null
+              }
+            })
+          ) : (
+            <Highlight innerHTML={true}>{entry.body}</Highlight>
+          )}
           <footer className="post-footer">
             <p>
               {'That was '}
@@ -76,6 +103,27 @@ export const query = graphql`
           body
           url
           slug
+          bodyBlocks {
+            ... on Craft_BodyBlocksText {
+              id
+              __typename
+              text {
+                content
+              }
+            }
+            ... on Craft_BodyBlocksCodeSnippet {
+              id
+              __typename
+              language
+              code
+            }
+            ... on Craft_BodyBlocksCodepenEmbed {
+              id
+              __typename
+              hash
+              user
+            }
+          }
           tags {
             id
             title

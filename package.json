@@ -19,6 +19,7 @@
     "moment": "^2.22.2",
     "react": "^16.4.2",
     "react-apollo": "^2.1.11",
+    "react-codepen-embed": "^0.1.0",
     "react-dom": "^16.4.2",
     "react-helmet": "^5.2.0",
     "react-highlight": "^0.12.0",
