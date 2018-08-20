@@ -1,4 +1,5 @@
 const path = require('path')
+require('isomorphic-fetch')
 
 /**
  * Implement Gatsby's Node APIs in this file.
@@ -27,11 +28,6 @@ exports.createPages = ({ graphql, actions }) => {
       }
     `).then(result => {
       result.data.craft.entries.forEach(entry => {
-        // console.log({
-        //   uri: entry.uri,
-        //   id: entry.id,
-        //   path: path.resolve(`./src/components/ThoughtsEntry.js`),
-        // })
         createPage({
           path: '/' + entry.uri,
           component: path.resolve(`./src/components/ThoughtsEntry.js`),
