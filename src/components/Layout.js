@@ -41,7 +41,7 @@ const Layout = ({ children, section = 'home' }) => (
               onLoad="this.media='all'"
             />
           </Helmet>
-          <Header siteTitle={data.site.siteMetadata.title} />
+          <Header siteTitle={data.site.siteMetadata.title} section={section} />
           <div role="main" className={section}>
             {children}
           </div>
