@@ -16,6 +16,10 @@ const client = new ApolloClient({
   },
 })
 
-export const wrapRootElement = ({ element }) => {
-  return () => <ApolloProvider client={client}>{element}</ApolloProvider>
+export const wrapRootComponent = ({ Root }) => {
+  return () => (
+    <ApolloProvider client={client}>
+      <Root />
+    </ApolloProvider>
+  )
 }
