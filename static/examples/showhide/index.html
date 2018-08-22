@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link type="text/css" rel="stylesheet" media="all" href="style.css" />
+        
+
+        
+    </head>
+    <body>
+        
+        <div id="tempContainer">
+            <div id="main">
+                <div id="meat">
+                    <h2>Slow Cook Savings</h2>
+                    <div class="meatListContainer">
+                        <div id="meatIntro" >
+                            <div id="meatImage">
+                                <img src="images/corned-beef.jpg" alt="Corned Beef" width="412" height="203" />
+                            </div>
+                            <div class="meatResults">
+                                <div class="TL">
+                                <div class="BL">
+                                <div class="TR">
+                                <div class="BR">
+                                
+                                    <h3>Seeing is believing!</h3>
+                                    <p>Meat Profits are high when you use Slow Cook Savings</p>
+                                    <ul class="meatInfo">
+                                        <li>17 lb. 4 oz. Prime Rib Convection Oven Roasting roasted Weight 12 lbs. 1 oz. Shrinkage 5 lbs. 3 oz.</li>
+                                        <li>17 lb. 4 oz. Prime Rib Slow Cook Roasting roasted Weight 16 lbs. 4 oz. 20% more yield</li>
+                                    </ul>
+                                </div></div></div></div>
+                            </div>
+                        </div>
+                    
+                    <dl id="meatList">
+                        <dt><a href="#">Item 1</a></dt>
+                        <dd>
+                            <div class="meatImage">
+                                <img src="images/<?= $meat['url-name'] ?>.jpg" alt="<?= $meat['name'] ?>" width="412" height="203" />
+                            </div>
+                            <div class="meatResults">
+                                <div class="TL">
+                                <div class="BL">
+                                <div class="TR">
+                                <div class="BR">
+                                
+                                    <dl class="details">
+                                        <dt>Average Conventional Shrinkage:</dt>
+                                        <dd><?= $meat['acs'] ?>%</dd>
+                                        <dt>Average Slow Cook Shrinkage:</dt>
+                                        <dd><?= $meat['ascs'] ?>%</dd>
+                                        <dt>Percent Shrinkage Savings:</dt>
+                                        <dd><?= $meat['pss'] ?>%</dd>
+                                    </dl>
+                                </div></div></div></div>
+                            </div>
+                        
+                        
+                        </dd>
+                        <!--[if lt IE 8]>
+                            <script type="text/javascript">
+                                document.getElementById("<?= $meat['url-name'] ?>").onmouseover = function(){ document.getElementById("<?= $meat['url-name'] ?>_dd").style.display="block";}
+                                document.getElementById("<?= $meat['url-name'] ?>").onmouseout = function(){ document.getElementById("<?= $meat['url-name'] ?>_dd").style.display="none";}
+
+
+                            </script>
+        
+        
+                        <![endif]-->
+                        <?php } ?>
+                    </dl>                    
+                    
+                    
+            
+            
+            
+            </div>
+            
+            </div>
+        
+        </div>
+    
+    </body>
+</html>
