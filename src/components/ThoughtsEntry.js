@@ -32,7 +32,7 @@ const ThoughtsEntry = ({
           <Timestamp time={entry.postDate} />
         </header>
         <div className="page-section-wrap">
-          {entry.bodyBlocks ? (
+          {entry.bodyBlocks.length ? (
             entry.bodyBlocks.map(block => {
               switch (block.__typename) {
                 case 'Craft_BodyBlocksText':
