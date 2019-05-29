@@ -1,20 +1,20 @@
 {
-  "name": "gatsby-starter-default",
-  "description": "Gatsby default starter",
+  "name": "dtott-gatsby",
+  "description": "Gatsby build for dtott.com",
   "version": "1.0.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Dan Ott",
   "dependencies": {
     "apollo-boost": "^0.1.13",
     "disqus-react": "^1.0.5",
     "dotenv": "^6.0.0",
-    "gatsby": "2.0.0-beta.106",
+    "gatsby": "2.7.3",
     "gatsby-plugin-feed": "^1.3.25",
     "gatsby-plugin-google-analytics": "2.0.0-beta.5",
-    "gatsby-plugin-manifest": "2.0.2-beta.6",
-    "gatsby-plugin-netlify": "2.0.0-beta.6",
-    "gatsby-plugin-offline": "2.0.0-beta.9",
+    "gatsby-plugin-manifest": "2.1.1",
+    "gatsby-plugin-netlify": "2.0.17",
+    "gatsby-plugin-offline": "2.1.1",
     "gatsby-plugin-react-helmet": "3.0.0-beta.4",
-    "gatsby-source-graphql": "2.0.0-beta.2",
+    "gatsby-source-graphql": "2.0.18",
     "isomorphic-fetch": "^2.2.1",
     "moment": "^2.22.2",
     "react": "^16.4.2",
@@ -40,6 +40,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/danieltott/dtott-gatsby"
   }
 }
