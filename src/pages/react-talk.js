@@ -24,11 +24,17 @@ const NotFoundPage = () => (
       </h1>
       <div style={{ display: 'flex' }}>
         <div className="page-section" style={{ flex: 1 }}>
+          <p>Thanks to:</p>
+          <ul>
+            <li>Tech Elevator</li>
+            <li>Zach Schneider</li>
+            <li>Cleveland Tech Slack</li>
+          </ul>
+        </div>
+        <div className="page-section" style={{ flex: 1 }}>
           <h2 className="post-title">
             <span className="">Dan Ott</span>
           </h2>
-        </div>
-        <div className="page-section" style={{ flex: 1 }}>
           <div className="">
             <p>
               website: <strong>dtott.com</strong>
