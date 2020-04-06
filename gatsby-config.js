@@ -73,7 +73,7 @@ module.exports = {
         feeds: [
           {
             serialize: ({ query: { site, craft } }) => {
-              return craft.entries.map(entry => {
+              return craft.entries.map((entry) => {
                 return {
                   title: entry.title,
                   description: entry.summary,
@@ -112,5 +112,20 @@ module.exports = {
       },
     },
     `gatsby-plugin-netlify`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `thoughts`,
+        path: `${__dirname}/src/thoughts/`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        defaultLayouts: {
+          default: require.resolve('./src/components/mdxLayoutPostSummary.js'),
+        },
+      },
+    },
   ],
 }

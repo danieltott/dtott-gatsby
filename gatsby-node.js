@@ -25,9 +25,35 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
         }
+        allMdx {
+          edges {
+            node {
+              exports {
+                meta {
+                  title
+                  date
+                  desc
+                  slug
+                }
+              }
+              id
+              fileAbsolutePath
+            }
+          }
+        }
       }
-    `).then(result => {
-      result.data.craft.entries.forEach(entry => {
+    `).then((result) => {
+      result.data.allMdx.edges.forEach(({ node }) => {
+        createPage({
+          path: '/' + node.exports.meta.slug,
+          component: path.resolve(`./src/components/ThoughtsEntry2.js`),
+          context: {
+            id: node.id,
+          },
+        })
+      })
+
+      result.data.craft.entries.forEach((entry) => {
         createPage({
           path: '/' + entry.uri,
           component: path.resolve(`./src/components/ThoughtsEntry.js`),
@@ -57,3 +83,24 @@ exports.onCreateWebpackConfig = ({ stage, actions, loaders }) => {
     })
   }
 }
+
+// const { createFilePath } = require("gatsby-source-filesystem")
+// exports.onCreateNode = ({ node, actions, getNode }) => {
+//   const { createNodeField } = actions
+//   // you only want to operate on `Mdx` nodes. If you had content from a
+//   // remote CMS you could also check to see if the parent node was a
+//   // `File` node here
+//   if (node.internal.type === "Mdx") {
+//     const value = createFilePath({ node, getNode })
+//     createNodeField({
+//       // Name of the field you are adding
+//       name: "slug",
+//       // Individual MDX node
+//       node,
+//       // Generated value based on filepath with "blog" prefix. you
+//       // don't need a separating "/" before the value because
+//       // createFilePath returns a path with the leading "/".
+//       value: `/blog${value}`,
+//     })
+//   }
+// }

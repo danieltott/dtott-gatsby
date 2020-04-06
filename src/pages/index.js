@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import scrollToComponent from 'react-scroll-to-component'
-
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 import Layout from '../components/Layout'
 import RawHtml from '../components/RawHtml'
 import ListPost from '../components/ListPost'
@@ -57,7 +57,7 @@ class IndexPage extends React.Component {
         <section
           className="page-section thoughts"
           id="thoughts"
-          ref={section => {
+          ref={(section) => {
             this.ThoughtsList = section
           }}
         >
@@ -65,12 +65,15 @@ class IndexPage extends React.Component {
             <span className="page-section-wrap">Thoughts</span>
           </h2>
           <div className="page-section-wrap">
+            {data.allMdx.edges.map(({ node }) => {
+              return <MDXRenderer>{node.body}</MDXRenderer>
+            })}
             {data.craft.entries
               .slice(
                 this.state.currentPage * this.state.perPage,
                 (this.state.currentPage + 1) * this.state.perPage
               )
-              .map(entry => (
+              .map((entry) => (
                 <ListPost key={entry.id} entry={entry} />
               ))}
             {this.state.currentPage > 0 && (
@@ -97,6 +100,22 @@ export default IndexPage
 
 export const query = graphql`
   query {
+    allMdx {
+      edges {
+        node {
+          exports {
+            meta {
+              title
+              date
+              desc
+              slug
+            }
+          }
+          body
+          id
+        }
+      }
+    }
     craft {
       entries(section: [thoughts]) {
         ... on Craft_Thoughts {
