@@ -107,7 +107,6 @@ export const query = graphql`
             meta {
               title
               date
-              desc
               slug
             }
           }

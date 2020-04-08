@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { graphql } from 'gatsby'
 import { DiscussionEmbed } from 'disqus-react'
-import Helmet from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import Layout from './Layout'
 import Timestamp from './Timestamp'
 import Highlight from 'react-highlight'
@@ -33,7 +33,7 @@ const ThoughtsEntry = ({
         </header>
         <div className="page-section-wrap">
           {entry.bodyBlocks.length ? (
-            entry.bodyBlocks.map(block => {
+            entry.bodyBlocks.map((block) => {
               switch (block.__typename) {
                 case 'Craft_BodyBlocksText':
                   return <RawHtml key={block.id} html={block.text.content} />

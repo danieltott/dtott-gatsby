@@ -30,14 +30,10 @@ exports.createPages = ({ graphql, actions }) => {
             node {
               exports {
                 meta {
-                  title
-                  date
-                  desc
                   slug
                 }
               }
               id
-              fileAbsolutePath
             }
           }
         }
