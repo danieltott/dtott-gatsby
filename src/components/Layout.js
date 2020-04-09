@@ -1,11 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import { StaticQuery, graphql, navigate } from 'gatsby'
+import { StaticQuery, graphql, navigate, Link } from 'gatsby'
 import moment from 'moment'
 import Header from './Header'
-import '../styles/codetheme.css'
-import '../styles/main.css'
 
 const Layout = ({ children, section = 'home' }) => (
   <StaticQuery
@@ -18,7 +16,7 @@ const Layout = ({ children, section = 'home' }) => (
         }
       }
     `}
-    render={data => {
+    render={(data) => {
       const searchTextInput = React.createRef()
       return (
         <>
@@ -42,6 +40,11 @@ const Layout = ({ children, section = 'home' }) => (
             />
           </Helmet>
           <Header siteTitle={data.site.siteMetadata.title} section={section} />
+          <div>
+            <Link to="/thoughts/2020/04/09/css-naked-day-2020">
+              Where are the styles?
+            </Link>
+          </div>
           <div role="main" className={section}>
             {children}
           </div>
@@ -50,7 +53,7 @@ const Layout = ({ children, section = 'home' }) => (
               action="/thoughts/search"
               className="site-search page-section"
               method="get"
-              onSubmit={e => {
+              onSubmit={(e) => {
                 e.preventDefault()
                 navigate(`/thoughts/search?q=${searchTextInput.current.value}`)
               }}

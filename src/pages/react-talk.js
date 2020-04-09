@@ -1,7 +1,7 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import '../styles/codetheme.css'
-import '../styles/main.css'
+// import '../styles/codetheme.css'
+// import '../styles/main.css'
 
 const NotFoundPage = () => (
   <>

@@ -30,11 +30,11 @@ class IndexPage extends React.Component {
     const { data } = this.props
     const totalPages = Math.ceil(data.craft.entries.length / this.state.perPage)
     return (
-      <Layout section="home">
+      <Layout section="thoughts">
         <Helmet title="Thoughts" />
         <h1
           className="section-title"
-          ref={section => {
+          ref={(section) => {
             this.ThoughtsList = section
           }}
         >
@@ -47,7 +47,7 @@ class IndexPage extends React.Component {
                 this.state.currentPage * this.state.perPage,
                 (this.state.currentPage + 1) * this.state.perPage
               )
-              .map(entry => (
+              .map((entry) => (
                 <ListPost key={entry.id} entry={entry} />
               ))}
             {this.state.currentPage > 0 && (

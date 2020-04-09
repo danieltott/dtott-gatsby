@@ -57,7 +57,7 @@ class IndexPage extends React.Component {
         <section
           className="page-section thoughts"
           id="thoughts"
-          ref={section => {
+          ref={(section) => {
             this.ThoughtsList = section
           }}
         >
@@ -70,7 +70,7 @@ class IndexPage extends React.Component {
                 this.state.currentPage * this.state.perPage,
                 (this.state.currentPage + 1) * this.state.perPage
               )
-              .map(entry => (
+              .map((entry) => (
                 <ListPost key={entry.id} entry={entry} />
               ))}
             {this.state.currentPage > 0 && (
