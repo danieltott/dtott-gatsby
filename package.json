@@ -31,7 +31,8 @@
     "react-helmet": "^5.2.0",
     "react-helmet-async": "^1.0.4",
     "react-highlight": "^0.12.0",
-    "react-scroll-to-component": "^1.0.2"
+    "react-scroll-to-component": "^1.0.2",
+    "styled-components": "^5.1.0"
   },
   "keywords": [
     "gatsby"
