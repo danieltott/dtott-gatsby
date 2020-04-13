@@ -18,7 +18,8 @@ export default function PageTemplate(props) {
   const {
     data: {
       mdx: {
-        exports: { meta, tags, body },
+        exports: { meta, tags },
+        body,
       },
     },
   } = props
@@ -76,8 +77,8 @@ export default function PageTemplate(props) {
   )
 }
 export const pageQuery = graphql`
-  query BlogPostQuery($id: String) {
-    mdx(id: { eq: $id }) {
+  query BlogPostQuery($slug: String) {
+    mdx(exports: { meta: { slug: { eq: $slug } } }) {
       mdxAST
       exports {
         tags

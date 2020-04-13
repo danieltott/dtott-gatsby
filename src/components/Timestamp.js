@@ -5,7 +5,7 @@ import formatISO from 'date-fns/formatISO'
 
 const Timestamp = ({ time }) => {
   const dates = useMemo(() => {
-    const d = typeof time === 'number' ? toDate(time * 1000) : new Date(time)
+    const d = typeof time === 'number' ? toDate(time * 1000) : new Date(parseInt(time))
     console.log(d)
     return {
       iso: formatISO(d),

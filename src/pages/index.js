@@ -68,7 +68,7 @@ class IndexPage extends React.Component {
             {data.allMdx.edges.map(({ node }) => {
               return <MDXRenderer>{node.body}</MDXRenderer>
             })}
-            {data.craft.entries
+            {/* {data.craft.entries
               .slice(
                 this.state.currentPage * this.state.perPage,
                 (this.state.currentPage + 1) * this.state.perPage
@@ -88,7 +88,7 @@ class IndexPage extends React.Component {
               <SimpleButton type="button" onClick={this.nextPage}>
                 Older Posts
               </SimpleButton>
-            )}
+            )} */}
           </div>
         </section>
       </Layout>

@@ -44,22 +44,22 @@ exports.createPages = ({ graphql, actions }) => {
           path: '/' + node.exports.meta.slug,
           component: path.resolve(`./src/components/ThoughtsEntry2.js`),
           context: {
-            id: node.id,
+            slug: node.exports.meta.slug,
           },
         })
       })
 
-      result.data.craft.entries.forEach((entry) => {
-        createPage({
-          path: '/' + entry.uri,
-          component: path.resolve(`./src/components/ThoughtsEntry.js`),
-          context: {
-            // Data passed to context is available
-            // in page queries as GraphQL variables.
-            id: entry.id,
-          },
-        })
-      })
+      // result.data.craft.entries.forEach((entry) => {
+      //   createPage({
+      //     path: '/' + entry.uri,
+      //     component: path.resolve(`./src/components/ThoughtsEntry.js`),
+      //     context: {
+      //       // Data passed to context is available
+      //       // in page queries as GraphQL variables.
+      //       id: entry.id,
+      //     },
+      //   })
+      // })
       resolve()
     })
   })
