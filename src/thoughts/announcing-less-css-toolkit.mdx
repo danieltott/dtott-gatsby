@@ -1,0 +1,470 @@
+import PageLayout from '../components/mdxLayoutPostSummary'
+
+export default PageLayout
+
+export const summary = (
+  <>
+    <p>
+      I've recently starting developing using LESS CSS (
+      <a href="http&#58;//lesscss.org">lesscss.org</a>), and quickly decided
+      that I would benefit from a toolkit containing mixins that I would use
+      over and over, such as border-radius or box-shadow.
+    </p>{' '}
+    <p>Enter LESS CSS Toolkit.</p>
+  </>
+)
+
+export const tags = ['front end', 'css']
+
+export const meta = {
+  title: 'Announcing LESS CSS Toolkit',
+  slug: 'thoughts/2011/12/06/announcing-less-css-toolkit',
+  date: '2011-12-06 16:31:00',
+  dateUpdated: '2020-04-09 09:02:13',
+  desc: '',
+}
+
+<p>
+  I've recently starting developing using LESS CSS (
+  <a href="http://lesscss.org">lesscss.org</a>), and quickly decided that I
+  would benefit from a toolkit containing mixins that I would use over and over,
+  such as border-radius or box-shadow.
+</p>
+<p>
+  Enter{' '}
+  <a href="https://github.com/danieltott/Less-CSS-Toolkit" target="_blank">
+    LESS CSS Toolkit
+  </a>
+  . You can import this file at the beginning of your LESS project, and then
+  have access to the following mixins:
+</p>
+<h2>What you get:</h2>
+
+<ul>
+  <li>
+    <a href="#lessAnimation">Animation</a>
+  </li>
+  <li>
+    <a href="#lessBackground">Background Properties</a>
+  </li>
+  <li>
+    <a href="#lessBorderImage">Border Image</a>
+  </li>
+  <li>
+    <a href="#lessBorderRadius">Border Radius</a>
+  </li>
+  <li>
+    <a href="#lessBoxShadow">Box Shadow</a>
+  </li>
+  <li>
+    <a href="#lessBoxSizing">Box Sizing</a>
+  </li>
+  <li>
+    <a href="#lessColumns">CSS Columns</a>
+  </li>
+  <li>
+    <a href="#lessEasyclear">Easy Clear</a>
+  </li>
+  <li>
+    <a href="#lessFlexbox">FlexBox Properties</a>
+  </li>
+  <li>
+    <a href="#lessGradient">Gradient</a>
+  </li>
+  <li>
+    <a href="#lessTransform">Transform Properties</a>
+  </li>
+  <li>
+    <a href="#lessTransitions">CSS Transitions</a>
+  </li>
+</ul>
+
+<h3 id="lessAnimation">Animation</h3>
+<p>
+  <code>.animation(@name, @duration, @iteration-count, @timing)</code>
+</p>
+<h4>Usage:</h4>
+
+```scss
+.myElement{ .animation(myAnimationName, .5s, 1, ease-in-out); }
+```
+
+<p>Will result in</p>
+
+```scss
+.myElement {
+  -moz-animation-name: myAnimationName;
+  -moz-animation-duration: 0.5s;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-timing-function: ease-in-out;
+  -webkit-animation-name: myAnimationName;
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-in-out;
+  -ms-animation-name: myAnimationName;
+  -ms-animation-duration: 0.5s;
+  -ms-animation-iteration-count: 1;
+  -ms-animation-timing-function: ease-in-out;
+  -o-animation-name: myAnimationName;
+  -o-animation-duration: 0.5s;
+  -o-animation-iteration-count: 1;
+  -o-animation-timing-function: ease-in-out;
+  animation-name: myAnimationName;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in-out;
+}
+```
+
+<p>
+  <a href="#entry">back to top</a>
+</p>
+<h3 id="lessBackground">Background Properties</h3>
+<p>
+  <code>.background-clip(@clip)</code>, <code>.background-origin(@origin)</code>{' '}
+  and <code>.background-size(@size)</code>
+</p>
+
+<h4>Usage:</h4>
+
+```scss
+.myElement{ .background-clip(padding-box); .background-origin(border-box) .background-size(250px 150px);
+```
+
+<p>Will result in</p>
+
+```scss
+.myElement{
+    -moz-background-clip: padding-box;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+
+    -moz-origin-size: border-box;
+    -o-origin-size: border-box;
+    -webkit-origin-size: border-box;
+    origin-size: border-box;
+
+    -moz-background-size 250px 150px;
+    -o-background-size: 250px 150px;
+    -webkit-background-size: 250px 150px;
+    background-size: 250px 150px;
+}
+
+```
+
+<p>
+  <a href="#entry">back to top</a>
+</p>
+<h3 id="lessBorderImage">Border Image</h3>
+<p>
+  <code>.border-image(@img, @number, @repeat: stretch)</code>
+</p>
+<h4>Usage:</h4>
+
+```scss
+.myElement{ .border-image(url(img.gif), 25 25 25 25, round round); }
+```
+
+<p>Will result in:</p>
+
+```scss
+.myElement {
+  -moz-border-image: url(img.gif), 25 25 25 25, round round;
+  -webkit-border-image: url(img.gif), 25 25 25 25, round round;
+  -ms-border-image: url(img.gif), 25 25 25 25, round round;
+  -o-border-image: url(img.gif), 25 25 25 25, round round;
+  border-image: url(img.gif), 25 25 25 25, round round;
+}
+```
+
+<p>
+  <a href="#entry">back to top</a>
+</p>
+<h3 id="lessBorderRadius">Border Radius</h3>
+<p>
+  <code>.border-radius(@radius)</code>
+</p>
+<h4>Usage:</h4>
+
+```scss
+.myElement{ .border-radius(5px); }
+```
+
+<p>Will result in:</p>
+
+```scss
+.myElement {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+```
+
+<p>
+  <a href="#entry">back to top</a>
+</p>
+<h3 id="lessBoxShadow">Box Shadow</h3>
+<p>
+  <code>.box-shadow(@shadow)</code>
+</p>
+<h4>Usage:</h4>
+
+```scss
+.myElement{ .box-shadow(3px 3px 2px rgba(0,0,0,.3)); }
+```
+
+<p>Will result in:</p>
+
+```scss
+.myElement {
+  -webkit-box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.3);
+}
+```
+
+<p>
+  <a href="#entry">back to top</a>
+</p>
+<h3 id="lessBoxSizing">Box Sizing</h3>
+<p>
+  <code>.box-sizing(@sizing)</code>
+</p>
+<h4>Usage:</h4>
+
+```scss
+.myElement{ .box-sizing(border-box); }
+```
+
+<p>Will result in:</p>
+
+```scss
+.myElement {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+```
+
+<p>
+  <a href="#entry">back to top</a>
+</p>
+<h3 id="lessColumns">CSS Columns</h3>
+<p>
+  <code>.columns(@columnValue, @gap: normal, @rule: none)</code>
+</p>
+<h4>Usage:</h4>
+
+```scss
+.myElement{ .columns(3); }
+```
+
+<p>Will result in:</p>
+
+```scss
+.myElement {
+  -moz-columns: 3;
+  -moz-column-gap: normal;
+  -moz-column-rule: none;
+
+  -webkit-columns: 3;
+  -webkit-column-gap: normal;
+  -webkit-column-rule: none;
+
+  columns: 3;
+  column-gap: normal;
+  column-rule: none;
+}
+```
+
+<p>
+  <a href="#entry">back to top</a>
+</p>
+<h3 id="lessEasyclear">Easy Clear</h3>
+<p>
+  <code>.easyclear()</code>
+</p>
+<p>
+  Applies an updated easy clear fix to the :after psuedo-element (for times when{' '}
+  <code>overflow:auto</code> isn't an option)
+</p>
+<h4>Usage:</h4>
+
+```scss
+.myElement{ .easyclear; }
+```
+
+<p>Will result in:</p>
+
+```scss
+.myElement:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: ' ';
+  clear: both;
+  height: 0;
+}
+```
+
+<p>
+  <a href="#entry">back to top</a>
+</p>
+<h3 id="lessFlexbox">FlexBox Properties</h3>
+<p>
+  <code>
+    .flexbox(@orient: horizontal, @pack: start, @align: stretch, @direction:
+    normal)
+  </code>
+</p>
+<p>
+  <code>.box-flex(@flex: 1)</code>
+</p>
+<h4>Usage:</h4>
+
+```scss
+.myElement{ .flexbox; }
+.myElement div{ .box-flex; }
+```
+
+<p>Will result in:</p>
+
+```scss
+.myElement {
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: start;
+  -webkit-box-align: stretch;
+  -webkit-box-direction: normal;
+
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-pack: start;
+  -moz-box-align: stretch;
+  -moz-box-direction: normal;
+
+  display: -ms-box;
+  -ms-box-orient: horizontal;
+  -ms-box-pack: start;
+  -ms-box-align: stretch;
+  -ms-box-direction: normal;
+
+  display: -o-box;
+  -o-box-orient: horizontal;
+  -o-box-pack: start;
+  -o-box-align: stretch;
+  -o-box-direction: normal;
+
+  display: box;
+  box-orient: horizontal;
+  box-pack: start;
+  box-align: stretch;
+  box-direction: normal;
+}
+.myElement div {
+  -moz-box-flex: 1;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  -o-flex: 1;
+  box-flex: 1;
+}
+```
+
+<p>
+  <a href="#entry">back to top</a>
+</p>
+<h3 id="lessGradient">Gradient</h3>
+<p>
+  <code>
+    .gradient(@startcolor, @stopcolor, @startpoint: center top, @endpoint:
+    center bottom)
+  </code>
+</p>
+<p>This creates a simple, two-color gradient. It defaults to top-to-bottom.</p>
+<h4>Usage:</h4>
+
+```scss
+.myElement{ .gradient(#000, #fff); }
+```
+
+<p>Will result in:</p>
+
+```scss
+.myElement {
+  background: -webkit-gradient(
+    linear,
+    center top,
+    center bottom,
+    color-stop(0, #000),
+    color-stop(0.5, #fff)
+  );
+  background: -webkit-linear-gradient(center top, #000, #fff);
+  background: -o-linear-gradient(center top, #000, #fff);
+  background: -moz-linear-gradient(center top, #000, #fff);
+  background: linear-gradient(center top, #000, #fff);
+}
+```
+
+<p>
+  <a href="#entry">back to top</a>
+</p>
+<h3 id="lessTransform">Transform Properties</h3>
+<p>
+  <code>.transform(@transform)</code>
+</p>
+<p>
+  <code>.transform-origin(@origin)</code>
+</p>
+<h4>Usage:</h4>
+
+```scss
+.myElement{ .transform(rotate(45deg)); .transform-origin(center center) }
+```
+
+<p>Will result in:</p>
+
+```scss
+.myElement {
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+
+  -moz-transform-origin: center center;
+  -webkit-transform-origin: center center;
+  -ms-transform-origin: center center;
+  transform-origin: center center;
+}
+```
+
+<p>
+  <a href="#entry">back to top</a>
+</p>
+<h3 id="lessTransitions">CSS Transitions</h3>
+<p>
+  <code>.transition(@transition)</code>
+</p>
+<h4>Usage:</h4>
+
+```scss
+.myElement{ .transition(all ease-out .5s); }
+```
+
+<p>Will result in:</p>
+
+```scss
+.myElement {
+  -webkit-transition: all ease-out 0.5s;
+  -moz-transition: all ease-out 0.5s;
+  -o-transition: all ease-out 0.5s;
+  -ms-transition: all ease-out 0.5s;
+  transition: all ease-out 0.5s;
+}
+```
+
+<h2>That's all for now</h2>
+<p>
+  This is a work in progress, so keep track of the project on github as I'll
+  probably be adding to it down the line. Any suggestions are always welcome.
+</p>

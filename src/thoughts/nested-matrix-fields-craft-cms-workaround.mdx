@@ -1,0 +1,62 @@
+import PageLayout from '../components/mdxLayoutPostSummary'
+
+export default PageLayout
+
+export const summary = (
+  <>
+  <p><a href="http://braddielman.com/">A friend</a> came to me wondering about how to pull off a nested Matrix situation in Craft CMS. What he wanted was to be able to use a Matrix field within another Matrix field, which is not possible at the moment. However, while talking about it with him, I came up with something that will work at least for his use-case. </p>
+  </>
+)
+
+export const tags = ['craftcms']
+
+export const meta = {
+  title: 'A Workaround for Nested Matrix fields in Craft CMS',
+  slug: 'thoughts/2016/06/30/nested-matrix-fields-craft-cms-workaround',
+  date: '2016-06-30 16:40:00',
+  dateUpdated: '2020-04-09 09:02:14',
+  desc: '',
+}
+
+<p><a href="http://braddielman.com/">A friend</a> came to me wondering about how to pull off a nested Matrix situation in Craft CMS. What he wanted was to be able to use a Matrix field within another Matrix field, which is not possible at the moment. However, while talking about it with him, I came up with something that will work at least for his use-case. </p>
+
+<p>What his client was looking for: a Matrix field where a user can add blocks of content, like Text Block, Image, Call to Action, etc. One of the block types was to be a collection of tiles, each tile having various fields like image, title, and description. My first thought here was to make a Tiles Section, and then use an Entries field type in the Matrix block. There are a couple problems with this solution though. It's a little confusing for users, and it also requires you to create many different entries if you are going to do things like use the same image with multiple different tiles. If you want each page to have custom tiles, then we're going to have to find something better.</p>
+
+<h3>Here's what I came up with:</h3>
+
+<p>Instead of creating a Tile Group matrix block type, we can create just a Tile. So the options for adding a matrix block would be Text Block, Image, Call to Action, and Tile. The user would then add a group of consecutive Tiles, and then we can handle the rest on the template side. So when the user is done, the list of blocks would look like this:</p>
+
+<ul>
+    <li>Call to Action</li>
+    <li>Testimonial</li>
+    <li>Large Media Block</li>
+    <li>Tile</li>
+    <li>Tile</li>
+    <li>Tile</li>
+    <li>Tile</li>
+    <li>Tile</li>
+    <li>Video</li>
+    <li>Basic Content</li>
+</ul>
+
+<p>But the output would be something like this:</p>
+
+<ul>
+    <li>Call to Action Content Block</li>
+    <li>Testimonial</li>
+    <li>Large Media Block</li>
+    <li>Tiles Group</li>
+    <li>Video</li>
+    <li>Basic Content</li>
+</ul>
+
+<p>We can achieve this in a decent way without doing anything too tricky. The basic idea here is that while we're looping through the Matrix field, if we get to a Tile, then instead of outputting anything, we just start collecting the tiles in a variable. Then, once we reach either something that is not a Tile or the end of the loop, we output the group of tiles all together. That way we can wrap it in whatever html we need and things are nice and tidy. </p>
+
+<p>Here's what I'm thinking the template code would look like:</p>
+
+<script src="https://gist.github.com/danieltott/a0959e6d2108a3a15285ea2f184530c0.js"></script>
+
+<p>The nice thing about this solution is that it is fairly easy for users to understand, and it retains the flexibility and ease-of-use that makes Matrix fields so handy in the first place.</p>
+
+<p>Hopefully this helps somebody out - I think it's a fairly elegant solution for this particular problem.</p>
+

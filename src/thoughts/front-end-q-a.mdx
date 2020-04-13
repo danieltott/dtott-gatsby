@@ -1,0 +1,70 @@
+import PageLayout from '../components/mdxLayoutPostSummary'
+
+export default PageLayout
+
+export const summary = (
+  <>
+  <p>A couple of weeks ago, a good friend sent me an email with a list of questions for me. He'd been out of the front-end game for a little while, and wanted to pick my brain a little bit. I thought that instead of just answering him directly, I'd share my answers with everyone.</p>
+  </>
+)
+
+export const tags = ['css','html','javascript','front end']
+
+export const meta = {
+  title: 'Front-End Q&amp;A',
+  slug: 'thoughts/2013/07/01/front-end-q-a',
+  date: '2013-07-01 22:15:38',
+  dateUpdated: '2020-04-09 09:02:13',
+  desc: '',
+}
+
+<p>A couple of weeks ago, a good friend sent me an email with a list of questions for me. He'd been out of the front-end game for a little while, and wanted to pick my brain a little bit. I thought that instead of just answering him directly, I'd share my answers with everyone.</p>
+
+<h2>Do you use any grid/responsive frameworks? If so, what do you prefer and why?</h2>
+<p>Honestly I haven't used many. There are a few that have caught my eye, but with sprokets I seldom have the chance to start on a fresh project, and bootstrapping in a responsive framework on top of legacy code is sort of ugly.  I've used the grids built in to Twitter bootstrap, and i've rolled out my own very basic ones.</p>
+
+<p>That being said, here are some frameworks that I've dabbled with or I'm keeping my eye on: </p>
+<ul>
+	<li><a href="http://gumbyframework.com">Gumby Framework</a></li>
+	<li><a href="http://susy.oddbird.net/">Susy Rsponsive Grid for Compass</a></li>
+	<li><a href="http://www.blueprintcss.org/">Blueprint CSS Framework</a></li>
+	<li><a href="http://responsive.gs/">Responsive Grid System</a></li>
+	<li><a href="http://framelessgrid.com">Frameless Grid System</a></li>
+	<li><a href="http://inuitcss.com/">Intuit CSS Framework</a></li>
+	<li><a href="http://foundation.zurb.com">Foundation Framework</a></li>
+</ul>
+
+<h2>Do you use a reset stylesheet at all? If so, what do you use? I have always been accustomed to Eric Meyer's, but have lately used some smaller subsets.</h2>
+<p>All of our projects use the Meyer reset, which I still don't have a big problem with. Lately, however, people have started using staring points like <a href="http://necolas.github.io/normalize.css/">Normalize</a>, which is less of a nuclear reset and more of a way to, well, normalize behavior between browsers. It looks like a good setup, and will likely be my base with new projects going forward.</p>
+
+<h2>Do you use a clearfix? Which method do you prefer?</h2>
+<p>I use <code>overflow:hidden</code> in general, and when i need to allow for overflows, i use the <a href="http://nicolasgallagher.com/micro-clearfix-hack/">micro clearfix hack</a></p>
+
+<h2>Do you use any polyfills/shims? If so, what do you prefer and why?</h2>
+<p>As needed, yes. Here's the definitive resource for when you need a polyfill for some feature: <a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills">HTML5 Cross-browser Polyfills</a></p>
+
+<h2>Do you use SASS/Less to help organize your CSS? If so, which one and what do you like most?</h2>
+<p>Yes yes yes. </p>
+
+<p>We've been using Less for the last year or two with a couple main clients, but we're moving over to sass/compass. It seems like sass has more active development, and higher developer mindshare. More features, too, especially when you add compass into the mix.</p>
+
+<p>One note - this isn't just about organizing CSS. It's also about speed of development and quality of code. Preprocessors help create environments that are friendly to DRY and modular development, and that's really what it's all about.</p>
+
+
+<h2>What do you use for embedding fonts? Typekit? Google? Something else?</h2>
+<p>I've used google before and it seemed to work ok, and a couple times I've done normal font embedding, but in general I almost always use typekit. It's simple to use, has a huge font library, and between Sprokets and my personal work, I almost always have access to a paid account.</p>
+<p>Also, while I was writing this, Hoefler &amp; Frere-Jones <a href="http://www.typography.com/cloud/welcome/">released a web font service</a> that seems pretty sweet.</p>
+
+
+<h2>From your perspective, what does the browser landscape look like to you? It's moved rapidly in the past few years, with some browsers releasing faster than others. What does your browser support look like? Do you use a VM to test in other browsers, or use a tool?</h2>
+<p>As far as client site support and testing, we do Chrome, FF, Safari in windows/mac, as well as IE 10, 9, and 8. We also (unfortunately) have a couple clients that have enough traffic to warrant IE7 support. I have virtual machines (using <a href="http://virtualbox.org">virtual box</a> and <a href="http://osxdaily.com/2011/09/04/internet-explorer-for-mac-ie7-ie8-ie-9-free/">this trick</a>) set up for IE7-10, and i test in chrome/ff/safari in mac/windows.</p>
+<p>For dev tools, I'm still kicking it old school with Firebug and Firefox. A lot of people have moved to Chrome and their devtools, and they're probably great.</p>
+
+
+<h2>Is there anything else you are in love with at the moment with HTML and CSS?</h2>
+<p>Right now I'm into learning Sass/Compass (as opposed to Less) for me. We just started making the move with the first project a couple weeks ago, so i've been learning about some of the ins and outs. That, plus using Grunt JS for compiling front-end code, which we've been using for a few months, and seems to be going well.</p>
+
+<p>Otherwise, most of my thought processes center not on new flashy features, but on improving and maintaining our large, old-as-hell codebases. Almost all of our main projects have at least some front-end code that is over 5 years old, and it is impractical at most points to just start over with a full rewrite of all front-end code.</p>
+
+<p>This is the sort of stuff that helps: <a href="http://smacss.com">SMACSS</a>, <a href="http://webuild.envato.com/blog/how-to-scale-and-maintain-legacy-css-with-sass-and-smacss/">How to Scale and Maintain Legacy CSS with Sass and SMACSS</a>, and <a href="http://nicolasgallagher.com/about-html-semantics-front-end-architecture/">About HMTL Semantics and Front-End Architecture</a></p>
+

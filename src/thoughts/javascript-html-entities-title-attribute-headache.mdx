@@ -1,0 +1,98 @@
+import PageLayout from '../components/mdxLayoutPostSummary'
+
+export default PageLayout
+
+export const summary = (
+  <>
+    <p>
+      So last month, I was attending the fairly new{' '}
+      <a href="http&#58;//webdesign.meetup.com/396/">
+        Cleveland Web Standards Meet-Up
+      </a>
+      . I was talking to <a href="http&#58;//www.wileymedia.com/">Eric Wiley</a>{' '}
+      about the redesign I did for the{' '}
+      <a href="http&#58;//www.freetimes.com">Free Times</a>, and{' '}
+      <a href="http&#58;//meyerweb.com">Eric Meyer</a>, who came for the first
+      time, overheard. He says "new site, huh?" and pulls out his laptop.
+    </p>
+  </>
+)
+
+export const tags = ['front end', 'javascript']
+
+export const meta = {
+  title: 'Javascript + HTML Entities + Title Attribute = Headache',
+  slug: 'thoughts/2007/07/11/javascript-html-entities-title-attribute-headache',
+  date: '2007-07-11 00:05:00',
+  dateUpdated: '2020-04-09 09:02:13',
+  desc: '',
+}
+
+<p>
+  So last month, I was attending the fairly new{' '}
+  <a href="http://webdesign.meetup.com/396/">Cleveland Web Standards Meet-Up</a>
+  . I was talking to <a href="http://www.wileymedia.com/">Eric Wiley</a> about
+  the redesign I did for the <a href="http://www.freetimes.com">Free Times</a>,
+  and <a href="http://meyerweb.com">Eric Meyer</a>, who came for the first time,
+  overheard. He says "new site, huh?" and pulls out his laptop.
+</p>
+
+<p>It's possible my heart stopped working.</p>
+
+<p>
+  His critique of my work actually went fairly well for me. He commented on the
+  fact that the ads came before the content, which I had already fixed on my
+  local version, but hadn't uploaded yet (if someone had told me Eric Meyer
+  would be there...). But then he noticed what I first assumed was one of those
+  embarrassing bugs that crop up now and again where I just forgot something
+  that, although simple to fix, was painfully obvious.
+</p>
+
+<p>
+  On the front page of the Free Times site, there is a simple javascript image
+  rotater that loops through the current lead stories. The script changes the
+  url of the link, and the src, alt, and title of the image. The problem was
+  that in the tooltips that popped up, the{' '}
+  <a href="http://en.wikipedia.org/wiki/HTML_entities">HTML entities</a> weren't
+  converting to actual symbols. For example, what should have been "He's happy"
+  turned out to say "He's happy." Oops.
+</p>
+
+<p>
+  I assumed it that I just forgot to do a conversion somewhere. It's happend
+  before. However, the truth is much more sinister. The "title" attribute, when
+  hard-coded in an html element, happily accepts html entities with no problem.
+  The problem arises when javascript inserts them. I googled around for a while,
+  but suprisingly couldn't find anything about the subject, so I hunkered down
+  and figured it out myself.
+</p>
+
+<p>
+  The solution isn't very hard: when using PHP to print the text in question,
+  use the{' '}
+  <code>
+    <a href="http://us.php.net/manual/en/function.rawurlencode.php">
+      rawurlencode() function
+    </a>
+  </code>
+  , then use the javascript{' '}
+  <code class="prettyprint">
+    <a href="http://www.w3schools.com/jsref/jsref_unescape.asp">unescape()</a>
+  </code>{' '}
+  function when inserting the text. It seems silly, but works fine. I needed to
+  use <code class="prettyprint">rawurlencode()</code> and not{' '}
+  <code class="prettyprint">urlencode()</code> because <code>urlencode()</code>{' '}
+  encodes spaces as '+' and javascript doesn't unescape them.
+</p>
+
+<pre class="code_example">
+  <code class="prettyprint">
+    someElement.title = unescape("&lt;?= rawurlencode($cover_story['title'])
+    ?&gt;");
+  </code>
+</pre>
+
+<p>
+  So, the lesson learned: check everything. Especially if Eric Meyer will be
+  going through your work.
+</p>

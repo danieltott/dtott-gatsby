@@ -1,0 +1,102 @@
+import PageLayout from '../components/mdxLayoutPostSummary'
+
+export default PageLayout
+
+export const summary = (
+  <>
+    <p>
+      One of the more popular posts on this site is{' '}
+      <a
+        href="http&#58;//dtott.com/thoughts/2007/12/10/clear-your-floats-the-right-way/"
+        title="Clear your floats&#58; the right way"
+      >
+        my explanation of the easyclear method
+      </a>{' '}
+      of clearing floats. I had been using it for a while when I wrote the post,
+      and it's a great solution. However,{' '}
+      <a href="http&#58;//www.dave-woods.co.uk/" title="Dave Woods">
+        Dave Woods
+      </a>{' '}
+      <a
+        href="http&#58;//dtott.com/thoughts/2007/12/10/clear-your-floats-the-right-way/#comment-86"
+        title="Dave Woods' comment"
+      >
+        commented
+      </a>{' '}
+      on that post with a new method&#58; setting <code>overflow&#58;auto</code>{' '}
+      on the containing element actually has the same effect as the clearfix,
+      without all the extra stuff.{' '}
+    </p>
+  </>
+)
+
+export const tags = ['general']
+
+export const meta = {
+  title: 'Clear Your Floats Even Easier',
+  slug: 'thoughts/2009/01/06/clear-your-floats-even-easier',
+  date: '2009-01-06 23:12:00',
+  dateUpdated: '2020-04-09 09:02:12',
+  desc: '',
+}
+
+<p>
+  One of the more popular posts on this site is{' '}
+  <a
+    href="http://dtott.com/thoughts/2007/12/10/clear-your-floats-the-right-way/"
+    title="Clear your floats: the right way"
+  >
+    my explanation of the easyclear method
+  </a>{' '}
+  of clearing floats. I had been using it for a while when I wrote the post, and
+  it's a great solution. However,{' '}
+  <a href="http://www.dave-woods.co.uk/" title="Dave Woods">
+    Dave Woods
+  </a>{' '}
+  <a
+    href="http://dtott.com/thoughts/2007/12/10/clear-your-floats-the-right-way/#comment-86"
+    title="Dave Woods' comment"
+  >
+    commented
+  </a>{' '}
+  on that post with a new method: setting <code>overflow:auto</code> on the
+  containing element actually has the same effect as the clearfix, without all
+  the extra stuff.{' '}
+</p>
+<p>
+  I thought, "that <em>can't</em> be right...can it?" Turns out Dave was right.
+  After looking into it some more, it turns out that <code>overflow:auto</code>{' '}
+  and <code>overflow:hidden</code> both work the same way, and that's it.{' '}
+</p>
+
+```css
+.containingElement {
+  overflow: hidden;
+}
+```
+
+<p>
+  Of course, <abbr title="Browser of Death">IE6</abbr> doesn't play along with
+  the rest, so as always, here's the hack:
+</p>
+
+```css
+* html #container {
+  height: 1%;
+}
+```
+
+<p>
+  Use this hack (or one without the <code>* html</code> inside an{' '}
+  <abbr title="Browser voted most likely to cause suicide">ie6</abbr>-only
+  stylesheet) to make <abbr title="Raise your hand if you hate ie6">ie6</abbr>{' '}
+  behave correctly.
+</p>
+<h3>That's all there is to it.</h3>
+<p>
+  I have since began using it everywhere, and it works flawlessly. The only time
+  it doesn't work correctly is when you actually need elements to overflow the
+  box (a drop-down menu for example, or any absolutely positioned elements
+  outside of the box). In these cases, I fall back on the trusty clearfix. But
+  for all others, <code>overflow:hidden</code> to the rescue!
+</p>

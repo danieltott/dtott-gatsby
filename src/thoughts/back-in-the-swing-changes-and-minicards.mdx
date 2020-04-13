@@ -1,0 +1,30 @@
+import PageLayout from '../components/mdxLayoutPostSummary'
+
+export default PageLayout
+
+export const summary = (
+  <>
+  <p>Back from the trip.  It was wonderful. Some catch-up news&#58;</p>
+  </>
+)
+
+export const tags = ['general']
+
+export const meta = {
+  title: 'Back In The Swing: Changes And MiniCards',
+  slug: 'thoughts/2007/08/06/back-in-the-swing-changes-and-minicards',
+  date: '2007-08-06 17:07:00',
+  dateUpdated: '2020-04-09 09:02:11',
+  desc: '',
+}
+
+<p>Back from the trip.  It was wonderful. Some catch-up news:</p>
+
+<p>Inspired by <a href="http://www.braddielman.com/2007/07/31/a-little-nip-here-a-little-tuck-there/">Brad</a> and some whisperings in the back of my head, I made a few modifications to the layout of the site.  Got rid of the welcome page (I'm not sure what I was thinking; I hate welcome pages with no content...), tossed the big buttons, and changed the header at the top to something more...pleasant.  I also added headers for each main section.</p>
+
+<p>For the headers, I really wanted to use transparent PNGs, so that I wouldn't have to change all of them if I ever changed the background color.  The problem with these is that IE 6 doesn't support them (surprise!).  Unfourtunately, a decent amount of people still use IE6, so I can't just ignore it.  Once again, Google saved the day.  I found <a href="http://www.twinhelix.com/css/iepngfix/">an awesome little tool</a> that goes through and fixes them.  You don't have to change anything in the HTML, and you choose which images it changes using normal CSS selectors.  In conjunction with a little conditional comment magic, you can even keep it from messing up your stylesheets (and keep them valid!).  As far as I can tell, it works on everything except tiled images and links.  Booya!</p>
+
+<p>Another happy suprise on getting home was that my <a href="http://www.moo.com/products/minicards.php">Moo.com MiniCards</a> arrived.  They look great, feel great, and at twenty bucks for a hundred, how can you miss?</p>
+
+<div class="post_image_container"><p><img src="/images/moocards.jpg" alt="Moo.com MiniCards" /></p></div>
+

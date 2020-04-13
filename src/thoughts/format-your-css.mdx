@@ -1,0 +1,130 @@
+import PageLayout from '../components/mdxLayoutPostSummary'
+
+export default PageLayout
+
+export const summary = (
+  <>
+    <p>
+      For years, I've always formatted my CSS in what I like to think of as the
+      "traditional" manner. Each selector on one line, and each property
+      indented one tab underneath. But when I started working with{' '}
+      <a href="http://sprokets.net" title="Sprokets">
+        Sprokets
+      </a>
+      , the other front-end developer there was using one-line css declarations.
+      This threw me for a loop for a while, but I slowly started liking it
+      better and better.
+    </p>
+  </>
+)
+
+export const tags = ['front end', 'css']
+
+export const meta = {
+  title: 'Format Your CSS',
+  slug: 'thoughts/2007/12/03/format-your-css',
+  date: '2007-12-03 13:03:00',
+  dateUpdated: '2020-04-09 09:02:12',
+  desc: '',
+}
+
+<p>
+  For years, I've always formatted my CSS in what I like to think of as the
+  "traditional" manner. Each selector on one line, and each property indented
+  one tab underneath:
+</p>
+
+```css
+#content {
+  width: 49em;
+  padding: 0 1.5em;
+  margin: 0 auto;
+  clear: both;
+}
+#content h2 {
+  font-size: 2em;
+  height: 1.5em;
+  margin-left: 0.75em;
+  color: #000;
+}
+#content h2 a {
+  font-weight: normal;
+  float: left;
+}
+#content h3 {
+  font-size: 1.25em;
+  line-height: 1.2em;
+  color: #4d9fdd;
+}
+```
+
+<p>
+  Pretty standard stuff. I'd break up sections with big comments, and that made
+  it fairly easy to scan. While this format never caused and problems{' '}
+  <em>per se</em>, and it was easy enough to implement, it never seemed
+  completely ideal.
+</p>
+<p>
+  When I started working with{' '}
+  <a href="http://sprokets.net" title="Sprokets">
+    Sprokets
+  </a>
+  , the other front-end developer there was using one-line css declarations.
+  This threw me for a loop for a while, but I slowly started liking it better
+  and better.
+</p>
+<p>
+  The method I've finally settled on is based on the one-line approach, but with
+  an extra twist: I indent the declarations based on it's place in the HTML
+  document. For example, take the HTML for this simple page:
+</p>
+
+```html
+<div id="one">
+  <p>text</p>
+  <p>text</p>
+</div>
+<div id="two">
+  <p>text</p>
+  <ul>
+    <li>list item</li>
+  </ul>
+</div>
+```
+
+<p>The CSS to access this code would be like this:</p>
+
+```css
+body{ properties; }
+  #one{ properties; }
+    #one p{ properties; }
+  #two{ properties; }
+    #two p{ properties; }
+    #two ul{ properties; }
+      #two ul li{ properties; }
+```
+
+<p>
+  This has worked very well for me so far, and I'm looking forward to trying out
+  on some bigger projects. It allows me to scan through my CSS much more
+  quickly, view comments more easily, and has the added benefit of helping me
+  think through things like descendants and inheritance. Take a look at{' '}
+  <a
+    href="/thoughts/wp-content/themes/dtott/style.css"
+    title="dtott.com stylesheet"
+  >
+    the CSS for this site
+  </a>{' '}
+  to see it in action on a bigger scale.
+</p>
+<p>
+  This method, while new for me, is clearly{' '}
+  <a
+    href="http://www.dustindiaz.com/css-indention-method/"
+    title="i.e. someone else did it a while ago"
+  >
+    not revolutionary
+  </a>
+  . However, since I stumbled on it on my own, I thought some of you guys might
+  benefit from it as I have. How do you format your CSS?
+</p>
