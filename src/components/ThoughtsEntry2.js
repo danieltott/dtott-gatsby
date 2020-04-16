@@ -1,7 +1,6 @@
 import React, { createContext, useContext } from 'react'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import { Link } from 'gatsby'
 import { DiscussionEmbed } from 'disqus-react'
 import Helmet from 'react-helmet'
 import Layout from './Layout'
@@ -15,6 +14,7 @@ export const usePostIsFull = () => {
 }
 
 export default function PageTemplate(props) {
+  console.log({ props })
   const {
     data: {
       mdx: {
@@ -38,7 +38,10 @@ export default function PageTemplate(props) {
         <article className="page-section post">
           <header className="page-section-wrap">
             <h1 className="post-title">{meta.title}</h1>
-            <Timestamp time={meta.date} />
+            <Timestamp
+              relativeDate={meta.relativeDate}
+              isoDate={meta.isoDate}
+            />
           </header>
           <div className="page-section-wrap">
             <MDXRenderer>{body}</MDXRenderer>
@@ -61,14 +64,16 @@ export default function PageTemplate(props) {
               </p>
             </footer>
             <aside className="post-comments">
-              <DiscussionEmbed
-                shortname="danieltott"
-                config={{
-                  url: `${process.env.GATSBY_DTOTT_URL}/${meta.slug}`,
-                  identifier: meta.slug,
-                  title: meta.title,
-                }}
-              />
+              {process.env.NODE_ENV === 'production' && (
+                <DiscussionEmbed
+                  shortname="danieltott"
+                  config={{
+                    url: `${process.env.GATSBY_DTOTT_URL}/${meta.slug}`,
+                    identifier: meta.slug,
+                    title: meta.title,
+                  }}
+                />
+              )}
             </aside>
           </div>
         </article>
@@ -84,7 +89,9 @@ export const pageQuery = graphql`
         tags
         meta {
           title
-          date(formatString: "x")
+          relativeDate: date(fromNow: true)
+          isoDate: date(formatString: "YYYY-MM-DDTHH:mm:ssZ")
+          date
           slug
           desc
         }

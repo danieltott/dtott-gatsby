@@ -1,21 +1,9 @@
-import React, { useMemo } from 'react'
-import toDate from 'date-fns/toDate'
-import format from 'date-fns/format'
-import formatISO from 'date-fns/formatISO'
+import React from 'react'
 
-const Timestamp = ({ time }) => {
-  const dates = useMemo(() => {
-    const d = typeof time === 'number' ? toDate(time * 1000) : new Date(parseInt(time))
-    console.log(d)
-    return {
-      iso: formatISO(d),
-      nice: format(d, 'PPpp'),
-    }
-  }, [time])
-
+const Timestamp = ({ relativeDate, isoDate }) => {
   return (
     <div className="timestamp">
-      <time dateTime={dates.iso}>posted {dates.nice}</time>
+      <time dateTime={isoDate}>posted {relativeDate}</time>
     </div>
   )
 }

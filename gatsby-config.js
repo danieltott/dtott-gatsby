@@ -25,22 +25,22 @@ module.exports = {
       },
     },
     'gatsby-plugin-offline',
-    {
-      resolve: 'gatsby-source-graphql',
-      options: {
-        typeName: 'Craft',
-        fieldName: 'craft',
-        // Url to query from
-        url: process.env.GATSBY_DTOTT_API_URL,
-        // HTTP headers
-        headers: {
-          Authorization: `bearer ${process.env.GATSBY_DTOTT_API_TOKEN}`,
-          'Content-type': 'application/json',
-        },
-        // Additional options to pass to node-fetch
-        fetchOptions: {},
-      },
-    },
+    // {
+    //   resolve: 'gatsby-source-graphql',
+    //   options: {
+    //     typeName: 'Craft',
+    //     fieldName: 'craft',
+    //     // Url to query from
+    //     url: process.env.GATSBY_DTOTT_API_URL,
+    //     // HTTP headers
+    //     headers: {
+    //       Authorization: `bearer ${process.env.GATSBY_DTOTT_API_TOKEN}`,
+    //       'Content-type': 'application/json',
+    //     },
+    //     // Additional options to pass to node-fetch
+    //     fetchOptions: {},
+    //   },
+    // },
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
@@ -55,62 +55,62 @@ module.exports = {
         exclude: [],
       },
     },
-    {
-      resolve: `gatsby-plugin-feed`,
-      options: {
-        query: `
-          {
-            site {
-              siteMetadata {
-                title
-                description
-                siteUrl
-                site_url: siteUrl
-              }
-            }
-          }
-        `,
-        feeds: [
-          {
-            serialize: ({ query: { site, craft } }) => {
-              return craft.entries.map((entry) => {
-                return {
-                  title: entry.title,
-                  description: entry.summary,
-                  date: moment(entry.postDate * 1000).format(
-                    'ddd, DD MMM YYYY HH:mm:ss ZZ'
-                  ),
-                  url: site.siteMetadata.siteUrl + '/' + entry.uri,
-                  guid: site.siteMetadata.siteUrl + '/' + entry.uri,
-                }
-              })
-            },
-            query: `
-              {
-                craft {
-                  entries(section: [thoughts]) {
-                    ... on Craft_Thoughts {
-                      id
-                      postDate
-                      title
-                      summary
-                      body
-                      url
-                      uri
-                      tags {
-                        id
-                        title
-                      }
-                    }
-                  }
-                }
-              }
-            `,
-            output: '/thoughts/feed.rss',
-          },
-        ],
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-feed`,
+    //   options: {
+    //     query: `
+    //       {
+    //         site {
+    //           siteMetadata {
+    //             title
+    //             description
+    //             siteUrl
+    //             site_url: siteUrl
+    //           }
+    //         }
+    //       }
+    //     `,
+    //     feeds: [
+    //       {
+    //         serialize: ({ query: { site, craft } }) => {
+    //           return craft.entries.map((entry) => {
+    //             return {
+    //               title: entry.title,
+    //               description: entry.summary,
+    //               date: moment(entry.postDate * 1000).format(
+    //                 'ddd, DD MMM YYYY HH:mm:ss ZZ'
+    //               ),
+    //               url: site.siteMetadata.siteUrl + '/' + entry.uri,
+    //               guid: site.siteMetadata.siteUrl + '/' + entry.uri,
+    //             }
+    //           })
+    //         },
+    //         query: `
+    //           {
+    //             craft {
+    //               entries(section: [thoughts]) {
+    //                 ... on Craft_Thoughts {
+    //                   id
+    //                   postDate
+    //                   title
+    //                   summary
+    //                   body
+    //                   url
+    //                   uri
+    //                   tags {
+    //                     id
+    //                     title
+    //                   }
+    //                 }
+    //               }
+    //             }
+    //           }
+    //         `,
+    //         output: '/thoughts/feed.rss',
+    //       },
+    //     ],
+    //   },
+    // },
     `gatsby-plugin-netlify`,
     {
       resolve: `gatsby-source-filesystem`,

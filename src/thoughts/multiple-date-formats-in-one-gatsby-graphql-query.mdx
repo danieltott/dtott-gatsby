@@ -1,0 +1,92 @@
+import PageLayout from '../components/mdxLayoutPostSummary'
+
+export default PageLayout
+
+export const summary = (
+  <>
+    <p>
+      Using some special magic, Gatsby can{' '}
+      <a href="https://www.gatsbyjs.org/docs/graphql-reference#format">
+        transform date fields in GraphQL queries into different formats
+      </a>
+      . But what if you would like more than one format, and don't want to import
+      an entire date formatting library?
+    </p>
+  </>
+)
+
+export const tags = ['gatsby', 'javascript', 'graphql']
+
+export const meta = {
+  title: 'Multiple date formats in one Gatsby GraphQL query',
+  slug: 'thoughts/2020/04/16/multiple-date-formats-in-one-gatsby-graphql-query',
+  date: '2020-04-16 09:17:00',
+  dateUpdated: '2020-04-16 09:26:37',
+  desc:
+    'Use formatString to return multiple date formats in one GraphQL query in Gatsby',
+}
+
+Using some special magic, Gatsby can [transform date fields in GraphQL queries into different formats](https://www.gatsbyjs.org/docs/graphql-reference#format). But what if you would like more than one format, and don't want to import an entire library?
+
+Here is the example the Gatsby docs use for `formatString`:
+
+```graphql
+{
+  allMarkdownRemark(filter: { frontmatter: { date: { ne: null } } }) {
+    edges {
+      node {
+        frontmatter {
+          title
+          date(formatString: "dddd DD MMMM YYYY")
+        }
+      }
+    }
+  }
+}
+```
+
+My problem was that I wanted a nicely formatted string, but also needed a valid `datetime` value for a [`<time>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time) element. Turns out this is really easy in GraphQL queries, but does not turn up in searches (that I could find).
+
+The solution is that you can use [field aliases](https://graphql.org/learn/queries/#aliases) to _repeat_ a field in the same query. This really applies to any field, but becomes especially useful for field transforms.
+
+Here's the same query, but with two different date formats:
+
+```graphql
+{
+  allMarkdownRemark(filter: { frontmatter: { date: { ne: null } } }) {
+    edges {
+      node {
+        frontmatter {
+          title
+          relativeDate: date(fromNow: true)
+          isoDate: date(formatString: "YYYY-MM-DDTHH:mm:ssZ")
+        }
+      }
+    }
+  }
+}
+```
+
+This will result in an object with `frontmatter.relativeDate` and `frontmatter.isoDate`:
+
+```json
+{
+  "data": {
+    "allMarkdownRemark": {
+      "edges": [
+        {
+          "node": {
+            "frontmatter": {
+              "title": "Break with a Banshee",
+              "relativeDate": "28 years ago",
+              "isoDate": "1992-01-01T00:00:00+00:00"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+I'm sure this is obvious to GraphQL pros, but it took me a while to figure this one out, so I wanted to share. Yay for learning!

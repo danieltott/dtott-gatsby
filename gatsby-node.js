@@ -14,17 +14,6 @@ exports.createPages = ({ graphql, actions }) => {
   return new Promise((resolve, reject) => {
     graphql(`
       {
-        craft {
-          entries(section: [thoughts]) {
-            ... on Craft_Thoughts {
-              id
-              postDate
-              title
-              uri
-              slug
-            }
-          }
-        }
         allMdx {
           edges {
             node {
@@ -48,18 +37,6 @@ exports.createPages = ({ graphql, actions }) => {
           },
         })
       })
-
-      // result.data.craft.entries.forEach((entry) => {
-      //   createPage({
-      //     path: '/' + entry.uri,
-      //     component: path.resolve(`./src/components/ThoughtsEntry.js`),
-      //     context: {
-      //       // Data passed to context is available
-      //       // in page queries as GraphQL variables.
-      //       id: entry.id,
-      //     },
-      //   })
-      // })
       resolve()
     })
   })
