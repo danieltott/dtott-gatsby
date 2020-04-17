@@ -1,4 +1,4 @@
-import PageLayout from '../components/mdxLayoutPostSummary'
+import PageLayout from '../components/MdxLayouts/Default'
 
 export default PageLayout
 
@@ -9,11 +9,12 @@ export const summary = (
       <a href="http&#58;//webdesign.meetup.com/396/">
         Cleveland Web Standards Meet-Up
       </a>
-      . I was talking to <a href="http&#58;//www.wileymedia.com/">Eric Wiley</a>{' '}
-      about the redesign I did for the{' '}
-      <a href="http&#58;//www.freetimes.com">Free Times</a>, and{' '}
-      <a href="http&#58;//meyerweb.com">Eric Meyer</a>, who came for the first
-      time, overheard. He says "new site, huh?" and pulls out his laptop.
+      . I was talking to <a href="http&#58;//www.wileymedia.com/">
+        Eric Wiley
+      </a> about the redesign I did for the <a href="http&#58;//www.freetimes.com">
+        Free Times
+      </a>, and <a href="http&#58;//meyerweb.com">Eric Meyer</a>, who came for the
+      first time, overheard. He says "new site, huh?" and pulls out his laptop.
     </p>
   </>
 )
@@ -30,11 +31,12 @@ export const meta = {
 
 <p>
   So last month, I was attending the fairly new{' '}
-  <a href="http://webdesign.meetup.com/396/">Cleveland Web Standards Meet-Up</a>
-  . I was talking to <a href="http://www.wileymedia.com/">Eric Wiley</a> about
-  the redesign I did for the <a href="http://www.freetimes.com">Free Times</a>,
-  and <a href="http://meyerweb.com">Eric Meyer</a>, who came for the first time,
-  overheard. He says "new site, huh?" and pulls out his laptop.
+  <a href="http://webdesign.meetup.com/396/">Cleveland Web Standards Meet-Up</a>.
+  I was talking to <a href="http://www.wileymedia.com/">Eric Wiley</a> about the
+  redesign I did for the <a href="http://www.freetimes.com">Free Times</a>, and <a href="http://meyerweb.com">
+    Eric Meyer
+  </a>, who came for the first time, overheard. He says "new site, huh?" and pulls
+  out his laptop.
 </p>
 
 <p>It's possible my heart stopped working.</p>
@@ -75,14 +77,13 @@ export const meta = {
       rawurlencode() function
     </a>
   </code>
-  , then use the javascript{' '}
-  <code class="prettyprint">
+  , then use the javascript <code class="prettyprint">
     <a href="http://www.w3schools.com/jsref/jsref_unescape.asp">unescape()</a>
-  </code>{' '}
-  function when inserting the text. It seems silly, but works fine. I needed to
-  use <code class="prettyprint">rawurlencode()</code> and not{' '}
-  <code class="prettyprint">urlencode()</code> because <code>urlencode()</code>{' '}
-  encodes spaces as '+' and javascript doesn't unescape them.
+  </code> function when inserting the text. It seems silly, but works fine. I needed
+  to use <code class="prettyprint">rawurlencode()</code> and not <code class="prettyprint">
+    urlencode()
+  </code> because <code>urlencode()</code> encodes spaces as '+' and javascript doesn't
+  unescape them.
 </p>
 
 <pre class="code_example">

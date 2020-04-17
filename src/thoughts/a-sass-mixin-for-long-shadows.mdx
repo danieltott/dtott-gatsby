@@ -1,14 +1,20 @@
-import PageLayout from '../components/mdxLayoutPostSummary'
+import PageLayout from '../components/MdxLayouts/Default'
 
 export default PageLayout
 
 export const summary = (
   <>
-  <p>If you're tired of Flat Design and looking for something to spice it up, why not try <a href="http://dribbble.com/search?q=long+shadow">Long Shadows</a>? And if you're going to try Long Shadows, why not use a pure CSS solution with this Sass mixin?</p>
+    <p>
+      If you're tired of Flat Design and looking for something to spice it up,
+      why not try{' '}
+      <a href="http://dribbble.com/search?q=long+shadow">Long Shadows</a>? And
+      if you're going to try Long Shadows, why not use a pure CSS solution with
+      this Sass mixin?
+    </p>
   </>
 )
 
-export const tags = ['css','flat design','long shadows','sass','mixin']
+export const tags = ['css', 'flat design', 'long shadows', 'sass', 'mixin']
 
 export const meta = {
   title: 'A Sass Mixin for Long Shadows',
@@ -18,20 +24,22 @@ export const meta = {
   desc: '',
 }
 
-<p>If you're tired of Flat Design and looking for something to spice it up, why not try <a href="http://dribbble.com/search?q=long+shadow">Long Shadows</a>? And if you're going to try Long Shadows, why not use a pure CSS solution with this Sass mixin?</p>
+<p>
+  If you're tired of Flat Design and looking for something to spice it up, why
+  not try <a href="http://dribbble.com/search?q=long+shadow">Long Shadows</a>?
+  And if you're going to try Long Shadows, why not use a pure CSS solution with
+  this Sass mixin?
+</p>
 
+<Codepen key={95} hash="AjKay" user="danieltott" />
 
-<Codepen
-  key={95}
-  hash="AjKay"
-  user="danieltott"
-/>
-
-<p>It's a pretty simple little thing, but let's break it down a little bit. Here's this mixin itself:</p>
-
+<p>
+  It's a pretty simple little thing, but let's break it down a little bit.
+  Here's this mixin itself:
+</p>
 
 ```css
-  @function makelongshadow($color) {
+@function makelongshadow($color) {
   $val: 0px 0px $color;
   @for $i from 1 through 200 {
     $val: #{$val}, #{$i}px #{$i}px #{$color};
@@ -44,35 +52,31 @@ export const meta = {
 }
 ```
 
-<p>Basically the <code>makelongshadow</code> function loops through and gives you a shadow value that consists of a bunch of stacked shadows: <code>1px 1px $color, 2px 2px $color...</code> etc. Then the <code>longshadow</code> mixin simply calls that function and applies the value to a text shadow. You'd use it like this:</p>
-
+<p>
+  Basically the <code>makelongshadow</code> function loops through and gives you
+  a shadow value that consists of a bunch of stacked shadows:{' '}
+  <code>1px 1px $color, 2px 2px $color...</code> etc. Then the{' '}
+  <code>longshadow</code> mixin simply calls that function and applies the value
+  to a text shadow. You'd use it like this:
+</p>
 
 ```css
-  h1 {
+h1 {
   @include longshadow(#ccc);
 }
 ```
 
 <p>The resulting css would look something like this:</p>
 
-
 ```css
-  h1 {
-  text-shadow: 0 0 #CCCCCC,
-    1px 1px #CCCCCC,
-    2px 2px #CCCCCC,
-    3px 3px #CCCCCC,
-    4px 4px #CCCCCC,
-    ...
-    196px 196px #CCCCCC,
-    197px 197px #CCCCCC,
-    198px 198px #CCCCCC,
-    199px 199px #CCCCCC,
-    200px 200px #CCCCCC;
+h1 {
+  text-shadow: 0 0 #cccccc, 1px 1px #cccccc, 2px 2px #cccccc, 3px 3px #cccccc,
+    4px 4px #cccccc, ... 196px 196px #cccccc, 197px 197px #cccccc, 198px 198px
+      #cccccc, 199px 199px #cccccc, 200px 200px #cccccc;
 }
 ```
 
-<p><a href="http://codepen.io/danieltott/pen/AjKay">Check out the pen</a> to see it in action, and happy Fourth of July!</p>
-
-
-
+<p>
+  <a href="http://codepen.io/danieltott/pen/AjKay">Check out the pen</a> to see
+  it in action, and happy Fourth of July!
+</p>

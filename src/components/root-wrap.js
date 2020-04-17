@@ -49,14 +49,14 @@ const shortcodes = {
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <Pre className={className} style={style}>
             {tokens.map((line, i) => (
-              <>
-                <LineNo key={`num_${i}`}>{i + 1}</LineNo>
+              <React.Fragment key={`num_${i}`}>
+                <LineNo>{i + 1}</LineNo>
                 <div key={`c_${i}`}>
                   {line.map((token, key) => (
                     <span {...getTokenProps({ token, key })} />
                   ))}
                 </div>
-              </>
+              </React.Fragment>
             ))}
           </Pre>
         )}

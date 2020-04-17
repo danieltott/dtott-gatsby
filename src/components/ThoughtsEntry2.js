@@ -1,10 +1,8 @@
 import React, { createContext, useContext } from 'react'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import { DiscussionEmbed } from 'disqus-react'
 import Helmet from 'react-helmet'
 import Layout from './Layout'
-import Timestamp from './Timestamp'
 
 export const PostContext = createContext()
 
@@ -14,11 +12,10 @@ export const usePostIsFull = () => {
 }
 
 export default function PageTemplate(props) {
-  console.log({ props })
   const {
     data: {
       mdx: {
-        exports: { meta, tags },
+        exports: { meta },
         body,
       },
     },
@@ -35,48 +32,8 @@ export default function PageTemplate(props) {
         <h2 className="section-title">
           <span className="page-section-wrap">Thoughts</span>
         </h2>
-        <article className="page-section post">
-          <header className="page-section-wrap">
-            <h1 className="post-title">{meta.title}</h1>
-            <Timestamp
-              relativeDate={meta.relativeDate}
-              isoDate={meta.isoDate}
-            />
-          </header>
-          <div className="page-section-wrap">
-            <MDXRenderer>{body}</MDXRenderer>
-            <footer className="post-footer">
-              <p>
-                {'That was '}
-                <a href={`/${meta.slug}`}>{meta.title}</a>, by Dan Ott. It is
-                filed under{' '}
-                {tags.map((tag, i, tags) => {
-                  const last = i === tags.length - 1
-                  return (
-                    <React.Fragment key={tag}>
-                      {last && tags.length > 1 && ' and '}
-                      <Link to={`/thoughts/search?q=tags:${tag}`}>{tag}</Link>
-                      {last ? '.' : ', '}
-                    </React.Fragment>
-                  )
-                })}
-                Thanks for reading.
-              </p>
-            </footer>
-            <aside className="post-comments">
-              {process.env.NODE_ENV === 'production' && (
-                <DiscussionEmbed
-                  shortname="danieltott"
-                  config={{
-                    url: `${process.env.GATSBY_DTOTT_URL}/${meta.slug}`,
-                    identifier: meta.slug,
-                    title: meta.title,
-                  }}
-                />
-              )}
-            </aside>
-          </div>
-        </article>
+
+        <MDXRenderer data={props.data.mdx}>{body}</MDXRenderer>
       </Layout>
     </PostContext.Provider>
   )

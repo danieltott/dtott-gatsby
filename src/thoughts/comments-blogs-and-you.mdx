@@ -1,14 +1,40 @@
-import PageLayout from '../components/mdxLayoutPostSummary'
+import PageLayout from '../components/MdxLayouts/Default'
 
 export default PageLayout
 
 export const summary = (
   <>
-  <p>I came across a post (via <a href="http&#58;//daringfireball.net/" title="Daring Fireball">Daring Fireball</a>) by <a href="http&#58;//www.joelonsoftware.com" title="Joel Spolsky">Joel Spolsky</a> regarding <a href="http&#58;//www.joelonsoftware.com/items/2007/07/20.html" title="Learning from Dave Winer">comments below blog posts</a>.  While I think that he sort of misrepresented <a href="http&#58;//www.scripting.com/2007/01/01.html#theUneditedVoiceOfAPerson" title="The unedited voice of a person">Dave Winer's post about blogs</a> (Dave's post was about what it means to be a blog, and the fact that having comments don't make a blog),  Joel does bring up some interesting points about comments&#58;</p>
+    <p>
+      I came across a post (via{' '}
+      <a href="http&#58;//daringfireball.net/" title="Daring Fireball">
+        Daring Fireball
+      </a>
+      ) by{' '}
+      <a href="http&#58;//www.joelonsoftware.com" title="Joel Spolsky">
+        Joel Spolsky
+      </a>{' '}
+      regarding{' '}
+      <a
+        href="http&#58;//www.joelonsoftware.com/items/2007/07/20.html"
+        title="Learning from Dave Winer"
+      >
+        comments below blog posts
+      </a>
+      . While I think that he sort of misrepresented{' '}
+      <a
+        href="http&#58;//www.scripting.com/2007/01/01.html#theUneditedVoiceOfAPerson"
+        title="The unedited voice of a person"
+      >
+        Dave Winer's post about blogs
+      </a>{' '}
+      (Dave's post was about what it means to be a blog, and the fact that
+      having comments don't make a blog), Joel does bring up some interesting
+      points about comments&#58;
+    </p>
   </>
 )
 
-export const tags = ['general','blogging']
+export const tags = ['general', 'blogging']
 
 export const meta = {
   title: 'Comments, Blogs, and You',
@@ -18,17 +44,143 @@ export const meta = {
   desc: '',
 }
 
-<p>I came across a post (via <a href="http://daringfireball.net/" title="Daring Fireball">Daring Fireball</a>) by <a href="http://www.joelonsoftware.com" title="Joel Spolsky">Joel Spolsky</a> regarding <a href="http://www.joelonsoftware.com/items/2007/07/20.html" title="Learning from Dave Winer">comments below blog posts</a>.  While I think that he sort of misrepresented <a href="http://www.scripting.com/2007/01/01.html#theUneditedVoiceOfAPerson" title="The unedited voice of a person">Dave Winer's post about blogs</a> (Dave's post was about what it means to be a blog, and the fact that having comments don't make a blog),  Joel does bring up some interesting points about comments:</p>
+<p>
+  I came across a post (via{' '}
+  <a href="http://daringfireball.net/" title="Daring Fireball">
+    Daring Fireball
+  </a>
+  ) by{' '}
+  <a href="http://www.joelonsoftware.com" title="Joel Spolsky">
+    Joel Spolsky
+  </a>{' '}
+  regarding{' '}
+  <a
+    href="http://www.joelonsoftware.com/items/2007/07/20.html"
+    title="Learning from Dave Winer"
+  >
+    comments below blog posts
+  </a>
+  . While I think that he sort of misrepresented{' '}
+  <a
+    href="http://www.scripting.com/2007/01/01.html#theUneditedVoiceOfAPerson"
+    title="The unedited voice of a person"
+  >
+    Dave Winer's post about blogs
+  </a>{' '}
+  (Dave's post was about what it means to be a blog, and the fact that having
+  comments don't make a blog), Joel does bring up some interesting points about
+  comments:
+</p>
 
+<blockquote cite="http://www.joelonsoftware.com/items/2007/07/20.html">
+  <p>
+    I don't know how many times I've read a brilliant article someone wrote on a
+    blog. By the end of the article, I'm excited, I'm impressed, it was a great
+    article. And then you get the dribble of morbid, meaningless, thoughtless
+    comments.[...]Thoughtless drivel written by some anonymous non-entity who
+    really didn't read the article very carefully and didn't come close to
+    understanding it and who has no ability whatsoever to control his typing
+    diarrhea if the site's software doesn't physically prevent him from posting.
+  </p>
+</blockquote>
+<p>
+  Joel really doesn't like those comments. But what do you think? I agree,
+  sometimes comments can get pretty out of hand; but on personal,
+  design-oriented blogs (like the kind I am trying to create and the blogs that
+  I subscribe to), I very rarely see them get ridiculous. More often than not,
+  the comments are actually helpful. Comments can help extend the post beyond
+  original, going in directions that the author never even thought about. They
+  can help point out mistakes in technical posts, and offer solutions.
+</p>
 
-<blockquote cite="http://www.joelonsoftware.com/items/2007/07/20.html"><p>I don't know how many times I've read a brilliant article someone wrote on a blog. By the end of the article, I'm excited, I'm impressed, it was a great article. And then you get the dribble of morbid, meaningless, thoughtless comments.[...]Thoughtless drivel written by some anonymous non-entity who really didn't read the article very carefully and didn't come close to understanding it and who has no ability whatsoever to control his typing diarrhea if the site's software doesn't physically prevent him from posting.</p></blockquote>
-<p>Joel really doesn't like those comments.  But what do you think?  I agree, sometimes comments can get pretty out of hand; but on personal, design-oriented blogs (like the kind I am trying to create and the blogs that I subscribe to), I very rarely see them get ridiculous.  More often than not, the comments are actually helpful.  Comments can help extend the post beyond original, going in directions that the author never even thought about.  They can help point out mistakes in technical posts, and offer solutions.</p>
+<p>
+  Of course, there are times when that doesn't work out so well.{' '}
+  <a
+    href="http://www.curbed.com/archives/2007/07/18/south_williamsburg_getting_a_little_more_religion.php"
+    title="South Williamsburg Getting a Little More Religion"
+  >
+    Joel's example
+  </a>{' '}
+  was pretty funny: a real estate post gone awry (
+  <a href="http://en.wikipedia.org/wiki/Spiderpig" title="Spiderpig">
+    spiderpig
+  </a>{' '}
+  referenced by the sixth comment). But I would say that it's the author's (or
+  moderator's) job to make sure things don't get out of hand. There's a line
+  that needs to be drawn in order to keep threads like this in check. Each
+  person can draw it where ever they like, but I think we can all agree that
+  comments that end in "go kill yourself" probably have no place in the
+  discourse of anything.
+</p>
 
-<p>Of course, there are times when that doesn't work out so well.  <a href="http://www.curbed.com/archives/2007/07/18/south_williamsburg_getting_a_little_more_religion.php" title="South Williamsburg Getting a Little More Religion">Joel's example</a> was pretty funny: a real estate post gone awry (<a href="http://en.wikipedia.org/wiki/Spiderpig" title="Spiderpig">spiderpig</a> referenced by the sixth comment).   But I would say that it's the author's (or moderator's) job to make sure things don't get out of hand.  There's a line that needs to be drawn in order to keep threads like this in check.  Each person can draw it where ever they like, but I think we can all agree that comments that end in "go kill yourself" probably have no place in the discourse of anything.</p>
+<p>
+  I, obviously, have enabled comments, as have most of the bloggers that I
+  actually know (
+  <a href="http://www.wileymedia.com/weblog/" title="Eric Wiley">
+    Eric Wiley
+  </a>
+  ,{' '}
+  <a href="http://braddielman.com/" title="Brad Dielman">
+    Brad Dielman
+  </a>
+  , and{' '}
+  <a href="http://www.nateklaiber.com/" title="Nate Klaiber">
+    Nate Klaiber
+  </a>{' '}
+  to name a few) . But, not everyone does (
+  <a href="http://www.scripting.com/" title="Scripting News">
+    Dave Winer
+  </a>{' '}
+  and of course{' '}
+  <a href="http://daringfireball.net/" title="John Gruber">
+    John Gruber
+  </a>{' '}
+  come to mind). Some, like{' '}
+  <a href="http://shauninman.com/" title="Shaun Inman">
+    Shaun Inman
+  </a>{' '}
+  and Cleveland's own{' '}
+  <a href="http://meyerweb.com" title="Eric Meyer">
+    Eric Meyer
+  </a>{' '}
+  rely on pre-moderating (I think; I didn't want to just put a "test" comment
+  in...) to stem some of the unwanted comments, but this of course becomes more
+  of a problem the more posts/comments that you have. In addition to
+  pre-moderating, Shaun Inman also only enables comments for some posts, and
+  closes them to comments after a fairly short amount of time.
+</p>
 
-<p>I, obviously, have enabled comments, as have most of the bloggers that I actually know (<a href="http://www.wileymedia.com/weblog/" title="Eric Wiley">Eric Wiley</a>, <a href="http://braddielman.com/" title="Brad Dielman">Brad Dielman</a>, and <a href="http://www.nateklaiber.com/" title="Nate Klaiber">Nate Klaiber</a> to name a few) . But, not everyone does (<a href="http://www.scripting.com/" title="Scripting News">Dave Winer</a> and of course <a href="http://daringfireball.net/" title="John Gruber">John Gruber</a> come to mind).  Some, like <a href="http://shauninman.com/" title="Shaun Inman">Shaun Inman</a> and Cleveland's own <a href="http://meyerweb.com" title="Eric Meyer">Eric Meyer</a>  rely on pre-moderating (I think; I didn't want to just put a "test" comment in...) to stem some of the unwanted comments, but this of course becomes more of a problem the more posts/comments that you have.  In addition to pre-moderating, Shaun Inman also only enables comments for some posts, and closes them to comments after a fairly short amount of time.</p>
+<p>
+  Of the two newspapers I work for, only the{' '}
+  <a href="http://lakewoodobserver.com" title="The Lakewood Observer">
+    Lakewood Observer
+  </a>{' '}
+  has comments of any kind, and they're in the form of a forum, not right under
+  the story. As an interesting side note on the Observer Forums, your real name
+  is required, instead of any random user name. This is a fairly huge hassle for
+  the moderators, but helps prevent the "thoughtless drivel" that Joel complains
+  of (well...most of the time). However, the{' '}
+  <a href="http://cleveland.com" title="Cleveland Plain Dealer">
+    Cleveland Plain Dealer
+  </a>{' '}
+  and the{' '}
+  <a href="http://www.clevescene.com/" title="Cleveland Scene">
+    Cleveland Scene
+  </a>{' '}
+  have comments right below their articles (I'm not sure if they're
+  pre-moderated or not).{' '}
+  <a href="http://foxnews.com" title="FOXNews">
+    FOXNews
+  </a>{' '}
+  does not.
+</p>
 
-<p>Of the two newspapers I work for, only the <a href="http://lakewoodobserver.com" title="The Lakewood Observer">Lakewood Observer</a> has comments of any kind, and they're in the form of a forum, not right under the story.  As an interesting side note on the Observer Forums, your real name is required, instead of any random user name.  This is a fairly huge hassle for the moderators, but helps prevent the "thoughtless drivel" that Joel complains of (well...most of the time).  However, the <a href="http://cleveland.com" title="Cleveland Plain Dealer">Cleveland Plain Dealer</a> and the <a href="http://www.clevescene.com/" title="Cleveland Scene">Cleveland Scene</a> have comments right below their articles (I'm not sure if they're pre-moderated or not).  <a href="http://foxnews.com" title="FOXNews">FOXNews</a> does not.</p>
-
-<p>So what's the right choice?  I sympathize with Joel that the comments on his site have gotten out of hand.  I don't see it enough in the sites that I frequent to be that worried about it, but what happens when a it does?   Do you just wait and see if  the problem keeps happening/gets worse?  If you pre-moderate, do you do so with a heavy hand, or let anything that's legal go through? Do you do away with comments altogether, or stand by your subborn faith in human-kind?</p>
-
+<p>
+  So what's the right choice? I sympathize with Joel that the comments on his
+  site have gotten out of hand. I don't see it enough in the sites that I
+  frequent to be that worried about it, but what happens when a it does? Do you
+  just wait and see if the problem keeps happening/gets worse? If you
+  pre-moderate, do you do so with a heavy hand, or let anything that's legal go
+  through? Do you do away with comments altogether, or stand by your subborn
+  faith in human-kind?
+</p>

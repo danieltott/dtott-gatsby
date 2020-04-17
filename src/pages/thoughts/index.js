@@ -1,8 +1,7 @@
 import React from 'react'
-import { graphql, Link, useStaticQuery } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import Helmet from 'react-helmet'
 import Layout from '../../components/Layout'
-import Timestamp from '../../components/Timestamp'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 
 const IndexPage = () => {
@@ -38,18 +37,9 @@ const IndexPage = () => {
         <div className="page-section-wrap">
           {data.allMdx.edges.map(({ node }) => {
             return (
-              <article className="post" key={node.id}>
-                <h3 className="post-title">
-                  <Link to={`/${node.exports.meta.slug}`}>
-                    {node.exports.meta.title}
-                  </Link>
-                </h3>
-                <Timestamp
-                  relativeDate={node.exports.meta.relativeDate}
-                  isoDate={node.exports.meta.isoDate}
-                />
-                <MDXRenderer>{node.body}</MDXRenderer>
-              </article>
+              <MDXRenderer key={node.id} data={node}>
+                {node.body}
+              </MDXRenderer>
             )
           })}
         </div>
