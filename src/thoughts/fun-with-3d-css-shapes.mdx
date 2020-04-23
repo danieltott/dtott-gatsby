@@ -41,39 +41,19 @@ export const meta = {
   desc: '',
 }
 
-<p>
-  About a year and a half ago, I had some ideas about using 3D CSS to create
-  nonstandard 3D shapes, but never got around to writing a post about it.
-  However, inspired by the incredibly impressive{' '}
-  <a href="http://acko.net/blog/making-love-to-webkit/">Acko.net redesign</a>, I
-  decided to finally clean it up and share it with you. Here it is.
-</p>
-<p>
-  <a href="https://codepen.io/danieltott/project/editor/XwGzRV">
-    <img src="/images/3dshapes.png" alt="3D Shapes" />
-  </a>
-</p>
-<p>
-  By stacking and rotating elements in 3D space, you can create some new shapes
-  out of pure CSS. It&#8217;s not practical or useful in the least, but it is
-  interesting. These examples work best in Safari, but they will mostly work in
-  Chrome. Check it out:{' '}
-  <a href="https://codepen.io/danieltott/project/editor/XwGzRV">
-    Pure CSS 3D Shapes
-  </a>{' '}
-  (remember to click and drag to rotate. Thanks to{' '}
-  <a href="http://www.eleqtriq.com/">Dirk Weber</a>&#8216;s{' '}
-  <a href="http://www.eleqtriq.com/2011/11/traqball-2-0/">traqball.js</a> for
-  that little bit of magic).
-</p>
+About a year and a half ago, I had some ideas about using 3D CSS to create nonstandard 3D shapes, but never got around to writing a post about it. However, inspired by the incredibly impressive [Acko.net redesign](http://acko.net/blog/making-love-to-webkit/), I decided to finally clean it up and share it with you. Here it is.
 
-<h2>What the heck is going on here?</h2>
+[![3D Shapes](/images/3dshapes.png)](https://codepen.io/danieltott/project/editor/XwGzRV)
 
-<p>
-  We&#8217;re basically stacking or rotating many elements to create each shape.
-</p>
-<h3>cylinder</h3>
-<p>The jist of the cylinder code goes like this:</p>
+By stacking and rotating elements in 3D space, you can create some new shapes out of pure CSS. It’s not practical or useful in the least, but it is interesting. These examples work best in Safari, but they will mostly work in Chrome. Check it out: [Pure CSS 3D Shapes](https://codepen.io/danieltott/project/editor/XwGzRV) (remember to click and drag to rotate. Thanks to [Dirk Weber](http://www.eleqtriq.com/)‘s [traqball.js](http://www.eleqtriq.com/2011/11/traqball-2-0/) for that little bit of magic).
+
+## What the heck is going on here?
+
+We’re basically stacking or rotating many elements to create each shape.
+
+### cylinder
+
+The gist of the cylinder code goes like this:
 
 ```css
 #cylinder div{
@@ -96,13 +76,11 @@ export const meta = {
 ...
 ```
 
-<p>
-  What we&#8217;re doing is setting all of the elements to the same 2D space,
-  and then moving them along the Z-axis to create our cylinder.
-</p>
+What we’re doing is setting all of the elements to the same 2D space, and then moving them along the Z-axis to create our cylinder.
 
-<h3>Sphere(s)</h3>
-<p>In the sphere (and watermelon), we take a different approach:</p>
+### Sphere(s)
+
+In the sphere (and watermelon), we take a different approach:
 
 ```css
 #sphere div{
@@ -127,22 +105,10 @@ export const meta = {
 ...
 ```
 
-<p>
-  In this case, instead of stacking elements along the Z-axis, we&#8217;re
-  rotating them 1 degree each along the Y-axis, thus getting ourselves a nice
-  sphere.
-</p>
-<h2>But&#8230;why?</h2>
-<p>
-  Absolutely no reason. I haven&#8217;t thought of any practical application,
-  and I doubt there really is any. But it was a good exercise to try to push 3D
-  CSS to it&#8217;s limit, and it was fun. That&#8217;s reason enough, right
-  there.
-</p>
-<p>
-  As a bonus, if you&#8217;re still paying attention - I present to you the pure{' '}
-  <a href="http://x.dtott.com/3d/solar-system.html">CSS 3D solar system</a>.
-  Please do us all a favor and open this in Safari (Chrome just isn&#8217;t up
-  to it yet). Be warned, this is A) not to scale, and B) likely to slow down
-  and/or crash your browser.
-</p>
+In this case, instead of stacking elements along the Z-axis, we’re rotating them 1 degree each along the Y-axis, thus getting ourselves a nice sphere.
+
+## But…why?
+
+Absolutely no reason. I haven’t thought of any practical application, and I doubt there really is any. But it was a good exercise to try to push 3D CSS to it’s limit, and it was fun. That’s reason enough, right there.
+
+As a bonus, if you’re still paying attention - I present to you the pure [CSS 3D solar system](http://x.dtott.com/3d/solar-system.html). Please do us all a favor and open this in Safari (Chrome just isn’t up to it yet). Be warned, this is A) not to scale, and B) likely to slow down and/or crash your browser.

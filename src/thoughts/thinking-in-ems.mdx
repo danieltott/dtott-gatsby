@@ -21,83 +21,24 @@ export const meta = {
   desc: '',
 }
 
-<p>
-  Well, I made it almost a month since the last design change. However, this
-  redesign is a little more extensive.
-</p>
-<h3>The Little Stuff</h3>
-<p>
-  First, I went to an all-Helvetica font scheme. My typography was all over the
-  place on the last view versions, and I feel much more comfortable with
-  choosing one font and sticking to it. Second, but related, I moved the title
-  and navigation to their own bar under the opening graphic, and moved the
-  quotes under the section heads to the right of the section heads.
-</p>
-<h3>The Grid</h3>
-<p>
-  The next thing I needed to change was the vertical spacing. I chose 1.5 ems as
-  my baseline height, and went with it. Everything now lies on a 1.5 em baseline
-  grid. You can imagine (or maybe you know from experience) that this seems like
-  it could be a pain. It is. What was my secret weapon?{' '}
-  <a href="http://robgoodlatte.com">Rob Goodlotte</a>'s{' '}
-  <a href="http://robgoodlatte.com/2007/07/31/syncotype-your-baselines/">
-    Syncotype
-  </a>
-  . What it does is place a horizontal grid over the page you're viewing, at any
-  size you'd like. 1em converts to 16px, so I was able to line everything up to
-  a 24px horizontal grid. It's awesome.
-</p>
-<h3>The Em</h3>
-<p>
-  The biggest change, which might not be all that visible at first, is that the
-  entire site (except for a couple borders) is now in ems. The entire structure,
-  the images, and of course the fonts, now resize with the text. The effect is
-  that when you increase font size in your browser, the entire web site zooms.
-  Try it out (cmd/apple + to increase size, cmd/apple - to lower size).
-</p>
+Well, I made it almost a month since the last design change. However, this redesign is a little more extensive.
 
-<p>
-  Seems like an easy concept; just divide all of your pixel values by 16, like I
-  mentioned before, and you're set, right? Well, at first, yes. For the overall
-  structure, that's all I had to do. The problems arise when you change the font
-  size of an element. Whenever you change the font size of an element, like a
-  paragraph or a heading, the rest of the attributes of that element are
-  measured against the new font size, instead of the body font size. To get the
-  margin or padding that you want, you have to divide the margin you'd like by
-  the new font size, and that number is your new margin.{' '}
-  <strong>Ideal margin / new font size = New margin</strong>.
-</p>
+### The Little Stuff
 
-<p>I had my calculator program running the entire time.</p>
+First, I went to an all-Helvetica font scheme. My typography was all over the place on the last view versions, and I feel much more comfortable with choosing one font and sticking to it. Second, but related, I moved the title and navigation to their own bar under the opening graphic, and moved the quotes under the section heads to the right of the section heads.
 
-<p>
-  Inspiration and guidance for this redesign came from{' '}
-  <a href="http://www.wilsonminer.com/" title="Wilson Miner">
-    Wilson Miner
-  </a>
-  's{' '}
-  <a
-    href="http://www.alistapart.com/articles/settingtypeontheweb"
-    title="Setting Type On The Web"
-  >
-    Setting Type On The Web
-  </a>{' '}
-  (on{' '}
-  <a href="http://www.alistapart.com/" title="A List Apart">
-    A List Apart
-  </a>
-  ) and <span class="fn">Richard Rutter's </span>
-  <a
-    href="http://24ways.org/2006/compose-to-a-vertical-rhythm"
-    title="Compose To A Vertical Rhythm"
-  >
-    Compose to a Vertical Rhythm
-  </a> (on <a href="http://24ways.org/" title="24 Ways">
-    24Ways
-  </a>).
-</p>
+### The Grid
 
-<p>
-  It's been a fun (and trying) experiment. Hopefully this version will last
-  longer than a month before I'm fed up with it!
-</p>
+The next thing I needed to change was the vertical spacing. I chose 1.5 ems as my baseline height, and went with it. Everything now lies on a 1.5 em baseline grid. You can imagine (or maybe you know from experience) that this seems like it could be a pain. It is. What was my secret weapon? [Rob Goodlotte](http://robgoodlatte.com)'s [Syncotype](http://robgoodlatte.com/2007/07/31/syncotype-your-baselines/) . What it does is place a horizontal grid over the page you're viewing, at any size you'd like. 1em converts to 16px, so I was able to line everything up to a 24px horizontal grid. It's awesome.
+
+### The Em
+
+The biggest change, which might not be all that visible at first, is that the entire site (except for a couple borders) is now in ems. The entire structure, the images, and of course the fonts, now resize with the text. The effect is that when you increase font size in your browser, the entire web site zooms. Try it out (cmd/apple + to increase size, cmd/apple - to lower size).
+
+Seems like an easy concept; just divide all of your pixel values by 16, like I mentioned before, and you're set, right? Well, at first, yes. For the overall structure, that's all I had to do. The problems arise when you change the font size of an element. Whenever you change the font size of an element, like a paragraph or a heading, the rest of the attributes of that element are measured against the new font size, instead of the body font size. To get the margin or padding that you want, you have to divide the margin you'd like by the new font size, and that number is your new margin. **Ideal margin / new font size = New margin**.
+
+I had my calculator program running the entire time.
+
+Inspiration and guidance for this redesign came from [Wilson Miner](http://www.wilsonminer.com/ 'Wilson Miner')'s [Setting Type On The Web](http://www.alistapart.com/articles/settingtypeontheweb 'Setting Type On The Web') (on [A List Apart](http://www.alistapart.com/ 'A List Apart') ) and Richard Rutter's [Compose to a Vertical Rhythm](http://24ways.org/2006/compose-to-a-vertical-rhythm 'Compose To A Vertical Rhythm') (on [24Ways](http://24ways.org/ '24 Ways') ).
+
+It's been a fun (and trying) experiment. Hopefully this version will last longer than a month before I'm fed up with it!

@@ -40,34 +40,9 @@ export const meta = {
   desc: '',
 }
 
-<p>
-  One of the more popular posts on this site is{' '}
-  <a
-    href="http://dtott.com/thoughts/2007/12/10/clear-your-floats-the-right-way/"
-    title="Clear your floats: the right way"
-  >
-    my explanation of the easyclear method
-  </a>{' '}
-  of clearing floats. I had been using it for a while when I wrote the post, and
-  it's a great solution. However,{' '}
-  <a href="http://www.dave-woods.co.uk/" title="Dave Woods">
-    Dave Woods
-  </a>{' '}
-  <a
-    href="http://dtott.com/thoughts/2007/12/10/clear-your-floats-the-right-way/#comment-86"
-    title="Dave Woods' comment"
-  >
-    commented
-  </a>{' '}
-  on that post with a new method: setting <code>overflow:auto</code> on the
-  containing element actually has the same effect as the clearfix, without all
-  the extra stuff.{' '}
-</p>
-<p>
-  I thought, "that <em>can't</em> be right...can it?" Turns out Dave was right.
-  After looking into it some more, it turns out that <code>overflow:auto</code>{' '}
-  and <code>overflow:hidden</code> both work the same way, and that's it.{' '}
-</p>
+One of the more popular posts on this site is [my explanation of the easyclear method](http://dtott.com/thoughts/2007/12/10/clear-your-floats-the-right-way/ 'Clear your floats: the right way') of clearing floats. I had been using it for a while when I wrote the post, and it's a great solution. However, [Dave Woods](http://www.dave-woods.co.uk/ 'Dave Woods') [commented](http://dtott.com/thoughts/2007/12/10/clear-your-floats-the-right-way/#comment-86 "Dave Woods' comment") on that post with a new method: setting `overflow:auto` on the containing element actually has the same effect as the clearfix, without all the extra stuff.
+
+I thought, "that _can't_ be right...can it?" Turns out Dave was right. After looking into it some more, it turns out that `overflow:auto` and `overflow:hidden` both work the same way, and that's it.
 
 ```css
 .containingElement {
@@ -75,10 +50,7 @@ export const meta = {
 }
 ```
 
-<p>
-  Of course, <abbr title="Browser of Death">IE6</abbr> doesn't play along with
-  the rest, so as always, here's the hack:
-</p>
+Of course, <abbr title="Browser of Death">IE6</abbr> doesn't play along with the rest, so as always, here's the hack:
 
 ```css
 * html #container {
@@ -86,17 +58,8 @@ export const meta = {
 }
 ```
 
-<p>
-  Use this hack (or one without the <code>* html</code> inside an{' '}
-  <abbr title="Browser voted most likely to cause suicide">ie6</abbr>-only
-  stylesheet) to make <abbr title="Raise your hand if you hate ie6">ie6</abbr>{' '}
-  behave correctly.
-</p>
-<h3>That's all there is to it.</h3>
-<p>
-  I have since began using it everywhere, and it works flawlessly. The only time
-  it doesn't work correctly is when you actually need elements to overflow the
-  box (a drop-down menu for example, or any absolutely positioned elements
-  outside of the box). In these cases, I fall back on the trusty clearfix. But
-  for all others, <code>overflow:hidden</code> to the rescue!
-</p>
+Use this hack (or one without the `* html` inside an <abbr title="Browser voted most likely to cause suicide">ie6</abbr>-only stylesheet) to make <abbr title="Raise your hand if you hate ie6">ie6</abbr> behave correctly.
+
+### That's all there is to it.
+
+I have since began using it everywhere, and it works flawlessly. The only time it doesn't work correctly is when you actually need elements to overflow the box (a drop-down menu for example, or any absolutely positioned elements outside of the box). In these cases, I fall back on the trusty clearfix. But for all others, `overflow:hidden` to the rescue!

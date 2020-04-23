@@ -27,43 +27,11 @@ export const meta = {
     'Combining Gatsby, Craft CMS, and CraftQL, I have arrived at the CMS+Progressive Web App Promised Land.',
 }
 
-<p>
-  I had been wanting to use Gatsby pretty much since I heard about it, and
-  finally found some time to put it to use. Combining{' '}
-  <a href="https://gatsbyjs.org/">Gatsby</a> (
-  <a href="https://next.gatsbyjs.org/">the 2.0 beta</a>),{' '}
-  <a href="https://craftcms.com/">Craft CMS</a>, and{' '}
-  <a href="https://github.com/markhuot/craftql">CraftQL</a>, I have arrived at
-  the CMS+Progressive Web App Promised Land.
-</p>
-<p>
-  I've been a fan of Craft CMS since before it launched. This site has used
-  Craft{' '}
-  <a href="http://cms.dtott.test/thoughts/2013/07/15/new-site-design">
-    since 2013
-  </a>
-  , and I've launched over 25 sites using Craft over the last 5 years. So while
-  I was excited about Gatsby, being able to continue using Craft was an
-  important requirement for me personally, as well as being able to use Gatsby
-  for clients' sites. I had made a few attempts in the past, but had always run
-  into various sticking points with trying to hook up Gatsby sources to Craft
-  APIs in some way. Two things finally allowed me to get through this: the
-  awesome CraftQL plugin, which allows you to make GraphQL requests to query
-  your Craft data, and the 2.0 release of{' '}
-  <a href="https://www.npmjs.com/package/gatsby-source-graphql">
-    <code>gatsby-source-graphql</code>
-  </a>
-  , which allows you to make arbitrary GraphQL calls and add them as data
-  sources inside Gatsby. Using this plugin required using the 2.0 beta of Gatsby
-  as well, which I was happy to do because I like new and shiny things.
-</p>
-<p>
-  So now I have a direct GraphQL connection between the Gatsby build and my
-  Craft content! After configuring <code>gatsby-source-graphql</code>, it was
-  pretty easy to feed my React components data from Craft. Here is some code
-  from gatsby-node.js, specifically the piece that reads in all of my posts from
-  Craft and outputs Gatsby pages:
-</p>
+I had been wanting to use Gatsby pretty much since I heard about it, and finally found some time to put it to use. Combining [Gatsby](https://gatsbyjs.org/) ( [the 2.0 beta](https://next.gatsbyjs.org/)), [Craft CMS](https://craftcms.com/), and [CraftQL](https://github.com/markhuot/craftql), I have arrived at the CMS+Progressive Web App Promised Land.
+
+I've been a fan of Craft CMS since before it launched. This site has used Craft [since 2013](http://cms.dtott.test/thoughts/2013/07/15/new-site-design) , and I've launched over 25 sites using Craft over the last 5 years. So while I was excited about Gatsby, being able to continue using Craft was an important requirement for me personally, as well as being able to use Gatsby for clients' sites. I had made a few attempts in the past, but had always run into various sticking points with trying to hook up Gatsby sources to Craft APIs in some way. Two things finally allowed me to get through this: the awesome CraftQL plugin, which allows you to make GraphQL requests to query your Craft data, and the 2.0 release of [`gatsby-source-graphql`](https://www.npmjs.com/package/gatsby-source-graphql) , which allows you to make arbitrary GraphQL calls and add them as data sources inside Gatsby. Using this plugin required using the 2.0 beta of Gatsby as well, which I was happy to do because I like new and shiny things.
+
+So now I have a direct GraphQL connection between the Gatsby build and my Craft content! After configuring `gatsby-source-graphql`, it was pretty easy to feed my React components data from Craft. Here is some code from gatsby-node.js, specifically the piece that reads in all of my posts from Craft and outputs Gatsby pages:
 
 ```javascript
 exports.createPages = ({ graphql, actions }) => {
@@ -101,54 +69,13 @@ exports.createPages = ({ graphql, actions }) => {
 }
 ```
 
-<p>
-  From there, it was easy converting old Twig templates to React. In this first
-  pass, I didn't want to complicate things, so I resisted trying to refactor the
-  entire site, so I basically just translated Twig directly to React while
-  moving things over. I've{' '}
-  <a href="https://github.com/danieltott/dtott-gatsby">
-    open-sourced the Gatsby code for this site
-  </a>{' '}
-  so feel free to dig around a little. There are a lot of places to improve, but
-  the wins gained from getting Gatsby involved are almost too many to list.
-  Since the results of a Gatsby build are a bunch of static files, I was also
-  able to move hosting of the main site over to{' '}
-  <a href="https://www.netlify.com/">Netlify</a>, which is just an amazing
-  resource all on its own.
-</p>
-<p>
-  Now that the site is fully built in React, here's my list of things I'd like
-  to accomplish in the near future:
-</p>
-<ul>
-  <li>
-    Refactor React components. There are a lot of places where I can create some
-    smaller components and <code>import</code> them. It would also be good to
-    split up the big CSS file into either component-specific stylesheets, or
-    getting into something like <a href="https://css-blocks.com/">CSS-Blocks</a>{' '}
-    or{' '}
-    <a href="https://github.com/styled-components/styled-components">
-      styled-components
-    </a>
-    .
-  </li>
-  <li>
-    Figure out a way to automatically re-build the Gatsby site (via Netlify)
-    when I've updated the content on the CMS. It would be easy enough to run a
-    webhook any time I save, but I would like to be able to debounce those
-    events so that it only sends an update after I'm done making updates to the
-    site. Maybe a plugin that makes use of the new{' '}
-    <a href="https://docs.craftcms.com/v3/config/#queue-component">Job Queue</a>
-    ?
-  </li>
-  <li>
-    Integrate{' '}
-    <a href="https://github.com/nystudio107/craft-seomatic/">SEOmatic</a>. We
-    rely on SEOmatic across almost all of our sites to manage and serve
-    SEO-related data. However at this point there is no straightforward way to
-    get to SEOmatic data through CraftQL
-  </li>
-  <li>Blog...more?</li>
-</ul>
-<p>That's all for now. Hopefully more updates coming!</p>
-<p> </p>
+From there, it was easy converting old Twig templates to React. In this first pass, I didn't want to complicate things, so I resisted trying to refactor the entire site, so I basically just translated Twig directly to React while moving things over. I've [open-sourced the Gatsby code for this site](https://github.com/danieltott/dtott-gatsby) so feel free to dig around a little. There are a lot of places to improve, but the wins gained from getting Gatsby involved are almost too many to list. Since the results of a Gatsby build are a bunch of static files, I was also able to move hosting of the main site over to [Netlify](https://www.netlify.com/), which is just an amazing resource all on its own.
+
+Now that the site is fully built in React, here's my list of things I'd like to accomplish in the near future:
+
+- Refactor React components. There are a lot of places where I can create some smaller components and `import` them. It would also be good to split up the big CSS file into either component-specific stylesheets, or getting into something like [CSS-Blocks](https://css-blocks.com/) or [styled-components](https://github.com/styled-components/styled-components) .
+- Figure out a way to automatically re-build the Gatsby site (via Netlify) when I've updated the content on the CMS. It would be easy enough to run a webhook any time I save, but I would like to be able to debounce those events so that it only sends an update after I'm done making updates to the site. Maybe a plugin that makes use of the new [Job Queue](https://docs.craftcms.com/v3/config/#queue-component) ?
+- Integrate [SEOmatic](https://github.com/nystudio107/craft-seomatic/). We rely on SEOmatic across almost all of our sites to manage and serve SEO-related data. However at this point there is no straightforward way to get to SEOmatic data through CraftQL
+- Blog...more?
+
+That's all for now. Hopefully more updates coming!

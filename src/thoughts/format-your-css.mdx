@@ -28,11 +28,7 @@ export const meta = {
   desc: '',
 }
 
-<p>
-  For years, I've always formatted my CSS in what I like to think of as the
-  "traditional" manner. Each selector on one line, and each property indented
-  one tab underneath:
-</p>
+For years, I've always formatted my CSS in what I like to think of as the "traditional" manner. Each selector on one line, and each property indented one tab underneath:
 
 ```css
 #content {
@@ -58,25 +54,11 @@ export const meta = {
 }
 ```
 
-<p>
-  Pretty standard stuff. I'd break up sections with big comments, and that made
-  it fairly easy to scan. While this format never caused and problems{' '}
-  <em>per se</em>, and it was easy enough to implement, it never seemed
-  completely ideal.
-</p>
-<p>
-  When I started working with{' '}
-  <a href="http://sprokets.net" title="Sprokets">
-    Sprokets
-  </a>
-  , the other front-end developer there was using one-line css declarations. This
-  threw me for a loop for a while, but I slowly started liking it better and better.
-</p>
-<p>
-  The method I've finally settled on is based on the one-line approach, but with
-  an extra twist: I indent the declarations based on it's place in the HTML
-  document. For example, take the HTML for this simple page:
-</p>
+Pretty standard stuff. I'd break up sections with big comments, and that made it fairly easy to scan. While this format never caused and problems _per se_, and it was easy enough to implement, it never seemed completely ideal.
+
+When I started working with [Sprokets](http://sprokets.net 'Sprokets') , the other front-end developer there was using one-line css declarations. This threw me for a loop for a while, but I slowly started liking it better and better.
+
+The method I've finally settled on is based on the one-line approach, but with an extra twist: I indent the declarations based on it's place in the HTML document. For example, take the HTML for this simple page:
 
 ```html
 <div id="one">
@@ -91,7 +73,7 @@ export const meta = {
 </div>
 ```
 
-<p>The CSS to access this code would be like this:</p>
+The CSS to access this code would be like this:
 
 ```css
 body{ properties; }
@@ -103,27 +85,6 @@ body{ properties; }
       #two ul li{ properties; }
 ```
 
-<p>
-  This has worked very well for me so far, and I'm looking forward to trying out
-  on some bigger projects. It allows me to scan through my CSS much more
-  quickly, view comments more easily, and has the added benefit of helping me
-  think through things like descendants and inheritance. Take a look at{' '}
-  <a
-    href="/thoughts/wp-content/themes/dtott/style.css"
-    title="dtott.com stylesheet"
-  >
-    the CSS for this site
-  </a>{' '}
-  to see it in action on a bigger scale.
-</p>
-<p>
-  This method, while new for me, is clearly{' '}
-  <a
-    href="http://www.dustindiaz.com/css-indention-method/"
-    title="i.e. someone else did it a while ago"
-  >
-    not revolutionary
-  </a>
-  . However, since I stumbled on it on my own, I thought some of you guys might benefit
-  from it as I have. How do you format your CSS?
-</p>
+This has worked very well for me so far, and I'm looking forward to trying out on some bigger projects. It allows me to scan through my CSS much more quickly, view comments more easily, and has the added benefit of helping me think through things like descendants and inheritance. Take a look at [the CSS for this site](/thoughts/wp-content/themes/dtott/style.css 'dtott.com stylesheet') to see it in action on a bigger scale.
+
+This method, while new for me, is clearly [not revolutionary](http://www.dustindiaz.com/css-indention-method/ 'i.e. someone else did it a while ago') . However, since I stumbled on it on my own, I thought some of you guys might benefit from it as I have. How do you format your CSS?

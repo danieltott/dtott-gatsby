@@ -23,18 +23,14 @@ export const meta = {
 }
 
 <img src="/images/uploads/clock2.png" class="insetRight" alt="CSS Clock" />
-<p>
-  A little experiment I built:{' '}
-  <a href="http://danieltott.github.io/CSS3-clock/">a word clock</a> using CSS3
-  transforms and a little Javascript to run the actual clock. Useful? Maybe not.
-  Fun? Definitely.
-</p>
-<p>The code behind it is fairly straight-forward. Let's take a peak:</p>
-<h2>CSS</h2>
-<p>
-  The first thing we need to do is set a base set of styles for each arm of the
-  clock.
-</p>
+
+A little experiment I built: [a word clock](http://danieltott.github.io/CSS3-clock/) using CSS3 transforms and a little Javascript to run the actual clock. Useful? Maybe not. Fun? Definitely.
+
+The code behind it is fairly straight-forward. Let's take a peak:
+
+## CSS
+
+The first thing we need to do is set a base set of styles for each arm of the clock.
 
 ```css
 li {
@@ -50,14 +46,9 @@ li {
 }
 ```
 
-<p>
-  This is basically saying for each arm, position it at the top of the clock
-  body, and then rotate around left side, so that we have uniform rotations.
-</p>
-<p>
-  Then, for each arm, we set the actual rotation. Here is the HTML for the
-  "hour" arms:
-</p>
+This is basically saying for each arm, position it at the top of the clock body, and then rotate around left side, so that we have uniform rotations.
+
+Then, for each arm, we set the actual rotation. Here is the HTML for the "hour" arms:
 
 ```html
 <ol id="hours">
@@ -76,7 +67,7 @@ li {
 </ol>
 ```
 
-<p>And, the corresponding CSS:</p>
+And, the corresponding CSS:
 
 ```css
 #hours > li {
@@ -132,21 +123,11 @@ li {
 }
 ```
 
-<p>
-  The first line sets the padding, so that each hour arm begins 80px from the
-  center. The rest set up the individual rotations for each arm, at 30 degrees
-  each. The minute and second hands have more padding, and rotate 6 degrees for
-  each arm. The rest of the CSS in the file is used to style the clock, and to
-  show/hide the extra text.
-</p>
+The first line sets the padding, so that each hour arm begins 80px from the center. The rest set up the individual rotations for each arm, at 30 degrees each. The minute and second hands have more padding, and rotate 6 degrees for each arm. The rest of the CSS in the file is used to style the clock, and to show/hide the extra text.
 
-<h2>Javascript</h2>
-<p>
-  All we need to do for the javascript is create a function that sets
-  class="active" on each arm of the current time. So, at 12:45 and 20 seconds,
-  the 12 hour arm, the 45 minute arm, and the 20 second arm have class="active",
-  and the rest are normal. Then we simply set an interval to run every second.
-</p>
+## Javascript
+
+All we need to do for the javascript is create a function that sets class="active" on each arm of the current time. So, at 12:45 and 20 seconds, the 12 hour arm, the 45 minute arm, and the 20 second arm have class="active", and the rest are normal. Then we simply set an interval to run every second.
 
 ```javascript
 $(function () {
@@ -202,15 +183,6 @@ $(function () {
 })
 ```
 
-<p>
-  It's a fun little experiment that doesn't have any real value on it's own, but
-  it's a good exercise and as good of an excuse as any to play around with CSS
-  transforms.
-</p>
+It's a fun little experiment that doesn't have any real value on it's own, but it's a good exercise and as good of an excuse as any to play around with CSS transforms.
 
-<p>
-  The full CSS file can be found{' '}
-  <a href="http://danieltott.github.io/CSS3-clock/clock.css">here</a>, and the
-  javascript can be found{' '}
-  <a href="http://danieltott.github.io/CSS3-clock/clock.js">here</a>
-</p>
+The full CSS file can be found [here](http://danieltott.github.io/CSS3-clock/clock.css), and the javascript can be found [here](http://danieltott.github.io/CSS3-clock/clock.js)

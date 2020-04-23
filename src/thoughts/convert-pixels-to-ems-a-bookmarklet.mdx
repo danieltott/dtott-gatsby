@@ -33,16 +33,11 @@ export const meta = {
   desc: '',
 }
 
-<p>
-  Recently, I was writing a Javascript app that involved some animated,
-  expanding boxes. While doing this, I realized I needed a way to dynamically
-  convert pixels to computed ems. The function wasn't too complicated, and so I
-  decided to make a bookmarklet out of it that did the same thing. It was kind
-  of fun. Hopefully you'll find it useful, either in javascript, or to remove
-  the headache when you're trying to create pixel-perfect designs using ems
-</p>
-<h3>The Function</h3>
-<p>So, here are the functions:</p>
+Recently, I was writing a Javascript app that involved some animated, expanding boxes. While doing this, I realized I needed a way to dynamically convert pixels to computed ems. The function wasn't too complicated, and so I decided to make a bookmarklet out of it that did the same thing. It was kind of fun. Hopefully you'll find it useful, either in javascript, or to remove the headache when you're trying to create pixel-perfect designs using ems
+
+### The Function
+
+So, here are the functions:
 
 ```javascript
 //this function returns the computed pixel value
@@ -65,33 +60,20 @@ function convertPixelsToEms(pixels, el) {
 }
 ```
 
-<h3>The Bookmarklet</h3>
-<p>And here's the bookmarklet:</p>
+### The Bookmarklet
+
+And here's the bookmarklet:
+
 <p style="text-align:center;">
   <a href="javascript:(function(){var script=document.createElement('script');script.src='http://dtott.com/pixel2em/pixel2em.js';document.getElementsByTagName('head')[0].appendChild(script);})()">
     pixel2em
   </a>
 </p>
-<p>
-  Just drag the link above to your menu bar, and click on it in any site. The
-  bookmarklet will appear at the top of the page. It takes a pixel amount, and
-  any css selector you can think of, so it will return the conversion relative
-  to an element. For example, on this site, if you use "body", 16 pixels =
-  1.14em, but if you use #content p, 16 pixels = 1.23em.
-</p>
-<p>
-  It's probably not perfect, so please let me know if things aren't working
-  correctly. Although, I can tell you right now it's not going to work on ie6,
-  so don't bother trying it there.
-</p>
-<p>
-  The bookmarklet makes use of Dean Edward's{' '}
-  <a href="http://dean.edwards.name/my/cssQuery/" title="cssQuery">
-    cssQuery
-  </a>
-  , a slick little script to retrieve elements based on CSS selectors.
-</p>
-<p>
-  All in all, this was a fun experiment, and I hope you find it useful. Have
-  fun.
-</p>
+
+Just drag the link above to your menu bar, and click on it in any site. The bookmarklet will appear at the top of the page. It takes a pixel amount, and any css selector you can think of, so it will return the conversion relative to an element. For example, on this site, if you use "body", 16 pixels = 1.14em, but if you use #content p, 16 pixels = 1.23em.
+
+It's probably not perfect, so please let me know if things aren't working correctly. Although, I can tell you right now it's not going to work on ie6, so don't bother trying it there.
+
+The bookmarklet makes use of Dean Edward's [cssQuery](http://dean.edwards.name/my/cssQuery/ 'cssQuery'), a slick little script to retrieve elements based on CSS selectors.
+
+All in all, this was a fun experiment, and I hope you find it useful. Have fun.

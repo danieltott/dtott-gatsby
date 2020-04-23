@@ -31,38 +31,12 @@ export const meta = {
   desc: '',
 }
 
-<p>
-  We all have various tools in our box to deal with the constant headache that
-  is Internet Explorer. Browser hacks, conditional comments, filters, pounding
-  our heads against the wall, etc (wait, is it possible that&#8217;s where the
-  headaches come from? I&#8217;ll look into it and get back to you).
-</p>
-<p>
-  This situation gets even worse when one wants to use some of the fantastic
-  techniques available to us in CSS3, like border radius, drop shadows, and
-  gradients. In the past, we had to use images for all of these design elements,
-  but now it&#8217;s possible to have a fancy, shiny button that uses only a{' '}
-  <code>&lt;button&gt;</code> element and some css. Well, possible except in IE.
-  Enter <a href="http://css3pie.com">CSS3 PIE</a>.
-</p>
-<p>
-  CSS3 PIE allows us to use these new shinies without reservation by inserting
-  VML elements into the page on the fly that mimic the styles we&#8217;re going
-  for, and all it takes for us is to simply include some extra lines in our IE
-  stylesheets. That&#8217;s it. It even takes care of transparent PNG support
-  for EI6.
-</p>
+We all have various tools in our box to deal with the constant headache that is Internet Explorer. Browser hacks, conditional comments, filters, pounding our heads against the wall, etc (wait, is it possible that’s where the headaches come from? I’ll look into it and get back to you).
 
-<p>
-  The best part of CSS3 PIE is that, since it&#8217;s loaded through the
-  proprietary CSS <code>behavior:</code> property, it is active over all parts
-  of your site, even elements added to the DOM later through javascript. You
-  don&#8217;t need to baby it through AJAX events, or really do anything at all
-  except load an IE stylesheet.
-</p>
+This situation gets even worse when one wants to use some of the fantastic techniques available to us in CSS3, like border radius, drop shadows, and gradients. In the past, we had to use images for all of these design elements, but now it’s possible to have a fancy, shiny button that uses only a `<button>` element and some css. Well, possible except in IE. Enter [CSS3 PIE](http://css3pie.com).
 
-<p>
-  I could go over examples, but they&#8217;re all on the{' '}
-  <a href="http://css3pie.com/documentation/">online documentation</a>, so check
-  it out for yourself, and have some PIE!
-</p>
+CSS3 PIE allows us to use these new shinies without reservation by inserting VML elements into the page on the fly that mimic the styles we’re going for, and all it takes for us is to simply include some extra lines in our IE stylesheets. That’s it. It even takes care of transparent PNG support for EI6.
+
+The best part of CSS3 PIE is that, since it’s loaded through the proprietary CSS `behavior:` property, it is active over all parts of your site, even elements added to the DOM later through javascript. You don’t need to baby it through AJAX events, or really do anything at all except load an IE stylesheet.
+
+I could go over examples, but they’re all on the [online documentation](http://css3pie.com/documentation/), so check it out for yourself, and have some PIE!

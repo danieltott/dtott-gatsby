@@ -39,136 +39,44 @@ export const meta = {
   desc: '',
 }
 
-<h3>
-  <strong>UPDATE</strong>
-</h3>
-<p>
-  Read{' '}
-  <a href="http://dtott.com/thoughts/2009/01/06/clear-your-floats-even-easier/">
-    http://dtott.com/thoughts/2009/01/06/clear-your-floats-even-easier/
-  </a>{' '}
-  for an even easier way of dealing with floating elements.
-</p>
-<p>Then come back and read this.</p>
+### **UPDATE**
 
-<p>
-  Aside from browser bugs, float clearing can be one of the most frustrating
-  aspects of CSS development. It takes a little bit of patience and thought to
-  set up your floats and clears in a way that facilitates both your design and
-  the flexibility required in a modern website.{' '}
-</p>
-<h3>The Old Way</h3>
-<p>
-  While judging the last contest of{' '}
-  <a href="http://cssoff.com/" title="CSS Off">
-    CSS Off
-  </a>
-  , one of the things that I found myself repeating over and over again was this:
-  "Don't use empty <code>div</code>s to clear your floats!" What I meant by that
-  was that in this day and age, there exist much better, more robust, and more semantically
-  correct ways to properly clear floats that simply inserting <code>
-    <div class="clear"></div>
-  </code>.
-</p>
-<h3>The Not Really New Way</h3>
-<p>
-  Enter the{' '}
-  <a
-    href="http://www.positioniseverything.net/easyclearing.html"
-    title="Easy Clear on positioniseverything.net"
-  >
-    EasyClear method
-  </a>
-  . I'm calling this the "Not Really New Way" because it appeared on <a
-    href="http://positioniseverything.net"
-    title="positioniseverything.net"
-  >
-    positioniseverything.net
-  </a> in 2004, but is still being ignored for the old empty clear div solution.{' '}
-</p>
-<p>
-  I'm not going to spend time explaining the specifics of <em>why</em> this
-  solution works; they have gone over the technical aspects of the solution in
-  the article, especially different hacks for different browsers. However,
-  before I explain the best way to <em>use</em> the EasyClear on your sites,
-  there is one part of CSS that needs to be understood, since the entire
-  EasyClear method hinges on it: the <code>:after</code> pseudo-element.{' '}
-</p>
-<h3>
-  <code>:after</code> - Intrigue and Deception
-</h3>
-<p>
-  For a long time, I was confused about the <code>:after</code> pseudo-element.
-  After doing a little testing and research, I figured it out. It's not all that
-  difficult to understand, actually, but I was mislead in the beginning. The{' '}
-  <a
-    href="http://www.w3schools.com/css/pr_pseudo_after.asp"
-    title=":after on w3schools.com"
-  >
-    w3schools.com's definition
-  </a>{' '}
-  of <code>:after</code> is the first that pops on on a quick{' '}
-  <a
-    href="http://www.google.com/search?q=css+%3Aafter"
-    title="Google: CSS :after"
-  >
-    Google search
-  </a>
-  , so it was the first place I went:
-</p>
-<blockquote>
-  <p>The :after pseudo-element inserts some content after an element.</p>
-</blockquote>
-<p>
-  It turns out that this is <em>completely</em> incorrect. The{' '}
-  <a
-    href="http://www.w3.org/TR/REC-CSS2/selector.html#before-and-after"
-    title=":after on w3.org"
-  >
-    actual definition
-  </a>{' '}
-  (via{' '}
-  <a href="http://www.w3.org" title="W3">
-    The W3
-  </a>
-  ) is this (emphasis added):
-</p>
-<blockquote>
-  <p>
-    The ':before' and ':after' pseudo-elements can be used to insert generated
-    content before or{' '}
-    <strong>
-      <em>after an element's content</em>
-    </strong>
-    .
-  </p>
-</blockquote>
-<p>
-  The difference between the two definitions is considerable. Content inserted
-  using the <code>:after</code> pseudo-element is inserted not after the
-  element, but instead <em>within</em> the element and <em>after</em> the
-  content. See an example{' '}
-  <a
-    href="http://dtott.com/examples/easyclear/after_example1.html"
-    title=":after example"
-  >
-    here
-  </a>
-  .{' '}
-</p>
-<p>
-  You can use <code>:after</code> to insert just about any content you'd like,
-  and give it most CSS attributes, including <code>display</code> and{' '}
-  <code>clear</code>. This is how EasyClear works its magic.
-</p>
-<h3>Using EasyClear</h3>
-<p>
-  Using EasyClear is simple. The only trick is to apply it to the correct
-  element. The element that you are going to apply it to most is the element{' '}
-  <em>containing</em> the floated elements. For example, a page with a container
-  that has a background you'd like to extend to include the entire content, and
-  two floated elements:
-</p>
+Read [http://dtott.com/thoughts/2009/01/06/clear-your-floats-even-easier/](http://dtott.com/thoughts/2009/01/06/clear-your-floats-even-easier/) for an even easier way of dealing with floating elements.
+
+Then come back and read this.
+
+Aside from browser bugs, float clearing can be one of the most frustrating aspects of CSS development. It takes a little bit of patience and thought to set up your floats and clears in a way that facilitates both your design and the flexibility required in a modern website.
+
+### The Old Way
+
+While judging the last contest of [CSS Off](http://cssoff.com/ 'CSS Off') , one of the things that I found myself repeating over and over again was this: "Don't use empty `div`s to clear your floats!" What I meant by that was that in this day and age, there exist much better, more robust, and more semantically correct ways to properly clear floats that simply inserting
+
+.
+
+### The Not Really New Way
+
+Enter the [EasyClear method](http://www.positioniseverything.net/easyclearing.html 'Easy Clear on positioniseverything.net') . I'm calling this the "Not Really New Way" because it appeared on [positioniseverything.net](http://positioniseverything.net 'positioniseverything.net') in 2004, but is still being ignored for the old empty clear div solution.
+
+I'm not going to spend time explaining the specifics of _why_ this solution works; they have gone over the technical aspects of the solution in the article, especially different hacks for different browsers. However, before I explain the best way to _use_ the EasyClear on your sites, there is one part of CSS that needs to be understood, since the entire EasyClear method hinges on it: the `:after` pseudo-element.
+
+### `:after` - Intrigue and Deception
+
+For a long time, I was confused about the `:after` pseudo-element. After doing a little testing and research, I figured it out. It's not all that difficult to understand, actually, but I was mislead in the beginning. The [w3schools.com's definition](http://www.w3schools.com/css/pr_pseudo_after.asp ':after on w3schools.com') of `:after` is the first that pops on on a quick [Google search](http://www.google.com/search?q=css+%3Aafter 'Google: CSS :after') , so it was the first place I went:
+
+> The :after pseudo-element inserts some content after an element.
+
+It turns out that this is _completely_ incorrect. The [actual definition](http://www.w3.org/TR/REC-CSS2/selector.html#before-and-after ':after on w3.org') (via [The W3](http://www.w3.org 'W3') ) is this (emphasis added):
+
+> The ':before' and ':after' pseudo-elements can be used to insert generated content before or **_after an element's content_** .
+
+The difference between the two definitions is considerable. Content inserted using the `:after` pseudo-element is inserted not after the element, but instead _within_ the element and _after_ the content. See an example [here](http://dtott.com/examples/easyclear/after_example1.html ':after example') .
+
+You can use `:after` to insert just about any content you'd like, and give it most CSS attributes, including `display` and `clear`. This is how EasyClear works its magic.
+
+### Using EasyClear
+
+Using EasyClear is simple. The only trick is to apply it to the correct element. The element that you are going to apply it to most is the element _containing_ the floated elements. For example, a page with a container that has a background you'd like to extend to include the entire content, and two floated elements:
+
 <p>
   <img
     src="/examples/easyclear/example_page.png"
@@ -176,20 +84,8 @@ export const meta = {
     title="Example page"
   />
 </p>
-<p>
-  In this example, you want to apply the EasyClear to <code>#container</code>,
-  since that is the containing element. It will insert a block-level element
-  with the <code>clear</code> attribute set to <code>both</code>, thus clearing
-  the floats inside the element without crufting up your HTML. You can see an
-  example at work{' '}
-  <a
-    href="http://dtott.com/examples/easyclear/easyclear_example.html"
-    title="EasyClear example"
-  >
-    here
-  </a>
-  , and here's the EasyClear CSS itself:
-</p>
+
+In this example, you want to apply the EasyClear to `#container`, since that is the containing element. It will insert a block-level element with the `clear` attribute set to `both`, thus clearing the floats inside the element without crufting up your HTML. You can see an example at work [here](http://dtott.com/examples/easyclear/easyclear_example.html 'EasyClear example') , and here's the EasyClear CSS itself:
 
 ```css
 /* EasyClearing http://www.positioniseverything.net/easyclearing.html */
@@ -216,28 +112,8 @@ export const meta = {
 /* End hide from IE-mac */
 ```
 
-<p>
-  As you can see, it's pretty simple to employ, and the results are perfect. The
-  best way that I've found to implement this on larger projects is to keep the
-  EasyClear in one place, at the bottom of your main stylesheet, and simply add
-  elements that you need to clear to the declaration itself, as illustrated{' '}
-  <a
-    href="http://dtott.com/examples/easyclear/easyclear_example2.html"
-    title="EasyClear multiple-element example"
-  >
-    here
-  </a>
-  .
-</p>
-<h3>Clears For All</h3>
-<p>
-  So now you never have to insert an empty <code>div</code> into your otherwise
-  perfectly crafted HTML. Go read{' '}
-  <a
-    href="http://www.positioniseverything.net/easyclearing.html"
-    title="Easy Clear on positioniseverything.net"
-  >
-    the article
-  </a>
-  , learn the background, spread the word, and, please, just start using it!
-</p>
+As you can see, it's pretty simple to employ, and the results are perfect. The best way that I've found to implement this on larger projects is to keep the EasyClear in one place, at the bottom of your main stylesheet, and simply add elements that you need to clear to the declaration itself, as illustrated [here](http://dtott.com/examples/easyclear/easyclear_example2.html 'EasyClear multiple-element example') .
+
+### Clears For All
+
+So now you never have to insert an empty `div` into your otherwise perfectly crafted HTML. Go read [the article](http://www.positioniseverything.net/easyclearing.html 'Easy Clear on positioniseverything.net') , learn the background, spread the word, and, please, just start using it!

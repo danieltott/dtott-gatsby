@@ -23,79 +23,24 @@ export const meta = {
   desc: '',
 }
 
-<p>
-  This is maybe the fourth or fifth incarnation of dtott.com. This time around I
-  tried to simplify everything, do away with (mostly) useless features, and
-  concentrate on the reading experience. Here's some notes on the site. Hope you
-  enjoy it!
-</p>
+This is maybe the fourth or fifth incarnation of dtott.com. This time around I tried to simplify everything, do away with (mostly) useless features, and concentrate on the reading experience. Here's some notes on the site. Hope you enjoy it!
 
-<h2>Craft</h2>
+## Craft
 
-<p>
-  I had been kicking around a couple static-site generators (including{' '}
-  <a href="http://jekyllrb.com/">Jekyll</a> and the very cool{' '}
-  <a href="http://static.ly/">static.ly</a>), but I decided I really wanted the
-  ability to add posts from other machines other than my own (like my iPad, for
-  example). So, I decided to stick with a traditional CMS.
-</p>
+I had been kicking around a couple static-site generators (including [Jekyll](http://jekyllrb.com/) and the very cool [static.ly](http://static.ly/)), but I decided I really wanted the ability to add posts from other machines other than my own (like my iPad, for example). So, I decided to stick with a traditional CMS.
 
-<p>
-  I really had been wanting to try out{' '}
-  <a href="http://pixelandtonic.com/">Pixel &amp; Tonic</a>'s{' '}
-  <a href="http://buildwithcraft.com/">new CMS, Craft</a>, and boy am I glad I
-  did. Everything has been incredibly easy, from templating (
-  <a href="http://twig.sensiolabs.org/">twig</a> is the bomb diggity) to server
-  setup and migration. One-click updating, even! It's been such a pleasure
-  working with it, I can't wait to use it for client work.
-</p>
+I really had been wanting to try out [Pixel & Tonic](http://pixelandtonic.com/)'s [new CMS, Craft](http://buildwithcraft.com/), and boy am I glad I did. Everything has been incredibly easy, from templating ( [twig](http://twig.sensiolabs.org/) is the bomb diggity) to server setup and migration. One-click updating, even! It's been such a pleasure working with it, I can't wait to use it for client work.
 
-<h2>Sass, Grunt</h2>
+## Sass, Grunt
 
-<p>
-  I moved to <a href="http://sass-lang.com">Sass</a>/
-  <a href="http://compass-style.org">Compass</a> from{' '}
-  <a href="http://lesscss.org">Less</a>, which has overall been a positive
-  experience. This site doesn't have too much going on in the way of complicated
-  CSS aside from some relative unit trickiness (see below), but using Sass (and{' '}
-  <a href="http://gruntjs.com">Grunt</a> for building) makes everything just a
-  little easier and nicer.
-</p>
+I moved to [Sass](http://sass-lang.com)/ [Compass](http://compass-style.org) from [Less](http://lesscss.org), which has overall been a positive experience. This site doesn't have too much going on in the way of complicated CSS aside from some relative unit trickiness (see below), but using Sass (and [Grunt](http://gruntjs.com) for building) makes everything just a little easier and nicer.
 
-<h2>Webfonts by H&amp;FJ</h2>
-<p>
-  Type foundry Hoefler &amp; Frere-Jones{' '}
-  <a href="http://www.typography.com/cloud/welcome/">
-    recently released their own webfont service
-  </a>
-  , which I jumped on as soon as I could. They make beautiful fonts, and their
-  service includes a ton of nice tools. Currently this site is using{' '}
-  <a href="http://www.typography.com/fonts/gotham/styles/">Gotham Narrow</a> and{' '}
-  <a href="http://www.typography.com/fonts/whitney/styles/">Whitney Pro</a>.
-</p>
+## Webfonts by H&FJ
 
-<h2>
-  Relative CSS Units: <code>rem</code>, <code>vw</code>, and <code>vh</code>
-</h2>
+Type foundry Hoefler & Frere-Jones [recently released their own webfont service](http://www.typography.com/cloud/welcome/) , which I jumped on as soon as I could. They make beautiful fonts, and their service includes a ton of nice tools. Currently this site is using [Gotham Narrow](http://www.typography.com/fonts/gotham/styles/) and [Whitney Pro](http://www.typography.com/fonts/whitney/styles/).
 
-<p>
-  For browsers that support it, this site now makes full-use of{' '}
-  <a href="http://snook.ca/archives/html_and_css/font-size-with-rem">
-    relative font-size units
-  </a>{' '}
-  as well as viewport-relative font-size units. Using these together allows me
-  to do some neat things when responding to different screen sizes. The
-  font-size of everything is set to use rem, which means basically a percentage
-  of whatever the font-size is of the html element. Then, I can set the html
-  element's font-size in vw, which allows the entire site to respond to the
-  width of the viewport! It's sort of fun stuff. Then all I have to do is set
-  some breakpoints where things start looking a little funky. The only downside
-  is that there is a webkit bug that prevents vw units from responding when a
-  user drags their window around. So, I threw in a little javascript to help out
-  with that.
-</p>
+## Relative CSS Units: `rem`, `vw`, and `vh`
 
-<p>
-  Anyway, this has been a fun little project, and I'm looking forward to
-  iterating on it and, hopefully, writing more. Thanks for checking it out!
-</p>
+For browsers that support it, this site now makes full-use of [relative font-size units](http://snook.ca/archives/html_and_css/font-size-with-rem) as well as viewport-relative font-size units. Using these together allows me to do some neat things when responding to different screen sizes. The font-size of everything is set to use rem, which means basically a percentage of whatever the font-size is of the html element. Then, I can set the html element's font-size in vw, which allows the entire site to respond to the width of the viewport! It's sort of fun stuff. Then all I have to do is set some breakpoints where things start looking a little funky. The only downside is that there is a webkit bug that prevents vw units from responding when a user drags their window around. So, I threw in a little javascript to help out with that.
+
+Anyway, this has been a fun little project, and I'm looking forward to iterating on it and, hopefully, writing more. Thanks for checking it out!
