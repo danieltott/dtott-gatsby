@@ -5,7 +5,6 @@ import Timestamp from '../Timestamp'
 import { Link } from 'gatsby'
 
 const Post = ({ body, meta, tags, data }) => {
-  console.log(meta)
   return (
     <article className="page-section post">
       <header className="page-section-wrap">
@@ -31,7 +30,7 @@ const Post = ({ body, meta, tags, data }) => {
                   {last ? '.' : ', '}
                 </React.Fragment>
               )
-            })}
+            })}{' '}
             Thanks for reading.
           </p>
         </footer>
