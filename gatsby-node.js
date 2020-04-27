@@ -31,7 +31,9 @@ exports.createPages = ({ graphql, actions }) => {
       result.data.allMdx.edges.forEach(({ node }) => {
         createPage({
           path: '/' + node.exports.meta.slug,
-          component: path.resolve(`./src/components/ThoughtsEntry2.js`),
+          component: node.exports.meta.component
+            ? path.resolve(node.exports.meta.component)
+            : path.resolve(`./src/components/ThoughtsEntry2.js`),
           context: {
             slug: node.exports.meta.slug,
           },
