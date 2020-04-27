@@ -10,17 +10,7 @@ const IndexPage = () => {
       allMdx(sort: { fields: exports___meta___date, order: DESC }) {
         edges {
           node {
-            exports {
-              meta {
-                title
-                relativeDate: date(fromNow: true)
-                isoDate: date(formatString: "YYYY-MM-DDTHH:mm:ssZ")
-                date
-                slug
-              }
-            }
-            body
-            id
+            ...blogListing
           }
         }
       }

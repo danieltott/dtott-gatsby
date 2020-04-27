@@ -21,6 +21,7 @@ exports.createPages = ({ graphql, actions }) => {
                 meta {
                   slug
                 }
+                tags
               }
               id
             }
@@ -28,7 +29,17 @@ exports.createPages = ({ graphql, actions }) => {
         }
       }
     `).then((result) => {
+      const tags = []
+
       result.data.allMdx.edges.forEach(({ node }) => {
+        if (node.exports.tags) {
+          node.exports.tags.forEach((tag) => {
+            if (tags.indexOf(tag) === -1) {
+              tags.push(tag)
+            }
+          })
+        }
+
         createPage({
           path: '/' + node.exports.meta.slug,
           component: node.exports.meta.component
@@ -39,6 +50,17 @@ exports.createPages = ({ graphql, actions }) => {
           },
         })
       })
+
+      tags.forEach((tag) => {
+        createPage({
+          path: '/tags/' + tag,
+          component: path.resolve('./src/components/ViewTag.js'),
+          context: {
+            tag,
+          },
+        })
+      })
+
       resolve()
     })
   })

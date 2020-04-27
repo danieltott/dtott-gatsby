@@ -3,23 +3,29 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import Layout from '../components/Layout'
 
+export const query = graphql`
+  fragment blogListing on Mdx {
+    exports {
+      meta {
+        title
+        relativeDate: date(fromNow: true)
+        isoDate: date(formatString: "YYYY-MM-DDTHH:mm:ssZ")
+        date
+        slug
+      }
+    }
+    body
+    id
+  }
+`
+
 const IndexPage = (props) => {
   const data = useStaticQuery(graphql`
     query {
       allMdx(sort: { fields: exports___meta___date, order: DESC }) {
         edges {
           node {
-            exports {
-              meta {
-                title
-                relativeDate: date(fromNow: true)
-                isoDate: date(formatString: "YYYY-MM-DDTHH:mm:ssZ")
-                date
-                slug
-              }
-            }
-            body
-            id
+            ...blogListing
           }
         }
       }

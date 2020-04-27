@@ -26,7 +26,7 @@ const Post = ({ body, meta, tags, data }) => {
               return (
                 <React.Fragment key={tag}>
                   {last && tags.length > 1 && ' and '}
-                  <Link to={`/thoughts/search?q=tags:${tag}`}>{tag}</Link>
+                  <Link to={`/tags/${tag}`}>{tag}</Link>
                   {last ? '.' : ', '}
                 </React.Fragment>
               )
