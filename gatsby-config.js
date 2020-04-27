@@ -7,7 +7,7 @@ var moment = require('moment')
 module.exports = {
   siteMetadata: {
     title: 'Front-End Design and Development ~  Daniel T. Ott',
-    description: `Daniel T Ott - Front End Design and Developmtn. Dan Ott's portfolio, information, and thoughts on HTML, CSS, Javascript, and the web development industry in general.`,
+    description: `Dan Ott's portfolio, information, and thoughts on HTML, CSS, Javascript, and the web development industry in general.`,
     siteUrl: `https://www.dtott.com`,
   },
   plugins: [
@@ -22,9 +22,17 @@ module.exports = {
         theme_color: '#663399',
         display: 'minimal-ui',
         icon: 'src/images/danott.png', // This path is relative to the root of the site.
+        cache_busting_mode: 'none',
       },
     },
-    'gatsby-plugin-offline',
+    {
+      resolve: 'gatsby-plugin-offline',
+      options: {
+        workboxConfig: {
+          globPatterns: ['**/*'],
+        },
+      },
+    },
     // {
     //   resolve: 'gatsby-source-graphql',
     //   options: {
@@ -55,62 +63,59 @@ module.exports = {
         exclude: [],
       },
     },
-    // {
-    //   resolve: `gatsby-plugin-feed`,
-    //   options: {
-    //     query: `
-    //       {
-    //         site {
-    //           siteMetadata {
-    //             title
-    //             description
-    //             siteUrl
-    //             site_url: siteUrl
-    //           }
-    //         }
-    //       }
-    //     `,
-    //     feeds: [
-    //       {
-    //         serialize: ({ query: { site, craft } }) => {
-    //           return craft.entries.map((entry) => {
-    //             return {
-    //               title: entry.title,
-    //               description: entry.summary,
-    //               date: moment(entry.postDate * 1000).format(
-    //                 'ddd, DD MMM YYYY HH:mm:ss ZZ'
-    //               ),
-    //               url: site.siteMetadata.siteUrl + '/' + entry.uri,
-    //               guid: site.siteMetadata.siteUrl + '/' + entry.uri,
-    //             }
-    //           })
-    //         },
-    //         query: `
-    //           {
-    //             craft {
-    //               entries(section: [thoughts]) {
-    //                 ... on Craft_Thoughts {
-    //                   id
-    //                   postDate
-    //                   title
-    //                   summary
-    //                   body
-    //                   url
-    //                   uri
-    //                   tags {
-    //                     id
-    //                     title
-    //                   }
-    //                 }
-    //               }
-    //             }
-    //           }
-    //         `,
-    //         output: '/thoughts/feed.rss',
-    //       },
-    //     ],
-    //   },
-    // },
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allMdx } }) => {
+              return allMdx.edges.map(({ node }) => {
+                return {
+                  title: node.exports.meta.title,
+                  description: node.exports.meta.desc,
+                  date: node.exports.meta.date,
+                  url: site.siteMetadata.siteUrl + '/' + node.exports.meta.slug,
+                  guid:
+                    site.siteMetadata.siteUrl + '/' + node.exports.meta.slug,
+                }
+              })
+            },
+            query: `
+              {
+                allMdx(sort: { fields: exports___meta___date, order: DESC }) {
+                  edges {
+                    node {
+                      exports {
+                        meta {
+                          title
+                          date(formatString: "ddd, DD MMM YYYY HH:mm:ss ZZ")
+                          slug
+                          desc
+                        }
+                      }
+                      id
+                    }
+                  }
+                }
+              }
+            `,
+            output: '/thoughts/feed.rss',
+          },
+        ],
+      },
+    },
     `gatsby-plugin-netlify`,
     {
       resolve: `gatsby-source-filesystem`,
