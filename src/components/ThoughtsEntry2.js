@@ -17,6 +17,7 @@ export default function PageTemplate(props) {
       mdx: {
         exports: { meta },
         body,
+        excerpt,
       },
     },
   } = props
@@ -26,7 +27,7 @@ export default function PageTemplate(props) {
       <Layout section="thoughts">
         <Helmet>
           <title>{meta.title}</title>
-          {meta.desc && <meta name="description" content={meta.desc} />}
+          <meta name="description" content={meta.desc || excerpt} />
         </Helmet>
 
         <h2 className="section-title">
@@ -54,6 +55,7 @@ export const pageQuery = graphql`
         }
       }
       body
+      excerpt
     }
   }
 `
