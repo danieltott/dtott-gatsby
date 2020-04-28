@@ -44,7 +44,7 @@ const IndexPage = ({ data }) => {
   }, [sort, data.allMdx.group])
 
   return (
-    <Layout section="home">
+    <Layout section="thoughts">
       <Helmet title="Thoughts" />
       <h1 className="section-title">
         <span className="page-section-wrap">Post Tags</span>
