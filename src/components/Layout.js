@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { StaticQuery, graphql, navigate } from 'gatsby'
+import { StaticQuery, graphql } from 'gatsby'
 import moment from 'moment'
 import Header from './Header'
 import '../styles/codetheme.css'
