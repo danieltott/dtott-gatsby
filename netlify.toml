@@ -12,7 +12,7 @@
   query = {term = ":term"}
 
 [[redirects]]
-  from = "/search"
+  from = "/thoughts/search"
   to = "/xsearch/:q"
   query = {q = ":q"}
 
