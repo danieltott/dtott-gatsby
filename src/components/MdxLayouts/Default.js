@@ -1,10 +1,61 @@
-import React from 'react'
+import React, { useReducer } from 'react'
 import { usePostIsFull } from '../ThoughtsEntry2'
-import { DiscussionEmbed } from 'disqus-react'
+// import { DiscussionEmbed } from 'disqus-react'
 import Timestamp from '../Timestamp'
 import { Link } from 'gatsby'
+import produce from 'immer'
+
+const initialState = {
+  status: 'initial',
+  fields: {
+    name: {
+      value: '',
+      valid: false,
+      touched: false,
+    },
+    email: {
+      value: '',
+      valid: false,
+      touched: false,
+    },
+    site: {
+      value: '',
+      valid: false,
+      touched: false,
+    },
+    comment: {
+      value: '',
+      valid: false,
+      touched: false,
+    },
+  },
+}
+const fields = ['name', 'email', 'site', 'comment']
+const formIsValid = (state) =>
+  fields.reduce((valid, cur) => valid && !!state.fields[cur].value, true)
+
+const reducer = (action, state) =>
+  produce(state, (newState) => {
+    switch (action.type) {
+      case 'fieldChange':
+        newState.fields[action.field] = {
+          touched: true,
+          value: action.value,
+          valid: !!action.value,
+        }
+
+        newState.status = formIsValid(newState) ? 'valid' : 'invalid'
+
+        break
+
+      default:
+        throw new Error(`Invalid action type ${action.type}`)
+    }
+  })
 
 const Post = ({ body, meta, tags, data }) => {
+  const [state, dispatch] = useReducer(reducer, initialState)
+
   return (
     <article className="page-section post">
       <header className="page-section-wrap">
@@ -35,7 +86,76 @@ const Post = ({ body, meta, tags, data }) => {
           </p>
         </footer>
         <aside className="post-comments">
-          {process.env.NODE_ENV === 'production' && (
+          <form data-netlify="true" name="comments" method="post">
+            <label htmlFor="comment_name">Your Name</label>
+            <div>
+              <input
+                id="comment_name"
+                name="name"
+                type="text"
+                autoComplete="name"
+                value={state.fields.name.value}
+                onChange={(e) => {
+                  dispatch({
+                    type: 'fieldChange',
+                    field: 'name',
+                    value: e.target.value,
+                  })
+                }}
+              />
+            </div>
+            <label htmlFor="comment_email">Your Email</label>
+            <div>
+              <input
+                id="comment_email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                value={state.fields.email.value}
+                onChange={(e) => {
+                  dispatch({
+                    type: 'fieldChange',
+                    field: 'email',
+                    value: e.target.value,
+                  })
+                }}
+              />
+            </div>
+            <label htmlFor="comment_site">Website</label>
+            <div>
+              <input
+                id="comment_site"
+                type="text"
+                autoComplete="site"
+                value={state.fields.site.value}
+                onChange={(e) => {
+                  dispatch({
+                    type: 'fieldChange',
+                    field: 'site',
+                    value: e.target.value,
+                  })
+                }}
+              />
+            </div>
+            <label htmlFor="comment_comment">Your Comment</label>
+            <div>
+              <input
+                id="comment_comment"
+                type="text"
+                autoComplete="comment"
+                value={state.fields.comment.value}
+                onChange={(e) => {
+                  dispatch({
+                    type: 'fieldChange',
+                    field: 'comment',
+                    value: e.target.value,
+                  })
+                }}
+              />
+            </div>
+          </form>
+
+          {/* {process.env.NODE_ENV === 'production' && (
             <DiscussionEmbed
               shortname="danieltott"
               config={{
@@ -44,7 +164,7 @@ const Post = ({ body, meta, tags, data }) => {
                 title: meta.title,
               }}
             />
-          )}
+          )} */}
         </aside>
       </div>
     </article>
