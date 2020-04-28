@@ -112,6 +112,7 @@ module.exports = {
               }
             `,
             output: '/thoughts/feed.rss',
+            title: 'Front-End Design and Development by Dan Ott',
           },
         ],
       },
