@@ -1,0 +1,46 @@
+import PageLayout from '../components/MdxLayouts/Default'
+
+export default PageLayout
+
+export const summary = (
+  <>
+    <p>
+      So I've been thinking for a while about what I'd like to blog about, now
+      that I'm at least comfortable (if not perfectly happy) with the
+      presentation of dtott.com. What I decided on is starting an ongoing series
+      of in-depth CSS tips. This will (obviously) be the first one.
+    </p>
+  </>
+)
+
+export const tags = ['css']
+
+export const meta = {
+  title: 'CSS Tip #1: Use A Reset',
+  slug: 'thoughts/2007/09/10/css-tip-1-use-a-reset',
+  date: '2007-09-10 20:46:00',
+  dateUpdated: '2020-04-09 09:02:11',
+  desc: '',
+}
+
+So I've been thinking for a while about what I'd like to blog about, now that I'm at least comfortable (if not perfectly happy) with the presentation of dtott.com. What I decided on is starting an ongoing series of in-depth CSS tips. This will (obviously) be the first one.
+
+### What's A Reset?
+
+A CSS reset is a set of CSS declarations designed to strip away all possible default formatting before adding any of your own. Every browser out there has default formatting for every HTML element. The body element in almost every browser has padding, margins, a set font size and color, and a set background color. Headings have margins, padding, different font sizes, and different font weights. Turn of CSS on your browser while viewing a site, and you'll see the default CSS that the browser uses. What the reset does, then, is strip all of that away. Headings, paragraphs, fieldsets, and everything else, set to one font, one size, one weight, and no extra paddings and margins.
+
+### But...Why?
+
+Well, there's a few reasons. First, by resetting the CSS, you remove the temptation to rely on browser defaults that may or may not be the same cross-browser. `H1`s, at least to the naked eye, are pretty consistent across the field. What about `fieldsets` or `dl`s?
+
+Second, removing that temptation will make you a better CSS coder. By having to explicitly set each attribute on each element you want to use, it forces you to learn what you might normally gloss over.
+
+Third, it will make your code meaner and cleaner. You won't have to set the margin and padding every time you use a `ul` unless the design calls for it. No more wasting lines and time undoing what the browser does for you.
+
+### OK, I'm Sold. What Now?
+
+Go out there and get a reset! If you are a control-freak-ninja-CSS-master, you could write your own, but there's no need for this. [Eric Meyer](http://meyerweb.com 'Eric Meyer') has already done it for us: [The Eric Meyer CSS Reset](http://meyerweb.com/eric/thoughts/2007/05/01/reset-reloaded/ 'The Eric Meyer CSS Reset') . Is this the only one? No. The [Yahoo! User Interface Library](http://developer.yahoo.com/yui) has [a reset](http://developer.yahoo.com/yui/reset/ 'YUI Reset') , and I'm sure there are more out there. Eric's is the best. I could go into why, but it's already been done [here](http://meyerweb.com/eric/thoughts/2007/04/18/reset-reasoning/) and [here](http://meyerweb.com/eric/thoughts/2007/05/01/reset-reloaded/) (including the comments). Just go, get the code, and put it above your stylesheets.
+
+### Cool!
+
+I concur. Do you concur?

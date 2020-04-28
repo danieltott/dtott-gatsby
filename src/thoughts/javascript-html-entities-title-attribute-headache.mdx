@@ -1,0 +1,48 @@
+import PageLayout from '../components/MdxLayouts/Default'
+
+export default PageLayout
+
+export const summary = (
+  <>
+    <p>
+      So last month, I was attending the fairly new{' '}
+      <a href="http&#58;//webdesign.meetup.com/396/">
+        Cleveland Web Standards Meet-Up
+      </a>
+      . I was talking to <a href="http&#58;//www.wileymedia.com/">
+        Eric Wiley
+      </a> about the redesign I did for the <a href="http&#58;//www.freetimes.com">
+        Free Times
+      </a>, and <a href="http&#58;//meyerweb.com">Eric Meyer</a>, who came for the
+      first time, overheard. He says "new site, huh?" and pulls out his laptop.
+    </p>
+  </>
+)
+
+export const tags = ['front end', 'javascript']
+
+export const meta = {
+  title: 'Javascript + HTML Entities + Title Attribute = Headache',
+  slug: 'thoughts/2007/07/11/javascript-html-entities-title-attribute-headache',
+  date: '2007-07-11 00:05:00',
+  dateUpdated: '2020-04-09 09:02:13',
+  desc: '',
+}
+
+So last month, I was attending the fairly new [Cleveland Web Standards Meet-Up](http://webdesign.meetup.com/396/). I was talking to [Eric Wiley](http://www.wileymedia.com/) about the redesign I did for the [Free Times](http://www.freetimes.com), and [Eric Meyer](http://meyerweb.com) , who came for the first time, overheard. He says "new site, huh?" and pulls out his laptop.
+
+It's possible my heart stopped working.
+
+His critique of my work actually went fairly well for me. He commented on the fact that the ads came before the content, which I had already fixed on my local version, but hadn't uploaded yet (if someone had told me Eric Meyer would be there...). But then he noticed what I first assumed was one of those embarrassing bugs that crop up now and again where I just forgot something that, although simple to fix, was painfully obvious.
+
+On the front page of the Free Times site, there is a simple javascript image rotater that loops through the current lead stories. The script changes the url of the link, and the src, alt, and title of the image. The problem was that in the tooltips that popped up, the [HTML entities](http://en.wikipedia.org/wiki/HTML_entities) weren't converting to actual symbols. For example, what should have been "He's happy" turned out to say "He's happy." Oops.
+
+I assumed it that I just forgot to do a conversion somewhere. It's happend before. However, the truth is much more sinister. The `title` attribute, when hard-coded in an html element, happily accepts html entities with no problem. The problem arises when javascript inserts them. I googled around for a while, but suprisingly couldn't find anything about the subject, so I hunkered down and figured it out myself.
+
+The solution isn't very hard: when using PHP to print the text in question, use the [`rawurlencode()` function](http://us.php.net/manual/en/function.rawurlencode.php), then use the javascript [`unescape()`](http://www.w3schools.com/jsref/jsref_unescape.asp) function when inserting the text. It seems silly, but works fine. I needed to use `rawurlencode()` and not `urlencode()` because `urlencode()` encodes spaces as '+' and javascript doesn't unescape them.
+
+```php
+someElement.title = unescape("<?= rawurlencode($cover_story['title']) ?>");
+```
+
+So, the lesson learned: check everything. Especially if Eric Meyer will be going through your work.

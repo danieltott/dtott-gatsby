@@ -1,0 +1,57 @@
+import PageLayout from '../components/MdxLayouts/Default'
+
+export default PageLayout
+
+export const summary = (
+  <>
+    <p>
+      In my{' '}
+      <a href="https://www.meetup.com/Cleveland-React/events/261043210/">
+        hooks talk for the Cleveland React Meetup
+      </a>
+      , I live-coded a conversion from a class-based app to one using <a href="https://reactjs.org/docs/hooks-intro.html">
+        hooks
+      </a>. I have published <a href="https://github.com/danieltott/practicalHooksTalk">
+        the code from the talk on GitHub
+      </a>.
+    </p>
+    <p>
+      This repo has branches containing each step along the way, from the{' '}
+      <a href="https://github.com/danieltott/practicalHooksTalk/tree/00-base">
+        basic class-based app
+      </a>{' '}
+      to the{' '}
+      <a href="https://github.com/danieltott/practicalHooksTalk/tree/06-Bonus-UserFilterContext">
+        completed thing
+      </a>
+      .
+    </p>
+  </>
+)
+
+export const tags = ['react', 'talk', 'hooks']
+
+export const meta = {
+  title: 'Practical React Hooks talk',
+  slug: 'thoughts/2019/05/30/practical-react-hooks-talk',
+  date: '2019-05-30 14:30:00',
+  dateUpdated: '2020-04-09 09:02:14',
+  desc: 'Example App and notes from my Practical React Hooks talk',
+}
+
+In my [hooks talk for the Cleveland React Meetup](https://www.meetup.com/Cleveland-React/events/261043210/) , I live-coded a conversion from a class-based app to one using [hooks](https://reactjs.org/docs/hooks-intro.html). I have published [the code from the talk on GitHub](https://github.com/danieltott/practicalHooksTalk) .
+
+This repo has branches containing each step along the way, from the [basic class-based app](https://github.com/danieltott/practicalHooksTalk/tree/00-base) to the [completed thing](https://github.com/danieltott/practicalHooksTalk/tree/06-Bonus-UserFilterContext) .
+
+I created Pull Requests detailing each step, to make it easy to see diffs along the way. Each pull request has notes on the specific steps taken:
+
+- [Step 1 - Convert Filter component](https://github.com/danieltott/practicalHooksTalk/pull/5)
+- [Step 2 - Convert SelectUsers component](https://github.com/danieltott/practicalHooksTalk/pull/6)
+- [Step 3 - Create useLoad custom hook and integrate into App component](https://github.com/danieltott/practicalHooksTalk/pull/7)
+- [Step 4 - Convert Todos component](https://github.com/danieltott/practicalHooksTalk/pull/8)
+- [Bonus Step 5 - Move api client into Context](https://github.com/danieltott/practicalHooksTalk/pull/9)
+- [Bonus Step 6 - Create a UserFilter Context and Custom Hook](https://github.com/danieltott/practicalHooksTalk/pull/10)
+
+Feel free to leave comments or questions in issues or the PRs - would be happy to discuss anything!
+
+It was a pleasure to deliver this talk and kick off a new meetup. I definitely learned some things along the way - and perhaps some things I'd do differently were I to give this talk again. But, I think overall it was a success!
