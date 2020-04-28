@@ -24,7 +24,7 @@ const Post = ({ body, meta, tags, data, comments }) => {
             under <InlineTagList tags={tags} /> Thanks for reading.
           </p>
         </footer>
-        {comments && (
+        {comments && comments.length > 0 && (
           <aside className="post-comments">
             <h3>
               {comments.length} comment
