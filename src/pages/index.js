@@ -54,6 +54,11 @@ const IndexPage = (props) => {
             <a href="http://codepen.io/danieltott">CodePen</a> or, occasionally,
             on <a href="http://www.flickr.com/photos/dtott/">Flickr</a>.
           </p>
+          <p>
+            I also co-founded the{' '}
+            <a href="https://clereact.dev/">Cleveland React Meetup Group</a> in
+            2019.
+          </p>
         </div>
       </section>
       <section className="page-section work">
