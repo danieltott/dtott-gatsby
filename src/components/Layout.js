@@ -59,7 +59,7 @@ const Layout = ({ children, section = 'home' }) => {
           </fieldset>
         </form>
         <div role="contentinfo" className="page-section-wrap">
-          <a href="/thoughts/feed">RSS</a>
+          <a href="/thoughts/feed.rss">RSS</a>
           {' • '}
           <a href="http://twitter.com/danieltott">Twitter</a>
           {' • '}

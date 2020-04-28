@@ -6,3 +6,7 @@
   from = "/search"
   to = "https://duckduckgo.com/?q=:term+site%3Adtott.com"
   query = {term = ":term"}
+
+[[redirects]]
+  from = "/thoughts/feed"
+  to = "/thoughts/feed.rss"
