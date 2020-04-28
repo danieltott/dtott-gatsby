@@ -11,7 +11,7 @@ export const summary = (
   </>
 )
 
-export const tags = ['gatsby', 'javascript', 'graphql']
+export const tags = ['netlify', 'search']
 
 export const meta = {
   title:
@@ -55,7 +55,7 @@ Once that's in place, there are two methods for adding a redirect on Netlify. Fr
 This solution will work with either method. Here's what it will look like in `_redirects`:
 
 ```_redirects
-/search term=:term https://duckduckgo.com/?q=:term+site:dtott.com
+/search term=:term https://duckduckgo.com/?q=:term+site:dtott.com # replace dtott.com with your site url
 ```
 
 And here's what it will look like in your `netlify.toml` file:
@@ -63,8 +63,10 @@ And here's what it will look like in your `netlify.toml` file:
 ```toml
 [[redirects]]
   from = "/search"
-  to = "https://duckduckgo.com/?q=:term+site:dtott.com" #replace dtott.com with your site url
+  to = "https://duckduckgo.com/?q=:term+site:dtott.com" # replace dtott.com with your site url
   query = {term = ":term"}
 ```
 
-Just be sure to replace `dtott.com` with your site url, and make sure the query parameter name matches the form (`term` in this case). And that's it! You can see this working below
+Just be sure to replace `dtott.com` with your site url, and make sure the query parameter name matches the form (`term` in this case).
+
+And that's it! You can see this working on [my site search below](#sitesearch)!
