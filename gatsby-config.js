@@ -9,6 +9,7 @@ module.exports = {
     title: 'Front-End Design and Development ~  Daniel T. Ott',
     description: `Dan Ott's portfolio, information, and thoughts on HTML, CSS, Javascript, and the web development industry in general.`,
     siteUrl: `https://www.dtott.com`,
+    year: moment().format('Y'),
   },
   plugins: [
     'gatsby-plugin-react-helmet',
