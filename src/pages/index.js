@@ -1,5 +1,5 @@
 import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql, useStaticQuery, Link } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import Layout from '../components/Layout'
 
@@ -22,7 +22,7 @@ export const query = graphql`
 const IndexPage = (props) => {
   const data = useStaticQuery(graphql`
     query {
-      allMdx(sort: { fields: exports___meta___date, order: DESC }) {
+      allMdx(limit: 5, sort: { fields: exports___meta___date, order: DESC }) {
         edges {
           node {
             ...blogListing
@@ -82,7 +82,7 @@ const IndexPage = (props) => {
       </section>
       <section className="page-section thoughts" id="thoughts">
         <h2 className="section-title">
-          <span className="page-section-wrap">Thoughts</span>
+          <span className="page-section-wrap">Some Recent Thoughts:</span>
         </h2>
         <div className="page-section-wrap">
           {data.allMdx.edges.map(({ node }) => {
@@ -92,6 +92,11 @@ const IndexPage = (props) => {
               </MDXRenderer>
             )
           })}
+          <div>
+            <Link to="/thoughts">
+              View Archive <span aria-hidden="true">📚</span>
+            </Link>
+          </div>
         </div>
       </section>
     </Layout>

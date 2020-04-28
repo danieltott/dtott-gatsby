@@ -216,8 +216,7 @@ h2,
   font-size: 20px;
   font-size: 0.2rem;
   font-weight: 500;
-  line-height: 24px;
-  line-height: 0.24rem;
+  line-height: 1.2;
 }
 h2 a,
 .home h3 a,
@@ -334,6 +333,23 @@ header[role='banner'] .banner-tagline {
 .timestamp {
   font-size: 0.7em;
   font-style: italic;
+}
+.post-summary-details {
+  padding: 0.5em 0;
+}
+.post-summary-tags {
+  font-size: 0.7em;
+  font-style: italic;
+}
+@media only screen and (min-width: 500px) {
+  .post-summary-details {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .post-summary-tags {
+    text-align: right;
+  }
 }
 .dan {
   width: 30%;

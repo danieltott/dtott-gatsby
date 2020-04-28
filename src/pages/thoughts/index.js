@@ -21,7 +21,7 @@ const IndexPage = () => {
     <Layout section="home">
       <Helmet title="Thoughts" />
       <h1 className="section-title">
-        <span className="page-section-wrap">Thoughts</span>
+        <span className="page-section-wrap">Thoughts - Full Archive</span>
       </h1>
       <section className="page-section thoughts">
         <div className="page-section-wrap">

@@ -1,5 +1,5 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import Helmet from 'react-helmet'
 import Layout from './Layout'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -18,6 +18,9 @@ export default function PageTemplate({ data, pageContext: { tag } }) {
       </h1>
       <section className="page-section thoughts">
         <div className="page-section-wrap">
+          <p>
+            <Link to="/tags">View all Tags</Link>
+          </p>
           {data.allMdx.edges.map(({ node }) => {
             return (
               <MDXRenderer key={node.id} data={node}>

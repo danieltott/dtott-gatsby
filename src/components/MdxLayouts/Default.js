@@ -3,6 +3,7 @@ import { usePostIsFull } from '../ThoughtsEntry2'
 // import { DiscussionEmbed } from 'disqus-react'
 import Timestamp from '../Timestamp'
 import { Link } from 'gatsby'
+import InlineTagList from '../InlineTagList'
 
 const Post = ({ body, meta, tags, data, comments }) => {
   return (
@@ -20,18 +21,7 @@ const Post = ({ body, meta, tags, data, comments }) => {
           <p>
             {'That was '}
             <a href={`/${meta.slug}`}>{meta.title}</a>, by Dan Ott. It is filed
-            under{' '}
-            {tags.map((tag, i, tags) => {
-              const last = i === tags.length - 1
-              return (
-                <React.Fragment key={tag}>
-                  {last && tags.length > 1 && ' and '}
-                  <Link to={`/tags/${tag}`}>{tag}</Link>
-                  {last ? '.' : ', '}
-                </React.Fragment>
-              )
-            })}{' '}
-            Thanks for reading.
+            under <InlineTagList tags={tags} /> Thanks for reading.
           </p>
         </footer>
         {comments && (
@@ -57,16 +47,21 @@ const Post = ({ body, meta, tags, data, comments }) => {
   )
 }
 
-const ListItem = ({ meta, summary, data }) => {
+const ListItem = ({ meta, summary, data, tags }) => {
   return (
     <article className="post">
       <h3 className="post-title">
         <Link to={`/${meta.slug}`}>{meta.title}</Link>
       </h3>
-      <Timestamp
-        relativeDate={data.exports.meta.relativeDate}
-        isoDate={data.exports.meta.isoDate}
-      />
+      <div className="post-summary-details">
+        <Timestamp
+          relativeDate={data.exports.meta.relativeDate}
+          isoDate={data.exports.meta.isoDate}
+        />
+        <div className="post-summary-tags">
+          filed under <InlineTagList tags={tags} />
+        </div>
+      </div>
       {summary}
     </article>
   )
@@ -83,6 +78,6 @@ export default ({ summary, children, meta, tags, data, comments }) => {
       comments={comments}
     />
   ) : (
-    <ListItem summary={summary} meta={meta} data={data} />
+    <ListItem summary={summary} meta={meta} data={data} tags={tags} />
   )
 }
