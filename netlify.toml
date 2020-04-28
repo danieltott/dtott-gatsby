@@ -1,3 +1,8 @@
 [[redirects]]
   from = "/thoughts/styling-react-components-talk"
   to = "/thoughts/2020/02/12/styling-react-components-talk"
+
+[[redirects]]
+  from = "/search"
+  to = "https://duckduckgo.com/?q=:term+site%3Adtott.com"
+  query = {term = ":term"}

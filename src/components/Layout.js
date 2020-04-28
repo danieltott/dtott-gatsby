@@ -20,7 +20,6 @@ const Layout = ({ children, section = 'home' }) => (
         }
       `}
       render={(data) => {
-        const searchTextInput = React.createRef()
         return (
           <>
             <Helmet
@@ -51,22 +50,16 @@ const Layout = ({ children, section = 'home' }) => (
             </div>
             <footer className="global-footer page-section">
               <form
-                action="/thoughts/search"
+                action="/search"
                 className="site-search page-section"
                 method="get"
-                onSubmit={(e) => {
-                  e.preventDefault()
-                  navigate(
-                    `/thoughts/search?q=${searchTextInput.current.value}`
-                  )
-                }}
               >
                 <fieldset className="page-section-wrap">
                   <input
                     type="text"
-                    name="q"
-                    ref={searchTextInput}
-                    placeholder="Search posts..."
+                    name="term"
+                    placeholder="Search site..."
+                    aria-label="Search site"
                   />
                   <button type="submit">Go</button>
                 </fieldset>
