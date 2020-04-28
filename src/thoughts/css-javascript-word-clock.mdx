@@ -1,0 +1,188 @@
+import PageLayout from '../components/MdxLayouts/Default'
+
+export default PageLayout
+
+export const summary = (
+  <>
+    <p>
+      A little Friday-fun experiment I built&#58; a word clock using CSS3
+      transforms and a little Javascript to run the actual clock. Useful? Maybe
+      not. Fun? Definitely.
+    </p>
+  </>
+)
+
+export const tags = ['css', 'html', 'javascript']
+
+export const meta = {
+  title: 'CSS/Javascript Word Clock',
+  slug: 'thoughts/2010/02/26/css-javascript-word-clock',
+  date: '2010-02-26 11:09:00',
+  dateUpdated: '2020-04-09 09:02:13',
+  desc: '',
+}
+
+<img src="/images/uploads/clock2.png" class="insetRight" alt="CSS Clock" />
+
+A little experiment I built: [a word clock](http://danieltott.github.io/CSS3-clock/) using CSS3 transforms and a little Javascript to run the actual clock. Useful? Maybe not. Fun? Definitely.
+
+The code behind it is fairly straight-forward. Let's take a peak:
+
+## CSS
+
+The first thing we need to do is set a base set of styles for each arm of the clock.
+
+```css
+li {
+  position: absolute;
+  width: 150px;
+  text-transform: lowercase;
+  -webkit-transform-origin: 0 center;
+  -moz-transform-origin: 0 center;
+  color: rgba(255, 255, 255, 0.1);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+```
+
+This is basically saying for each arm, position it at the top of the clock body, and then rotate around left side, so that we have uniform rotations.
+
+Then, for each arm, we set the actual rotation. Here is the HTML for the "hour" arms:
+
+```html
+<ol id="hours">
+  <li><span>One</span></li>
+  <li><span>Two</span></li>
+  <li><span>Three</span></li>
+  <li><span>Four</span></li>
+  <li><span>Five</span></li>
+  <li><span>Six</span></li>
+  <li><span>Seven</span></li>
+  <li><span>Eight</span></li>
+  <li><span>Nine</span></li>
+  <li><span>Ten</span></li>
+  <li><span>Eleven</span></li>
+  <li><span>Twelve</span></li>
+</ol>
+```
+
+And, the corresponding CSS:
+
+```css
+#hours > li {
+  padding: 0 0 0 80px;
+}
+#hours > li:nth-child(1) {
+  -webkit-transform: rotate(-60deg);
+  -moz-transform: rotate(-60deg);
+}
+#hours > li:nth-child(2) {
+  -webkit-transform: rotate(-30deg);
+  -moz-transform: rotate(-30deg);
+}
+#hours > li:nth-child(3) {
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+}
+#hours > li:nth-child(4) {
+  -webkit-transform: rotate(30deg);
+  -moz-transform: rotate(30deg);
+}
+#hours > li:nth-child(5) {
+  -webkit-transform: rotate(60deg);
+  -moz-transform: rotate(60deg);
+}
+#hours > li:nth-child(6) {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+}
+#hours > li:nth-child(7) {
+  -webkit-transform: rotate(120deg);
+  -moz-transform: rotate(120deg);
+}
+#hours > li:nth-child(8) {
+  -webkit-transform: rotate(150deg);
+  -moz-transform: rotate(150deg);
+}
+#hours > li:nth-child(9) {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+}
+#hours > li:nth-child(10) {
+  -webkit-transform: rotate(210deg);
+  -moz-transform: rotate(210deg);
+}
+#hours > li:nth-child(11) {
+  -webkit-transform: rotate(240deg);
+  -moz-transform: rotate(240deg);
+}
+#hours > li:nth-child(12) {
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+}
+```
+
+The first line sets the padding, so that each hour arm begins 80px from the center. The rest set up the individual rotations for each arm, at 30 degrees each. The minute and second hands have more padding, and rotate 6 degrees for each arm. The rest of the CSS in the file is used to style the clock, and to show/hide the extra text.
+
+## Javascript
+
+All we need to do for the javascript is create a function that sets class="active" on each arm of the current time. So, at 12:45 and 20 seconds, the 12 hour arm, the 45 minute arm, and the 20 second arm have class="active", and the rest are normal. Then we simply set an interval to run every second.
+
+```javascript
+$(function () {
+  var hours = $('#hours'),
+    minutes = $('#minutes'),
+    seconds = $('#seconds')
+
+  //these are default grabs so that the first time it runs, it doesn't throw an error
+  //after that, we use them to cache the current active arm for each group, so that we
+  //don't have to waste time searching
+  var cHour = $('html'),
+    cMinute = $('html'),
+    cSecond = $('html')
+
+  var setCurrentTime = function () {
+    //establish what the time is
+    var currentTime = new Date()
+    var hour = currentTime.getHours() - 1
+    if (hour == -1) {
+      hour = 11
+    }
+    var minute = currentTime.getMinutes() - 1
+    if (minute == -1) {
+      minute = 59
+    }
+    var second = currentTime.getSeconds() - 1
+    if (second == -1) {
+      second = 59
+    }
+    var ampm = 'am'
+    if (hour > 11) {
+      ampm = 'pm'
+      hour = hour - 12
+    }
+    if (hour == 11) {
+      ampm = 'pm'
+    }
+
+    //remove the active class, and add it to the new time
+    cHour.removeClass('active')
+    cHour = hours.children(':eq(' + hour + ')').addClass('active')
+
+    cMinute.removeClass('active')
+    cMinute = minutes.children(':eq(' + minute + ')').addClass('active')
+
+    cSecond.removeClass('active')
+    cSecond = seconds.children(':eq(' + second + ')').addClass('active')
+
+    $('body').removeClass('am').removeClass('pm').addClass(ampm)
+  }
+  //set the interval to run each second
+  setInterval(setCurrentTime, 1000)
+})
+```
+
+It's a fun little experiment that doesn't have any real value on it's own, but it's a good exercise and as good of an excuse as any to play around with CSS transforms.
+
+The full CSS file can be found [here](http://danieltott.github.io/CSS3-clock/clock.css), and the javascript can be found [here](http://danieltott.github.io/CSS3-clock/clock.js)

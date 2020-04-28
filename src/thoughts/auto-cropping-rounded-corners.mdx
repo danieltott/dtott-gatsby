@@ -1,0 +1,172 @@
+import PageLayout from '../components/MdxLayouts/Default'
+
+export default PageLayout
+
+export const summary = (
+  <>
+    <p>
+      I know, I know. What this world really needs is a new rounded corners
+      solution. With CSS3 support right around the corner (ha, right), why
+      bother, right? Well, this solution offers something new to the world of
+      rounded corners. What it does is this&#58; it crops the content below it,
+      so that anything with a background color or image (headers, paragraphs,
+      even images) automatically get the rounded corner treatment with no extra
+      work. See below&#58;
+    </p>
+  </>
+)
+
+export const tags = ['front end', 'em', 'pixel', 'css']
+
+export const meta = {
+  title: 'Auto-Cropping Rounded Corners',
+  slug: 'thoughts/2008/03/17/auto-cropping-rounded-corners',
+  date: '2008-03-17 00:00:00',
+  dateUpdated: '2020-04-09 09:02:12',
+  desc: '',
+}
+
+I know, I know. What this world really needs is a new rounded corners solution. With CSS3 support right around the corner (ha, right), why bother, right?
+
+Well, this solution offers something new to the world of rounded corners. What it does is this: it crops the content below it, so that anything with a background color or image (headers, paragraphs, even images) automatically get the rounded corner treatment with no extra work. See below:
+
+<p>
+  <img
+    src="/examples/croppingcorners/images/screenshot.jpg"
+    alt="Screenshot of cropping corners"
+    style="width:49em;"
+  />
+</p>
+
+In this screenshot, the image is a normal, rectangular image. Nothing was done to it, except inserting it inside one of my rounded corners containers. It's easy enough that you can even have your clients do it in their <abbr title="Content Management System">CMS</abbr>s without the headache of trying to teach them to use the Rounded Rectangle Tool in Photoshop.
+
+This technique solves a very specific issue. There are plenty of ways to render rounded corners that involve less markup, simpler CSS, and less time in photoshop, but none of them (that I am aware of) crop the content below it.
+
+You can view the solution at work [here](http://dtott.com/examples/croppingcorners/index.html 'Cropping Corners Example') , and I'll try to take you through how it works.
+
+### First, The Images
+
+So this part isn't too hard, as long as you can navigate your way around photoshop. Just as a note, it's definitely possible that there are better ways to go about this part in photoshop. If there are, don't hesitate to drop a line in the comments.
+
+First things first: go and download the [Super PNG](http://www.fnordware.com/superpng/ 'Super PNG') plug-in for photoshop. What this plug-in does is strips out the color information that photoshop usually saves with PNGs, which will help you avoid that little difference you can see between browsers. See [here](http://hsivonen.iki.fi/png-gamma/ 'The Sad Story of PNG Gamma Correction') for a more detailed explanation, but this is important.
+
+Once you've got Super PNG running, use the aforementioned Rounded Rectangle Tool to create a rounded rectangle with your desired radius and give it the background color of your container. Edit the layer style to give it a stroke of whatever width you'd like, then rastersize it. Then, decide how much padding you want to be cropped inside your container (I used 2 pixels in the screenshot above). Duplicate your rectangle, and shrink it to fit inside of your desired padding. CMD/CTRL+click on the layer thumbnail to load the selection on the smaller rectangle, then select the larger rectangle and hit delete. You can now throw out the smaller rectangle.
+
+Once this is done, you should have the outline of a container. Now, zoom in to one of the corners, and, using the marque tool, select a square that is just big enough to contain the corner. Copy it, open a new document, and paste it in. Throw out the background, if there is one, and you should have a corner that looks something like this:
+
+<p>
+  <img
+    src="/examples/croppingcorners/images/borderscreenshot.jpg"
+    title="The top-left border at %1200"
+  />
+</p>
+
+Once you've got this, simply save it, then rotate it and save it three more times so that you end up with each corner.
+
+### Second, The HTML
+
+Now that that annoying photoshop work is done, I'm going to start referring you to an actual example, located here. Here's the HTML for one box:
+
+```html
+<div class="b_greyWhiteStroke">
+  <div class="TL"></div>
+  <div class="BL"></div>
+  <div class="TR"></div>
+  <div class="BR"></div>
+  <div class="b_innerContainer">
+    <h2>This Is A Block</h2>
+    <p>Lorem ipsum dolor sit amet...</p>
+  </div>
+</div>
+```
+
+This is fairly simple. There's a div for the outer container, a `div` for the inner container, and a `div` for each border. All of your content will go inside `.b_innerContainer`, and the corners of this content will automatically be cropped.
+
+### Third, The CSS
+
+The CSS for this solution is a little more complicated, but nothing too bad. The basic idea is that you give the border `div`s `position:absolute`, place them in the corners, and let them sit on top of everything else, thus cropping it:
+
+```css
+.b_greyWhiteStroke {
+  position: relative;
+  border-color: #dce3e7;
+}
+
+.TL,
+.BL,
+.TR,
+.BR {
+  width: 6px;
+  height: 6px;
+  position: absolute;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  z-index: 9999 !important;
+}
+
+.TL {
+  top: 0;
+  left: 0;
+}
+.BL {
+  bottom: 0;
+  left: 0;
+}
+.TR {
+  top: 0;
+  right: 0;
+}
+.BR {
+  bottom: 0;
+  right: 0;
+}
+
+.b_greyWhiteStroke .TL {
+  background-image: url(images/grey_whitestroke_tl.png);
+}
+.b_greyWhiteStroke .BL {
+  background-image: url(images/grey_whitestroke_bl.png);
+}
+.b_greyWhiteStroke .TR {
+  background-image: url(images/grey_whitestroke_tr.png);
+}
+.b_greyWhiteStroke .BR {
+  background-image: url(images/grey_whitestroke_br.png);
+}
+
+.b_innerContainer {
+  border-width: 1px;
+  border-style: solid;
+  padding: 2px 2px 8px;
+}
+
+.b_greyWhiteStroke .b_innerContainer {
+  border-color: #dce3e7;
+}
+```
+
+See, that's not too bad, is it? A couple notes here. First, I've separated `.TR` from `.b_greyWhiteStroke .TR`. This is so that I can have multiple background-color schemes going with only minor additions to the CSS. So, if i wanted to create, say, and alert box with a yellow border, I wouldn't have to rewrite all the existing CSS, I'd just have to make some additions.
+
+### What about <abbr title="Internet Explorer 6">ie6</abbr>?
+
+IE6, as always, was the big headache here. However, by hacking up [Angus Turnbull](http://www.twinhelix.com)'s [IE PNG Fix](http://www.twinhelix.com/css/iepngfix/) with a couple of my own modifications, I managed to get it to work. The problem, aside from <abbr title="Internet Explorer 6">ie6</abbr>'s refusal to run transparent PNGs, was that the border block wouldn't always line up with the edge of the container. I assume it's some sort of rounding error, but I'm not positive about that. Anyway, the PNG Fix now fixes the transparency, and checks to make sure the borders are where they should be. The only problem here is that this solution doesn't work in <abbr title="Internet Explorer 6">ie6</abbr> when you use a fluid width. Or, more correctly, it will correct itself when the page loads, but there is a possibility of the borders moving a pixel out of place if user starts manually changing the width of the window. Check out [the example page](http://dtott.com/examples/croppingcorners/index.html 'Cropping Corners Example') in <abbr title="Internet Explorer 6">ie6</abbr> to see what i mean. Here is the code to include this fix:
+
+```html
+<!--[if lte IE 6]>
+  <style type="text/css">
+    .TL,
+    .BL,
+    .TR,
+    .BR {
+      overflow: hidden;
+      behavior: url('ie6fixborders.htc');
+    }
+  </style>
+<![endif]-->
+```
+
+### The End
+
+So, there you have it. You can download the entire example [here](/examples/croppingcorners/croppingCorners.zip 'Cropping Corners .zip file') . This solution, for sure, is not the best for all situations. There are tons of smaller and easier solutions out there, and you should use them unless you have this specific need. However, if you do decide you need something like this, I think you'll find it to your liking.
+
+As always, I'm more than open for comments and suggestions for improvement. Hopefully you'll find this solution useful sometime in the future.

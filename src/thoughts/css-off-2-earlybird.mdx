@@ -1,0 +1,75 @@
+import PageLayout from '../components/MdxLayouts/Default'
+
+export default PageLayout
+
+export const summary = (
+  <>
+    <p>
+      <a href="http&#58;//cssoff.com/2007/07/16/earlybird-judging-is-underway/trackback/">
+        Judging is underway
+      </a>{' '}
+      for the latest CSSOFF contest, so, as promised, here's{' '}
+      <a
+        href="http&#58;//dtott.com/cssoff/earlybird/"
+        title="my earlybird entry"
+      >
+        my entry
+      </a>
+      , and here's the <a
+        href="http&#58;//dtott.com/thoughts/wp-content/uploads/earlybird.jpg"
+        title="Initial Earlybird File"
+      >
+        jpeg of the initial file
+      </a> we got. As I said before, I'm pretty happy with the results. Here are
+      my thoughts on this entry.
+    </p>
+  </>
+)
+
+export const tags = ['general']
+
+export const meta = {
+  title: 'CSS Off #2 - Earlybird',
+  slug: 'thoughts/2007/07/17/css-off-2-earlybird',
+  date: '2007-07-17 17:04:00',
+  dateUpdated: '2020-04-09 09:02:11',
+  desc: '',
+}
+
+[Judging is underway](http://cssoff.com/2007/07/16/earlybird-judging-is-underway/trackback/) for the latest CSSOFF contest, so, as promised, here's [my entry](http://dtott.com/cssoff/earlybird/ 'my earlybird entry') , and here's the [jpeg of the initial file](http://dtott.com/thoughts/wp-content/uploads/earlybird.jpg 'Initial Earlybird File') we got. As I said before, I'm pretty happy with the results. Here are my thoughts on this entry.
+
+### Initial Impressions
+
+The mock-up was definetely a lot prettier than last time around, which helps me enjoy what I'm doing. I could tell it was tailor-made for an elastic sort of layout, and there were some pesky curved borders, but overall it seemed not too bad.
+
+### Getting Started
+
+For this one, I actually went through and made all of the HTML before ever touching any stylesheets or image editors. It was a kind of fun way to go through, and it helped me organize my mind about how everything should be grouped. Note: If you viewed source, you might see that I left almost none of the links blank. They all have hrefs like "/search?search_type=region&q=Earthworm" and so on. Why do I do this? I don't really know. I guess it helps me think the relationships between items through, and to group certain items certain ways, but I'm not really sure if it has any effect. It might simply be a little more geeky OCD.
+
+### The Layout
+
+Getting the layout running was pretty easy. I used the technique involving negative margins for the sidebar, which gave the content a fluid width and the sidebar a fixed width. I also used a percentage for the space between the content and the sidebar, which I thought added a nice dimension when resizing the window.
+
+### The Main Content
+
+This page is supposed to represent search results, so it was pretty easy to style most of the content. It's all supposed to look the same, anyway (except for the "related" result). Nothing incredibly exciting here.
+
+### The Search Navigation
+
+The search nav is the rounded box at the top of the search results. There are, of course, billions of different ways to render rounded corners; I chose a fixed height, fluid width option. I'm not sure, in retrospect, why i didn't go for a fully elastic model for text resizing, but that's ok. I again used negative margins to fix those end-caps on the end.
+
+This was also one of a couple of spots (the other is in the sidebar) where they had form controls (the "Group Related Worms" checkbox) with no visible submit button. Since it's a huge accessability no-no to not have a submit button, I included one and hid it with Javascript when the page loaded. I figured that in the real world, this form control would alter the results through AJAX, so using Javascript to hide the submit button works well.
+
+### The Sidebar
+
+The sidebar was not really anything tough. The only real pain in the butt was the first list of choices; the answers for "How Early..." It wasn't a huge deal to float the list items (however, I think it was a silly choice and not very wise; what happens when you want to add another choice? It either looks bad, or you have to restyle it) but ie was giving me problems for a while. I ended up discovering that ie's default font size is larger than firefox's, so I added a conditional comment to reduce the default font size in ie.
+
+### The Search Form
+
+The search form was the most interesting part of this assignment. Initially, I thought it was weird, since it's so hard to style form controls consistently in different browsers, but I figured it was doable. Then I noticed that the layer in the photoshop was titled "Search Box with Glow on Focus." Uh oh. That meant it had to look normal, and then start glowing when it recieved focus. And _that_ means more Javascript.
+
+I managed to make it look terrific in every browser except....Safari. Safari is notorious for it's habit of refusing to give up form styles to anyone. I could have served a different set of styles to Safari, but by this point it was getting late, so I decided that one browser incorrect would be an acceptable compromise.
+
+### In Conclusion
+
+So, it was a very fun project, and I'm looking forward to the next contest. CSSOff only got 24 entries this time around (down more than 50% from last time), so hopefully there will be more next time. Also, hopefully that means we get results sooner. Either way I expect it to be more than a week until we hear word; in the meantime, what do you guys think?

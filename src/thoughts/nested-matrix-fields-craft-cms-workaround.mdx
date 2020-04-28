@@ -1,0 +1,117 @@
+import PageLayout from '../components/MdxLayouts/Default'
+
+export default PageLayout
+
+export const summary = (
+  <>
+    <p>
+      <a href="http://braddielman.com/">A friend</a> came to me wondering about
+      how to pull off a nested Matrix situation in Craft CMS. What he wanted was
+      to be able to use a Matrix field within another Matrix field, which is not
+      possible at the moment. However, while talking about it with him, I came
+      up with something that will work at least for his use-case.{' '}
+    </p>
+  </>
+)
+
+export const tags = ['craftcms']
+
+export const meta = {
+  title: 'A Workaround for Nested Matrix fields in Craft CMS',
+  slug: 'thoughts/2016/06/30/nested-matrix-fields-craft-cms-workaround',
+  date: '2016-06-30 16:40:00',
+  dateUpdated: '2020-04-09 09:02:14',
+  desc: '',
+}
+
+[A friend](http://braddielman.com/) came to me wondering about how to pull off a nested Matrix situation in Craft CMS. What he wanted was to be able to use a Matrix field within another Matrix field, which is not possible at the moment. However, while talking about it with him, I came up with something that will work at least for his use-case.
+
+What his client was looking for: a Matrix field where a user can add blocks of content, like Text Block, Image, Call to Action, etc. One of the block types was to be a collection of tiles, each tile having various fields like image, title, and description. My first thought here was to make a Tiles Section, and then use an Entries field type in the Matrix block. There are a couple problems with this solution though. It's a little confusing for users, and it also requires you to create many different entries if you are going to do things like use the same image with multiple different tiles. If you want each page to have custom tiles, then we're going to have to find something better.
+
+### Here's what I came up with:
+
+Instead of creating a Tile Group matrix block type, we can create just a Tile. So the options for adding a matrix block would be Text Block, Image, Call to Action, and Tile. The user would then add a group of consecutive Tiles, and then we can handle the rest on the template side. So when the user is done, the list of blocks would look like this:
+
+- Call to Action
+- Testimonial
+- Large Media Block
+- Tile
+- Tile
+- Tile
+- Tile
+- Tile
+- Video
+- Basic Content
+
+But the output would be something like this:
+
+- Call to Action Content Block
+- Testimonial
+- Large Media Block
+- Tiles Group
+- Video
+- Basic Content
+
+We can achieve this in a decent way without doing anything too tricky. The basic idea here is that while we're looping through the Matrix field, if we get to a Tile, then instead of outputting anything, we just start collecting the tiles in a variable. Then, once we reach either something that is not a Tile or the end of the loop, we output the group of tiles all together. That way we can wrap it in whatever html we need and things are nice and tidy.{' '}
+
+Here's what I'm thinking the template code would look like:
+
+```twig
+{% macro outputTiles(tileList) %}
+    {# use macro to keep it DRY #}
+    <div class="tiles">
+    {% for tile in tileList %}
+        <div class="tile">{{ tile.tileTitle }}</div>
+    {% endfor %}
+    </div>
+{% endmacro %}
+
+{% if entry.testMatrix is defined %}
+    {# start with empty array #}
+    {% set tileList = [] %}
+
+    {# loop through matrix blocks like normal #}
+
+    {% for block in entry.testMatrix %}
+
+        {% if block.type != "tile" and tileList|length %}
+            {# here's where we actually output the tile group #}
+            {{ _self.outputTiles(tileList) }}
+
+            {# once we've outputted the tiles, empty the list #}
+            {% set tileList = [] %}
+
+        {% endif %}
+
+        {# normal switch on block.type #}
+        {% switch block.type %}
+
+            {% case "textBlock" %}
+                <div class="textBlock">Text Block</div>
+
+            {% case "imageBlock" %}
+                <div class="imageBlock">Image Block</div>
+
+            {% case "callToAction" %}
+                <div class="callToAction">Call to Action</div>
+
+            {% case "tile" %}
+                {# instead of outputting anything, we save this tile to our list for later outputting #}
+                {% set tileList = tileList|merge([block]) %}
+
+        {% endswitch %}
+    {% endfor %}
+
+    {# once we've finished the loop, we output any tiles that were at the end of the loop #}
+    {% if tileList|length %}
+        {{ _self.outputTiles(tileList) }}
+        {% set tileList = [] %}
+    {% endif %}
+
+{% endif %}
+{# that's it! #}
+```
+
+The nice thing about this solution is that it is fairly easy for users to understand, and it retains the flexibility and ease-of-use that makes Matrix fields so handy in the first place.
+
+Hopefully this helps somebody out - I think it's a fairly elegant solution for this particular problem.
