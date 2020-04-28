@@ -1,0 +1,70 @@
+import PageLayout from '../components/MdxLayouts/Default'
+
+export default PageLayout
+
+export const summary = (
+  <>
+    <p>
+      A quick and easy way to provide a site search via DuckDuckGo (or Google if
+      you must) using Netlify redirects (and no javascript).
+    </p>
+  </>
+)
+
+export const tags = ['gatsby', 'javascript', 'graphql']
+
+export const meta = {
+  title:
+    'Add a DuckDuckGo or Google search form to your site using Netlify redirects',
+  slug: 'netlify-site-search',
+  date: '2020-04-28 04:06:00',
+  dateUpdated: '2020-04-28 04:06:00',
+  desc:
+    'A quick and easy way to provide a site search via DuckDuckGo (or Google if you must) using Netlify redirects (and no javascript).',
+}
+
+Having a site search can be handy for your users, but sort of a pain to get going, especially if you're using Gatsby or another JAMstack system.
+
+Chris Coyer's [first recommendation for site search](https://css-tricks.com/on-site-search/) is to use DuckDuckGo (or Google if you must), using the `site:yoursite.com` keyword. The only problem is that it requires a bit of javascript to insert the `site:` keyword to the user's search after they hit submit.
+
+If you're deploying to Netlify, you can accomplish this without adding any javascript by using [redirects with query parameters](https://docs.netlify.com/routing/redirects/redirect-options/#query-parameters). The idea is we create a form with a specific query parameter, and then set up a redirect that watches for that parameter and sends the user to DuckDuckGo with the correct `site:` keyword appended.
+
+Here's the html for the search form:
+
+```html
+<form action="/search" method="GET">
+  <fieldset>
+    <input type="text" name="term" aria-label="Search site" />
+    <button type="submit">Go</button>
+  </fieldset>
+</form>
+```
+
+Two important points here:
+
+- Notice that `method` is set to `GET` - it's important that the form is using `GET` as opposed to `POST` so that the redirect can see the query parameter.
+- We've set the `name` of the input to `term`. This can be anything, it just needs to be the same here as in the redirect rule below.
+
+Once that's in place, there are two methods for adding a redirect on Netlify. From the docs:
+
+> You can configure redirect and rewrite rules for your Netlify site in two ways:
+>
+> - Save a plain text file called `_redirects` to the [publish directory](/configure-builds/get-started/#basic-build-settings) of your site. You can find [`_redirects` file syntax](/routing/redirects/#syntax-for-the-redirects-file) details below.
+> - Add one or more `redirects` tables to your [Netlify configuration file](/configure-builds/file-based-configuration/#redirects). This method allows for more structured configuration and additional capabilities, as described in the [Netlify configuration file syntax](/routing/redirects/#syntax-for-the-netlify-configuration-file) section below.
+
+This solution will work with either method. Here's what it will look like in `_redirects`:
+
+```_redirects
+/search term=:term https://duckduckgo.com/?q=:term+site:dtott.com
+```
+
+And here's what it will look like in your `netlify.toml` file:
+
+```toml
+[[redirects]]
+  from = "/search"
+  to = "https://duckduckgo.com/?q=:term+site:dtott.com" #replace dtott.com with your site url
+  query = {term = ":term"}
+```
+
+Just be sure to replace `dtott.com` with your site url, and make sure the query parameter name matches the form (`term` in this case). And that's it! You can see this working below
