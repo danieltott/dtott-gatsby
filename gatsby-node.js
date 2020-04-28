@@ -27,6 +27,12 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
         }
+        allThreadsJson {
+          nodes {
+            link
+            _id
+          }
+        }
       }
     `).then((result) => {
       const tags = []
@@ -40,6 +46,12 @@ exports.createPages = ({ graphql, actions }) => {
           })
         }
 
+        const thread = result.data.allThreadsJson.nodes.find(
+          (thread) => thread.link === node.exports.meta.slug
+        )
+
+        console.log(thread)
+
         createPage({
           path: '/' + node.exports.meta.slug,
           component: node.exports.meta.component
@@ -47,6 +59,7 @@ exports.createPages = ({ graphql, actions }) => {
             : path.resolve(`./src/components/ThoughtsEntry2.js`),
           context: {
             slug: node.exports.meta.slug,
+            threadID: thread ? thread._id : null,
           },
         })
       })

@@ -117,6 +117,14 @@ module.exports = {
       },
     },
     `gatsby-plugin-netlify`,
+    `gatsby-transformer-json`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: 'json',
+        path: `${__dirname}/content/json`,
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {

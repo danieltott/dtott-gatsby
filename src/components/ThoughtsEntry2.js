@@ -21,7 +21,6 @@ export default function PageTemplate(props) {
       },
     },
   } = props
-
   return (
     <PostContext.Provider value={true}>
       <Layout section="thoughts">
@@ -34,15 +33,16 @@ export default function PageTemplate(props) {
           <span className="page-section-wrap">Thoughts</span>
         </h2>
 
-        <MDXRenderer data={props.data.mdx}>{body}</MDXRenderer>
+        <MDXRenderer data={props.data.mdx} comments={props.data.comments.nodes}>
+          {body}
+        </MDXRenderer>
       </Layout>
     </PostContext.Provider>
   )
 }
 export const pageQuery = graphql`
-  query BlogPostQuery($slug: String) {
+  query BlogPostQuery($slug: String, $threadID: String) {
     mdx(exports: { meta: { slug: { eq: $slug } } }) {
-      mdxAST
       exports {
         tags
         meta {
@@ -56,6 +56,21 @@ export const pageQuery = graphql`
       }
       body
       excerpt
+    }
+    comments: allCommentsJson(
+      filter: { thread: { _id: { eq: $threadID } } }
+      sort: { fields: createdAt, order: ASC }
+    ) {
+      nodes {
+        author {
+          name
+          username
+          isAnonymous
+        }
+        createdAt
+        relativeDate: createdAt(fromNow: true)
+        message
+      }
     }
   }
 `
