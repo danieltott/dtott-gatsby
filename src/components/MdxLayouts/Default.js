@@ -42,7 +42,7 @@ const Post = ({ body, meta, tags, data, comments }) => {
             </h3>
             <ol>
               {comments.map((comment) => (
-                <li>
+                <li key={comment.createdAt}>
                   <h4>
                     {comment.author.name} posted {comment.relativeDate}:
                   </h4>
