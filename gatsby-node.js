@@ -50,8 +50,6 @@ exports.createPages = ({ graphql, actions }) => {
           (thread) => thread.link === node.exports.meta.slug
         )
 
-        console.log(thread)
-
         createPage({
           path: '/' + node.exports.meta.slug,
           component: node.exports.meta.component
