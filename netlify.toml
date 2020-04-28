@@ -3,10 +3,23 @@
   to = "/thoughts/2020/02/12/styling-react-components-talk"
 
 [[redirects]]
+  from = "/thoughts/feed"
+  to = "/thoughts/feed.rss"
+
+[[redirects]]
   from = "/search"
   to = "https://duckduckgo.com/?q=:term+site%3Adtott.com"
   query = {term = ":term"}
 
 [[redirects]]
-  from = "/thoughts/feed"
-  to = "/thoughts/feed.rss"
+  from = "/search"
+  to = "/xsearch/:q"
+  query = {q = ":q"}
+
+[[redirects]]
+  from = "/xsearch/tags:*"
+  to = "/tags/:splat"
+
+[[redirects]]
+  from = "/xsearch/*"
+  to = "https://duckduckgo.com/?q=:splat+site%3Adtott.com"
