@@ -1,10 +1,11 @@
-[[redirects]]
-  from = "/thoughts/styling-react-components-talk"
-  to = "/thoughts/2020/02/12/styling-react-components-talk"
+# Fix up rss feed link
 
 [[redirects]]
   from = "/thoughts/feed"
   to = "/thoughts/feed.rss"
+
+
+# redirect search to duckduckgo
 
 [[redirects]]
   from = "/search"
@@ -27,3 +28,19 @@
 [[redirects]]
   from = "/xsearch/*"
   to = "https://duckduckgo.com/?q=:splat+site%3Adtott.com"
+
+
+# Fix up some whoopsies
+
+[[redirects]]
+  from = "/thoughts/styling-react-components-talk"
+  to = "/thoughts/2020/02/12/styling-react-components-talk"
+
+[[redirects]]
+  from = "/thoughts/2007/09/10/css-tips-1-use-a-reset"
+  to = "/thoughts/2007/09/10/css-tip-1-use-a-reset"
+
+
+# add gatsby cache build plugin
+[[plugins]]
+  package = "netlify-plugin-gatsby-cache"
