@@ -40,6 +40,10 @@
   from = "/thoughts/2007/09/10/css-tips-1-use-a-reset"
   to = "/thoughts/2007/09/10/css-tip-1-use-a-reset"
 
+[[redirects]]
+  from ="/index.php"
+  query = {p = ":p"}
+  to="/:p"
 
 # add gatsby cache build plugin
 [[plugins]]
