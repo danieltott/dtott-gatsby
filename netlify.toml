@@ -21,5 +21,9 @@
   to = "/tags/:splat"
 
 [[redirects]]
+  from = "/thoughts/search"
+  to = "/thoughts"
+
+[[redirects]]
   from = "/xsearch/*"
   to = "https://duckduckgo.com/?q=:splat+site%3Adtott.com"
