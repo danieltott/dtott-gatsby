@@ -49,6 +49,7 @@ export const pageQuery = graphql`
           title
           relativeDate: date(fromNow: true)
           isoDate: date(formatString: "YYYY-MM-DDTHH:mm:ssZ")
+          differenceInDays: date(difference: "days")
           date
           slug
           desc

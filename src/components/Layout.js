@@ -47,6 +47,7 @@ const Layout = ({ children, section = 'home' }) => {
           action="/search"
           className="site-search page-section"
           method="get"
+          id="sitesearch"
         >
           <fieldset className="page-section-wrap">
             <input
