@@ -1,7 +1,5 @@
 import fetch from 'isomorphic-fetch'
 import React from 'react'
-import { ApolloProvider } from 'react-apollo'
-import ApolloClient from 'apollo-boost'
 import { MDXProvider } from '@mdx-js/react'
 import Codepen from './CodepenEmbed'
 import Highlight, { defaultProps } from 'prism-react-renderer'
@@ -69,19 +67,6 @@ const shortcodes = {
 //   path: `.env.${process.env.GATSBY_NODE_ENV}`,
 // })
 
-const client = new ApolloClient({
-  fetch,
-  uri: process.env.GATSBY_DTOTT_API_URL,
-  headers: {
-    authorization: `bearer ${process.env.GATSBY_DTOTT_API_TOKEN}`,
-    'Content-type': 'application/json',
-  },
-})
-
 export const wrapRootElement = ({ element }) => {
-  return (
-    <MDXProvider components={shortcodes}>
-      <ApolloProvider client={client}>{element}</ApolloProvider>
-    </MDXProvider>
-  )
+  return <MDXProvider components={shortcodes}>{element}</MDXProvider>
 }
