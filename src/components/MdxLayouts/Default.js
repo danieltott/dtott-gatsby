@@ -13,6 +13,7 @@ const Post = ({ body, meta, tags, data, comments }) => {
         <Timestamp
           relativeDate={data.exports.meta.relativeDate}
           isoDate={data.exports.meta.isoDate}
+          differenceInDays={data.exports.meta.differenceInDays}
         />
       </header>
       <div className="page-section-wrap">
@@ -57,6 +58,7 @@ const ListItem = ({ meta, summary, data, tags }) => {
         <Timestamp
           relativeDate={data.exports.meta.relativeDate}
           isoDate={data.exports.meta.isoDate}
+          differenceInDays={data.exports.meta.differenceInDays}
         />
         <div className="post-summary-tags">
           filed under <InlineTagList tags={tags} />
