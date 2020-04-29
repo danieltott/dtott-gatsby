@@ -45,12 +45,12 @@ Two important points here:
 - Notice that `method` is set to `GET` - it's important that the form is using `GET` as opposed to `POST` so that the redirect can see the query parameter.
 - We've set the `name` of the input to `term`. This can be anything, it just needs to be the same here as in the redirect rule below.
 
-Once that's in place, there are two methods for adding a redirect on Netlify. From the docs:
+Once that's in place, there are two methods for adding a redirect on Netlify. From [the docs](https://docs.netlify.com/routing/redirects/):
 
 > You can configure redirect and rewrite rules for your Netlify site in two ways:
 >
-> - Save a plain text file called `_redirects` to the [publish directory](/configure-builds/get-started/#basic-build-settings) of your site. You can find [`_redirects` file syntax](/routing/redirects/#syntax-for-the-redirects-file) details below.
-> - Add one or more `redirects` tables to your [Netlify configuration file](/configure-builds/file-based-configuration/#redirects). This method allows for more structured configuration and additional capabilities, as described in the [Netlify configuration file syntax](/routing/redirects/#syntax-for-the-netlify-configuration-file) section below.
+> - Save a plain text file called `_redirects` to the [publish directory](https://docs.netlify.com/configure-builds/get-started/#basic-build-settings) of your site. You can find [`_redirects` file syntax](https://docs.netlify.com/routing/redirects/#syntax-for-the-redirects-file) details below.
+> - Add one or more `redirects` tables to your [Netlify configuration file](https://docs.netlify.com/configure-builds/file-based-configuration/#redirects). This method allows for more structured configuration and additional capabilities, as described in the [Netlify configuration file syntax](https://docs.netlify.com/routing/redirects/#syntax-for-the-netlify-configuration-file) section below.
 
 This solution will work with either method. Here's what it will look like in `_redirects`:
 
