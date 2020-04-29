@@ -123,5 +123,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-mdx`,
     },
+    {
+      resolve: `gatsby-plugin-styled-components`,
+    },
   ],
 }
