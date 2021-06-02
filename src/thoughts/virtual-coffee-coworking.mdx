@@ -1,0 +1,427 @@
+import PageLayout from '../components/MdxLayouts/Default'
+
+export default PageLayout
+
+export const summary = (
+  <>
+    <p>
+      In our Slack for Virtual Coffee, our members had started a practice of
+      Coworking over Zoom. Coworking is a way to share space with other people
+      while still getting work done, and I thought it was very cool. Members
+      would simply post a personal Zoom link saying something like "starting a
+      Coworking session if anyone wants to join." Eventually we made a Slack
+      channel specifically for this.
+    </p>
+    <p>
+      In chatting with our members, I realized we probably could do a couple
+      cool things to support this a bit better. It’d be nice to have an official
+      Virtual Coffee Coworking setup for Zoom, so I put one together using Zoom,
+      Slack, Airtable, and Netlify Functions. Here's how it's all set up.
+    </p>
+  </>
+)
+
+export const tags = [
+  'netlify',
+  'coworking',
+  'slack',
+  'netlify functions',
+  'zoom',
+]
+
+export const meta = {
+  title: 'How I built the Virtual Coffee Coworking Room',
+  slug: 'virtual-coffee-coworking',
+  date: '2021-06-02 08:00:00',
+  dateUpdated: '2021-06-02 08:00:00',
+  desc:
+    "Here's how the Virtual Coffee Coworking Room works, using Zoom, Slack, Airtable, and Netlify Functions",
+}
+
+In our Slack for Virtual Coffee, our members had started a practice of Coworking over Zoom. Coworking is a way to share space with other people while still getting work done, and I thought it was very cool. Members would simply post a personal Zoom link saying something like "starting a Coworking session if anyone wants to join." Eventually we made a Slack channel specifically for this.
+
+In chatting with our members, I realized we probably could do a couple cool things to support this a bit better. It’d be nice to have an official Virtual Coffee Coworking setup for Zoom, but initially it was unclear how to pull it off. Eventually, though, one of our members shared this article: [Setting Up a Zoom Room for Anytime Co-working](https://elizabethgoddard.co.uk/zoom-room-anytime-co-working/) by Elizabeth Goddard, which outlined an approach to take for the Zoom side of it, and after that everything sort of took off!
+
+Here’s a look at how the Virtual Coffee Coworking Room is set up:
+
+The first part of this is the setup of the Zoom meeting. We followed the same pattern as in the article. The article has all the details, but the important bits are:
+
+- Create a new licensed Zoom "user" just for the co-working room
+- Create a Recurring Meeting hosted by that user, with the "recurrence" field set to "No Fixed Time"
+- Allow anyone to join the meeting before the host
+
+The only major change I made from the settings listed in the blog post is turning on the "sound notification when someone joins or leaves" - our members requested that pretty much right away. In a room like this where people are working and not necessarily looking at the zoom window all the time, having an audible notice when people enter/leave is a nice feature.
+
+So what we have now is a link that anyone can go to, that will start a new instance of the meeting if none exists, or join an already ongoing meeting.
+
+This works great! But, there’s no way to tell when someone’s in the meeting or not without joining, so our next step was to post notices in Slack when the room opens/closes. And, while we’re at it, why not also let the Slack room know who’s in there currently?
+
+For this we need:
+
+- A Zoom App for event webhooks
+- A Slack App to send messages to Slack
+- Some kind of back end to handle both of these. We used Netlify Functions and Airtable
+
+## Zoom App
+
+Zoom has [several different types of Apps](https://marketplace.zoom.us/develop/create) you can create - for us all we needed is one that sends webhooks. Luckily, that’s one of the options!
+
+So to get started with this, create a Webhook Only app, fill out the basic info, then get in to the Features tab.
+
+Copy down the "verification token" - we’ll need this later.
+
+The [Zoom webhooks apps](https://marketplace.zoom.us/docs/api-reference/webhook-reference) are pretty cool - you can create individual subscriptions, each with their own events. For the Coworking room, I’m sending all events to one location, and I’ve subscribed to the following events:
+
+- [Start Meeting](https://marketplace.zoom.us/docs/api-reference/webhook-reference/meeting-events/meeting-started)
+- [End Meeting](https://marketplace.zoom.us/docs/api-reference/webhook-reference/meeting-events/meeting-ending)
+- [Participant/Host joined meeting](https://marketplace.zoom.us/docs/api-reference/webhook-reference/meeting-events/participant-joined-meeting)
+- [Participant/Host left meeting](https://marketplace.zoom.us/docs/api-reference/webhook-reference/meeting-events/participant-left)
+
+<img
+  src="/images/vc-coworking-zoom-settings.png"
+  alt="Screenshot of Zoom App settings"
+/>
+
+Note - once app is installed, it will fire this webhook for all meetings for all users on your account, not just the co-working room, so we’ll need to make sure we filter that later.
+
+Once this is configured and added to your Zoom account, Zoom will start sending notifications to the url you provide any time one of these events occur!
+
+## Slack App
+
+Next up is creating a Slack App. All our Slack App needs to do at the moment is post or update messages. So - go to [the Slack App dashboard](https://api.slack.com/apps) and hit "Create New App."
+
+You can start from scratch or use this manifest:
+
+```yaml
+_metadata:
+  major_version: 1
+  minor_version: 1
+display_information:
+  name: Co-Working Slack App
+  description: A bot for the Co-Working Room
+  background_color: '#ffffff'
+features:
+  bot_user:
+    display_name: Coworking Bot
+    always_online: true
+oauth_config:
+  scopes:
+    bot:
+      - chat:write.public
+      - chat:write
+settings:
+  interactivity:
+    is_enabled: true
+    request_url: https://yourbackend/slack-interactivity
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  is_hosted: false
+```
+
+It’s a pretty simple app at this point. Note the `interactivity` setting - you’ll see later how we use this, but literally all that endpoint does at this point is return a `200 OK` response.
+
+Install the app to your Slack workspace, and make note of the "Bot User OAuth Token"
+
+## The backend: Netlify Functions and Airtable
+
+So here’s our desired flow:
+
+- User A starts meeting
+- Zoom sends web hook for `meeting.started` (and also `meeting.participant_joined`)
+- Post a message in our slack Co-Working channel saying the room is open
+- In the thread for that message, post that User A has joined the meeting
+- Keep the thread updated as members enter/leave by posting "User B has entered," "User C has left" etc
+- When the last user leaves the meeting, that instance ends and zoom sends a `meeting.ended` event
+- Update the original message to say that the current session has ended
+
+Note - The fact that we’re threading the participant updates, as well as that we’re updating the original message, requires that we have some sort of database. If you wanted to put all of this straight in to a Slack channel, you could skip the Airtable portion of this altogether.
+
+So let’s translate those steps into what our Netlify functions are actually doing.
+
+### Netlify Functions
+
+I'm not going to dig too far into [Netlify Functions](https://www.netlify.com/products/functions/) in this article - but if you go with their default setup, you can create a file at `functions/my-coworking-function.js`. Once Netlify deploys it, you'll be able to reach it by going to `https://mysite.netlify.app/.netlify/functions/my-coworking-function`. This is the url you'll need to use for your Zoom App and your Slack App.
+
+Another _really cool thing_ Netlify offers is [Netlify Dev](https://www.netlify.com/products/dev/). What this does is set up your local environment to mirror Netlify's for a specific site. So once you link up your site locally to your Netlify site, you can run `netlify dev` and you'll have a local version of your site running. The _really cool_ part of this is [`netlify dev --live`](https://docs.netlify.com/cli/get-started/#share-a-live-development-server) - this allows you to create a local version of your production site that is accessible to the outside world. Why would you do this? Well, when developing your Zoom App or your Slack App, to test changes you'll have to make the change, commit it, push it up, wait for Netlify to build and deploy, and then run the action you're testing. If you use `netlify dev --live`, you can give your Zoom App the url provided by netlify, and Zoom will now be sending webhooks directly to your machine. This way you just need to hit save and try again when making changes. It was a massive time saver for this process.
+
+Moving on, there are a couple bits of information that we've written down in previous steps, and the best way to store this sort of stuff is through Environment Variables. Locally, you can create a `.env` file, or can you use Netlify's Environment Variables UI. If you're using `netlify dev`, Netlify will pull down any variables set in the UI, but if you've overwritten them via `.env` file, it will use those instead. Again, _really cool_.
+
+The environment variables we're using:
+
+```env
+# zoom app verification token
+ZOOM_WEBHOOK_AUTH='xxxxxx'
+
+# slack app Bot User OAuth Token
+SLACK_BOT_TOKEN='xxxxxx'
+
+# Channel ID to post to
+SLACK_COWORKING_CHANNEL_ID='xxxxxx'
+
+# Meeting ID for ongoing meeting
+ZOOM_COWORKING_MEETING_ID='xxxxxx'
+
+# If we're using Airtable
+AIRTABLE_API_KEY='xxxxxx'
+
+# ID for airtable base
+AIRTABLE_COWORKING_BASE='xxxxxx'
+```
+
+You can create [Netlify Functions](https://www.netlify.com/products/functions/) using Javascript, Typescript, or Go. We’re using Javascript for this. There’s a lot of cool stuff you can do, but honestly to start, it’s easiest for me to just think of Netlify Functions as simply a Javascript file that you can run at any time.
+
+The file can look like this to start:
+
+```js
+const handler = async function (event) {
+  // do cool stuff
+}
+
+module.exports = { handler }
+```
+
+That `event` object contains all of the information about the request that we’ll need.
+
+When we set up the Zoom webhook, we can point it to this file.
+
+The first thing we’ll want to do is verify it’s coming from our Zoom app. You can compare the Verification Token from the Zoom app to make sure it’s really our Zoom app and not some rando:
+
+```js
+if (event.headers.authorization !== process.env.ZOOM_WEBHOOK_AUTH) {
+  console.log('Unauthorized', event)
+  return {
+    statusCode: 401,
+    body: '',
+  }
+}
+```
+
+Zoom sends the verification code in the "authorization" header, so it’s easy to check.
+
+Then we can move on to handling the webhook!
+
+```js
+// parse the event body to get to the JSON
+const request = JSON.parse(event.body)
+```
+
+When zoom sends a webhook, it’s sending a JSON payload that generally looks like this:
+
+```json
+{
+  "event": "meeting.participant_left",
+  "event_ts": 1234566789900,
+  "payload": {
+    "account_id": "o8KK_AAACq6BBEyA70CA",
+    "object": {
+      "uuid": "czLF6FFFoQOKgAB99DlDb9g==",
+      "id": "111111111",
+      "probably-more": "params here"
+    }
+  }
+}
+```
+
+`payload.object.id` is the meeting ID, while `payload.object.uuid` is the instance ID. So the first thing we want to do is make sure the meeting ID matches our Coworking meeting ID. Remember, once this Zoom app is installed, _all meetings_ will fire off this webhook. Easy enough:
+
+```js
+if (request.payload.object.id === process.env.ZOOM_COWORKING_MEETING_ID) {
+  // we’re good to go
+}
+```
+
+Next, we can decide what to do based on the event type - I used a switch statement here:
+
+```js
+switch (request.event) {
+  case EVENT_PARTICIPANT_JOINED:
+  case EVENT_PARTICIPANT_LEFT:
+  case EVENT_MEETING_STARTED:
+  case EVENT_MEETING_ENDED:
+}
+```
+
+Let's run through the events:
+
+### Event Started:
+
+We get an event of type [`meeting.started`](https://marketplace.zoom.us/docs/api-reference/webhook-reference/meeting-events/meeting-started). We'll want to:
+
+- `web.chat.postMessage()` via the [Slack Web API](https://api.slack.com/web)
+- Save a record of that to Airtable
+
+Once nice thing we can do is take advantage of [Blocks](https://api.slack.com/block-kit) - a neat way to build more interactive messages. So instead of a plain-text message, we get something that looks more like this:
+
+<img
+  src="/images/vc-coworking-message.png"
+  alt="Screenshot of coworking message in Slack"
+/>
+
+This also allowed us to very easily put up a dialog to prevent accidental joining and to add some information:
+
+<img
+  src="/images/vc-coworking-dialog.png"
+  alt="Screenshot of coworking message in Slack"
+/>
+
+Here's the configuration we used:
+
+```json
+{
+  "blocks": [
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "A new Co-Working Session has Started!"
+      },
+      "accessory": {
+        "type": "button",
+        "text": {
+          "type": "plain_text",
+          "text": "Join Now!",
+          "emoji": true
+        },
+        "value": "join-meeting",
+        "url": "https://link-to-meeting",
+        "action_id": "button-action",
+        "style": "primary",
+        "confirm": {
+          "title": {
+            "type": "plain_text",
+            "text": "Heads up!"
+          },
+          "text": {
+            "type": "mrkdwn",
+            "text": "This is a Zoom link - following it will most likely open Zoom and add you to our Co-Working Room. \n\n Additionally, as always, our <https://virtualcoffee.io/code-of-conduct|Code of Conduct> is in effect. \n\n Just want to make sure we're all on the same page 😃"
+          },
+          "confirm": {
+            "type": "plain_text",
+            "text": "Let's go!"
+          },
+          "deny": {
+            "type": "plain_text",
+            "text": "Stop, I've changed my mind!"
+          }
+        }
+      }
+    }
+  ]
+}
+```
+
+The button accessory + confirm requires interactivity to be turned on…for some reason. If you don’t do this step, everything still works, but users will also see an error when they go back to Slack. It’s really annoying, but fortunately, the interactivity endpoint doesn’t have to actually do anything. Here’s our entire Slack Interactivity endpoint:
+
+```
+const handler = async function (event, context) {
+  return {
+    statusCode: 200,
+    body: '',
+  };
+};
+
+module.exports = { handler };
+
+```
+
+The [postMessage](https://api.slack.com/methods/chat.postMessage) function returns some information about the request, including the timestamp of the message. This is basically the "ID" for the message - it’s what we’ll use to post threaded messages, and to update the message when the meeting ends.
+
+```js
+return await web.chat.postMessage({
+  channel: process.env.SLACK_COWORKING_CHANNEL_ID,
+  text: 'A new Co-Working Session has Started!',
+  // blocks config from above
+  blocks,
+})
+```
+
+Next we create a record in Airtable using [Airtable.js](https://github.com/airtable/airtable.js/) with the Zoom meeting instance uuid and the slack message timestamp. We’re also noting the start_time, but we’re not actually using that at the moment.
+
+```js
+const created = await base('room_instances').create({
+  instance_uuid: request.payload.object.uuid,
+  slack_thread_timestamp: result.ts,
+  start_time: request.payload.object.start_time,
+})
+```
+
+### Participant Joined/Left
+
+[meeting.participant_joined](https://marketplace.zoom.us/docs/api-reference/webhook-reference/meeting-events/participant-joined-meeting) and [meeting.participant_left](https://marketplace.zoom.us/docs/api-reference/webhook-reference/meeting-events/participant-left) have almost the same exact behavior:
+
+- Find the Airtable record with the matching uuid
+- Use the Slack message timestamp to post messages to the thread.
+
+One issue here though: Zoom sends the Meeting Started and the Participant Joined events at the same time. Furthermore, the Meeting Started event contains no information about the user. So this is a race condition that we need to handle - the Participant Joined event will try to find that Airtable record, but it doesn’t exist yet because the Meeting Started action hasn’t finished. So - I solved this by basically adding in some "retry" behavior - if we didn’t find the matching Airtable record, pause for a second and retry. Do this a few times until we find it - if we haven’t found it after 5 tries, probably something weird happened.
+
+I’m sure this behavior can be improved, but it’s mostly working for now!
+
+```js
+// returns a roomInstance record, or undefined.
+// Will retry 5 times, pausing 1 second between tries.
+async function findRoomInstance(base, instanceId) {
+  async function tryFind() {
+    const resultArray = await base('room_instances')
+      .select({
+        // Selecting the first 1 records in Grid view:
+        maxRecords: 1,
+        view: 'Grid view',
+        filterByFormula: `instance_uuid='${instanceId}'`,
+      })
+      .firstPage()
+
+    return resultArray[0]
+  }
+
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms))
+  }
+
+  let roomInstance = await tryFind()
+  let count = 0
+  while (count < 5 && !roomInstance) {
+    console.log('trying again')
+    count++
+    await sleep(1000)
+    roomInstance = await tryFind()
+  }
+
+  if (!roomInstance) {
+    console.log(`room instance ${instanceId} not found`)
+  }
+
+  return roomInstance
+}
+```
+
+Once we have the Slack timestamp, we can use `web.chat.postMessage` again to update our attendance:
+
+```js
+const username = zoomRequest.payload.object.participant.user_name
+const result = await web.chat.postMessage({
+  thread_ts: roomInstance.get('slack_thread_timestamp'),
+  text:
+    zoomRequest.event === 'meeting.participant_joined'
+      ? `${username} has joined!`
+      : `${username} has left. We'll miss you!`,
+  channel: process.env.SLACK_COWORKING_CHANNEL_ID,
+})
+```
+
+### Meeting Ends
+
+When the last participant leaves, that instance of the meeting ends and Zoom sends us a [`meeting.ended`](https://marketplace.zoom.us/docs/api-reference/webhook-reference/meeting-events/meeting-ending) event, so we update the Slack message to let everyone know nobody is in the meeting currently.
+
+To update a message, we need to find the Airtable record again, and then we can use `web.chat.update` to update the body of the message with some new text. This update has the same blocks as above, but with a message like "The current Co-Working Session has ended."
+
+## That's It! 😅
+
+There are certainly a few moving pieces here, but it was pretty fun to build.
+
+I've open-sourced [our webhooks repo](https://github.com/Virtual-Coffee/webhooks) - there are some differences from this article but it could be instructive to see one that is currently live. This repo handles some other events aside from the coworking room, so keep that in mind if you're using it as an example.
+
+Some possible next steps for improvement:
+
+- Instead of a text thread, we could actually make use of some interactivity to have a "currently in the meeting" block
+- We’ve been adding some other features to our Slack app, like an App Home Screen. Adding the Coworking stuff in there could be pretty cool
+- Any other things we think of!
