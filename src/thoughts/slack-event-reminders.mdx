@@ -1,0 +1,174 @@
+import PageLayout from '../components/MdxLayouts/Default'
+
+export default PageLayout
+
+export const summary = (
+  <>
+    <p>
+      In our Slack for Virtual Coffee, our members had started a practice of
+      Coworking over Zoom. Coworking is a way to share space with other people
+      while still getting work done, and I thought it was very cool. Members
+      would simply post a personal Zoom link saying something like "starting a
+      Coworking session if anyone wants to join." Eventually we made a Slack
+      channel specifically for this.
+    </p>
+    <p>
+      In chatting with our members, I realized we probably could do a couple
+      cool things to support this a bit better. It’d be nice to have an official
+      Virtual Coffee Coworking setup for Zoom, so I put one together using Zoom,
+      Slack, Airtable, and Netlify Functions. Here's how it's all set up.
+    </p>
+  </>
+)
+
+export const tags = ['netlify', 'slack', 'netlify functions']
+
+export const meta = {
+  title: 'How To Post Event Reminders to Slack',
+  slug: 'slack-event-reminders',
+  date: '2022-04-12 09:00:00',
+  dateUpdated: '2022-04-12 09:00:00',
+  desc: 'Post event reminders to Slack using Netlify Functions',
+}
+
+At Virtual Coffee, we have events almost every day, and we hang out in Slack every day! So, it was inevitable that we'd get some sort of event reminders going in Slack. Our first pass was by the late Mike Rogers (we miss you, Mike ❤️). Our events were listed on MeetingPlace.io, so Mike wrote a Ruby app to pull date down from MeetingPlace and post to Slack: [Meetingplace Events Bot](https://github.com/Virtual-Coffee/bot-meetingplace-events).
+
+When we moved from Meetingplace to our own CMS, I took the chance to do some upgrades, and convert to Javascript, at the same time. Our current setup (along with some other stuff) is located at our [webhooks repo](https://github.com/Virtual-Coffee/webhooks). Follow along and we can get some event reminders going for you!
+
+![Slack event reminders screenshot](/images/slack-event-reminders.png)]
+
+## Here's what you need:
+
+- A data source that can give you events in a specified range. We have a custom CMS now that stores this data, but this can also be from Meetingplace, Meetup.com, or anywhere else.
+- A Slack App you've created and added to your Slack
+- A place to execute some Code - we're using Netlify functions
+- Something that can execute Cron Jobs - we're using [cron-job.org](https://cron-job.org). If you're going to do hourly reminders, I'd advise you _not_ to use GitHub Actions. You can't count on them to run close enough to the time the events start.
+
+## Creating your function on Netlify
+
+A Netlify function is a Javascript file that lives at a url. It can receive GET or POST parameters, and can serve a response.
+
+Our function is going to be called by our cron job (more on this in a bit), and will send a message to Slack.
+
+When the function is called, here's the basic outline of what will happen:
+
+1. Cron job sends a `GET` request to our function's url, with a `GET` parameter of `type=weekly`, `type=daily`, or `type=hourly`
+2. The function will fetch events from our events data source with the appropriate parameters
+3. The function will parse the events as needed
+4. Next it'll create some blocks using the block templates above
+5. Finally the function will send a message to Slack using the [Slack Web API Client](https://slack.dev/node-slack-sdk/web-api)
+
+Since every event API is going to look a little different, I'm not going to dig super deep into steps 2 and 3.
+
+## A GitHub Template for You!
+
+I created a basic GitHub template that you can use that follows the same ideas: [`slack-event-reminders-template`](https://github.com/Virtual-Coffee/slack-event-reminders-template)
+
+After you follow the instructions there, you'll have a working Netlify Function + Slack App that does everything we need!
+
+## Bonus: Designing your Slack message
+
+You can post Slack messages in plain text, but I've found it pretty nice and straightforward to use Slack's [Block Kit Builder](https://app.slack.com/block-kit-builder) to design messages like in the screenshot above.
+
+Here's the blocks for our weekly message ([open in builder](https://app.slack.com/block-kit-builder/T014AAKN3KP#%7B%22blocks%22:%5B%7B%22type%22:%22header%22,%22text%22:%7B%22type%22:%22plain_text%22,%22text%22:%22%F0%9F%93%86%20This%20Week's%20Events%20Are:%22,%22emoji%22:true%7D%7D,%7B%22type%22:%22section%22,%22text%22:%7B%22type%22:%22mrkdwn%22,%22text%22:%22*%3C!date%5E1649768400%5E%7Bdate_long_pretty%7D%20%7Btime%7D%7CTuesday,%20April%2012,%202022,%209:00%20AM%20EDT%3E*%5CnVirtual%20Coffee%20-%20Morning%20Crowd%22%7D%7D,%7B%22type%22:%22section%22,%22text%22:%7B%22type%22:%22mrkdwn%22,%22text%22:%22*%3C!date%5E1649952000%5E%7Bdate_long_pretty%7D%20%7Btime%7D%7CThursday,%20April%2014,%202022,%2012:00%20PM%20EDT%3E*%5CnVirtual%20Coffee%20-%20Afternoon%20Crowd%22%7D%7D,%7B%22type%22:%22section%22,%22text%22:%7B%22type%22:%22mrkdwn%22,%22text%22:%22*%3C!date%5E1650373200%5E%7Bdate_long_pretty%7D%20%7Btime%7D%7CTuesday,%20April%2019,%202022,%209:00%20AM%20EDT%3E*%5CnVirtual%20Coffee%20-%20Morning%20Crowd%22%7D%7D,%7B%22type%22:%22context%22,%22elements%22:%5B%7B%22type%22:%22mrkdwn%22,%22text%22:%22See%20details%20and%20more%20events%20at%20%3Chttps://virtualcoffee.io/events%7CVirtualCoffee.IO%3E!%22%7D%5D%7D%5D%7D)):
+
+```json
+{
+  "blocks": [
+    {
+      "type": "header",
+      "text": {
+        "type": "plain_text",
+        "text": "📆 This Week's Events Are:",
+        "emoji": true
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*<!date^1649768400^{date_long_pretty} {time}|Tuesday, April 12, 2022, 9:00 AM EDT>*\nVirtual Coffee - Morning Crowd"
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*<!date^1649952000^{date_long_pretty} {time}|Thursday, April 14, 2022, 12:00 PM EDT>*\nVirtual Coffee - Afternoon Crowd"
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*<!date^1650373200^{date_long_pretty} {time}|Tuesday, April 19, 2022, 9:00 AM EDT>*\nVirtual Coffee - Morning Crowd"
+      }
+    },
+    {
+      "type": "context",
+      "elements": [
+        {
+          "type": "mrkdwn",
+          "text": "See details and more events at <https://virtualcoffee.io/events|VirtualCoffee.IO>!"
+        }
+      ]
+    }
+  ]
+}
+```
+
+Here's an example of our hourly message ([open in builder](https://app.slack.com/block-kit-builder/T014AAKN3KP#%7B%22blocks%22:%5B%7B%22type%22:%22header%22,%22text%22:%7B%22type%22:%22plain_text%22,%22text%22:%22%E2%8F%B0%20Starting%20Soon:%22,%22emoji%22:true%7D%7D,%7B%22type%22:%22section%22,%22text%22:%7B%22type%22:%22mrkdwn%22,%22text%22:%22*Test%20Event*%5Cn%3C!date%5E1649790000%5E%7Bdate_long_pretty%7D%20%7Btime%7D%7CTuesday,%20April%2012,%202022,%203:00%20PM%20EDT%3E%22%7D,%22accessory%22:%7B%22type%22:%22button%22,%22text%22:%7B%22type%22:%22plain_text%22,%22text%22:%22Join%20Event%22,%22emoji%22:true%7D,%22value%22:%22join_event_173%22,%22url%22:%22https://virtualcoffee.io%22,%22action_id%22:%22button-join-event%22%7D%7D,%7B%22type%22:%22context%22,%22elements%22:%5B%7B%22type%22:%22mrkdwn%22,%22text%22:%22An%20hour-long%20chat%20with%20devs%20at%20all%20stages%20of%20the%20journey.%20You%20can%20come%20to%20hang%20out%20with%20great%20people,%20ask%20questions%20or%20bring%20up%20a%20topic,%20or%20just%20sit%20back%20and%20listen%20to%20others%20talk%20about%20tech.%20Currently%20open%20to%20slack%20members%20only.%20Check%20announcements%20for%20the%20Join%20Event%20button.Every%20Tuesday%20at%209AM%20ET!%22%7D%5D%7D,%7B%22type%22:%22divider%22%7D%5D%7D)):
+
+```json
+{
+  "blocks": [
+    {
+      "type": "header",
+      "text": {
+        "type": "plain_text",
+        "text": "⏰ Starting Soon:",
+        "emoji": true
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*Test Event*\n<!date^1649790000^{date_long_pretty} {time}|Tuesday, April 12, 2022, 3:00 PM EDT>"
+      },
+      "accessory": {
+        "type": "button",
+        "text": {
+          "type": "plain_text",
+          "text": "Join Event",
+          "emoji": true
+        },
+        "value": "join_event_173",
+        "url": "https://virtualcoffee.io",
+        "action_id": "button-join-event"
+      }
+    },
+    {
+      "type": "context",
+      "elements": [
+        {
+          "type": "mrkdwn",
+          "text": "An hour-long chat with devs at all stages of the journey. You can come to hang out with great people, ask questions or bring up a topic, or just sit back and listen to others talk about tech. Currently open to slack members only. Check announcements for the Join Event button.Every Tuesday at 9AM ET!"
+        }
+      ]
+    },
+    {
+      "type": "divider"
+    }
+  ]
+}
+```
+
+### A couple cool things to note here:
+
+- The [`<!date>` command](https://api.slack.com/reference/surfaces/formatting#date-formatting) formats dates in the user's local time zone. So if you have a date that starts at 12pm EST, you can use the `<!date>` command and it will output as 9am for a user in California!
+- The [`button` accessory](https://api.slack.com/reference/block-kit/block-elements#button) gives us a nice-looking button for opening links. You can even add a confirmation dialog or do some other actions with these if you want!
+
+## That's it!
+
+Please feel free to let me know if there are any questions, or file an issue on the GitHub template if you see somewhere we can improve!
