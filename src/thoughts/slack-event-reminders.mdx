@@ -5,23 +5,25 @@ export default PageLayout
 export const summary = (
   <>
     <p>
-      In our Slack for Virtual Coffee, our members had started a practice of
-      Coworking over Zoom. Coworking is a way to share space with other people
-      while still getting work done, and I thought it was very cool. Members
-      would simply post a personal Zoom link saying something like "starting a
-      Coworking session if anyone wants to join." Eventually we made a Slack
-      channel specifically for this.
+      At Virtual Coffee, we have events almost every day, and we hang out in
+      Slack every day! So, it was inevitable that we'd get some sort of event
+      reminders going in Slack. Our first pass was by the late Mike Rogers (we
+      miss you, Mike ❤️). Our events were listed on MeetingPlace.io, so Mike
+      wrote a Ruby app to pull date down from MeetingPlace and post to Slack:{' '}
+      <a href="https://github.com/Virtual-Coffee/bot-meetingplace-events">
+        Meetingplace Events Bot
+      </a>
+      .
     </p>
     <p>
-      In chatting with our members, I realized we probably could do a couple
-      cool things to support this a bit better. It’d be nice to have an official
-      Virtual Coffee Coworking setup for Zoom, so I put one together using Zoom,
-      Slack, Airtable, and Netlify Functions. Here's how it's all set up.
+      When we moved from Meetingplace to our own CMS, I took the chance to do
+      some upgrades, and convert to Javascript, at the same time. Follow along
+      and we can get some event reminders going for you!
     </p>
   </>
 )
 
-export const tags = ['netlify', 'slack', 'netlify functions']
+export const tags = ['netlify', 'slack', 'netlify functions', 'javascript']
 
 export const meta = {
   title: 'How To Post Event Reminders to Slack',
@@ -33,7 +35,7 @@ export const meta = {
 
 At Virtual Coffee, we have events almost every day, and we hang out in Slack every day! So, it was inevitable that we'd get some sort of event reminders going in Slack. Our first pass was by the late Mike Rogers (we miss you, Mike ❤️). Our events were listed on MeetingPlace.io, so Mike wrote a Ruby app to pull date down from MeetingPlace and post to Slack: [Meetingplace Events Bot](https://github.com/Virtual-Coffee/bot-meetingplace-events).
 
-When we moved from Meetingplace to our own CMS, I took the chance to do some upgrades, and convert to Javascript, at the same time. Our current setup (along with some other stuff) is located at our [webhooks repo](https://github.com/Virtual-Coffee/webhooks). Follow along and we can get some event reminders going for you!
+When we moved from Meetingplace to our own CMS, I took the chance to do some upgrades, and convert to Javascript, at the same time. Follow along and we can get some event reminders going for you!
 
 ![Slack event reminders screenshot](/images/slack-event-reminders.png)]
 
