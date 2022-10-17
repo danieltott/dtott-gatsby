@@ -37,6 +37,11 @@ const Layout = ({ children, section = 'home' }) => {
           media="nope!"
           onLoad="this.media='all'"
         />
+        <script
+          defer
+          data-domain="dtott.com"
+          src="https://plausible.io/js/plausible.js"
+        />
       </Helmet>
       <Header siteTitle={data.site.siteMetadata.title} section={section} />
       <div role="main" className={section}>
